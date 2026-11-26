@@ -1,0 +1,19 @@
+name: Validar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Conferir dados e traduções
+        run: node scripts/validar-dados.mjs
+      - name: Testar o motor
+        run: node scripts/testar-motor.mjs
