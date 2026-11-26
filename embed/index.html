@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Widget Roda o VI: como colocar no seu site</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#0B0C12;color:#ECEEF3;font:400 16px/1.6 Inter,system-ui,sans-serif}
+  main{max-width:1000px;margin:0 auto;padding:48px 20px 80px}
+  h1{font:800 clamp(32px,5vw,48px)/1 "Inter Tight",sans-serif;letter-spacing:-.04em;margin:0 0 12px}
+  h2{font:800 22px/1.2 "Inter Tight",sans-serif;letter-spacing:-.02em;margin:40px 0 10px}
+  p{color:#C9CCD6;max-width:62ch}
+  a{color:#FFC24D}
+  pre{background:#12141D;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px;overflow-x:auto;font:13.5px/1.6 ui-monospace,Consolas,monospace;color:#E6E8EF}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:20px;align-items:start}
+  .claro{background:#F4F5F8;border-radius:20px;padding:20px}
+  .claro roda-vi-teste{--rodavi-fundo:#fff;--rodavi-texto:#14151C;--rodavi-mudo:#5C6070;--rodavi-borda:#E2E4EA;--rodavi-trilho:#E6E7EC;--rodavi-campo:#F4F5F8}
+</style>
+<script type="module" src="./rodavi-widget.js"></script>
+</head>
+<body>
+<main>
+  <h1>Coloque o teste no seu site</h1>
+  <p>O <a href="/">Roda o VI</a> é aberto. Copie as duas linhas abaixo e o teste aparece no seu site, em português, inglês ou espanhol. Nada é baixado no PC de quem usa.</p>
+
+  <div class="grid">
+    <roda-vi-teste idioma="pt"></roda-vi-teste>
+    <roda-vi-teste idioma="en"></roda-vi-teste>
+    <div class="claro"><roda-vi-teste idioma="es"></roda-vi-teste></div>
+  </div>
+
+  <h2>1. Widget pronto</h2>
+<pre>&lt;script type="module" src="https://roda-o-vi.netlify.app/embed/rodavi-widget.js"&gt;&lt;/script&gt;
+&lt;roda-vi-teste idioma="pt"&gt;&lt;/roda-vi-teste&gt;</pre>
+  <p>Pra mudar as cores, use variáveis de CSS no seu site:</p>
+<pre>roda-vi-teste {
+  --rodavi-fundo: #ffffff;
+  --rodavi-texto: #14151C;
+  --rodavi-mudo: #5C6070;
+  --rodavi-borda: #E2E4EA;
+  --rodavi-trilho: #E6E7EC;
+  --rodavi-campo: #F4F5F8;
+  --rodavi-raio: 16px;
+}</pre>
+  <p>O widget avisa quando tem resultado:</p>
+<pre>document.addEventListener("rodavi:resultado", (e) =&gt; {
+  console.log(e.detail.pct, e.detail.port.titulo);
+});</pre>
+
+  <h2>2. Só o motor de cálculo</h2>
+  <p>Monte sua própria tela usando o mesmo cálculo do site.</p>
+<pre>import { carregarDados, detectarGPU, acharGPU, avaliar }
+  from "https://roda-o-vi.netlify.app/lib/rodavi.js";
+
+const { gpus, cpus } = await carregarDados();
+const gpu = acharGPU(detectarGPU(), gpus);
+const r = avaliar({ gpu, cpu: cpus[0], ramGB: 32, idioma: "pt" });
+// r.pct, r.fps.min, r.fps.max, r.port.titulo, r.oficial.titulo ...</pre>
+
+  <h2>3. Só os dados</h2>
+  <p>Listas abertas, com CORS liberado:</p>
+<pre>https://roda-o-vi.netlify.app/data/gpus.json
+https://roda-o-vi.netlify.app/data/cpus.json
+https://roda-o-vi.netlify.app/data/rigs.json</pre>
+  <p>Também dá pra puxar direto do GitHub pelo jsDelivr, fixando uma versão:</p>
+<pre>https://cdn.jsdelivr.net/gh/RafaeltCMSP/roda-o-vi@v1.0.0/embed/rodavi-widget.js</pre>
+</main>
+</body>
+</html>

@@ -1,0 +1,315 @@
+{
+  "versao": 1,
+  "atualizado": "2026-11-26",
+  "escala": "nota de 0 a 1 para jogos pesados de mundo aberto",
+  "cpus": [
+    {
+      "id": "ryzen-7-9800x3d",
+      "nome": "Ryzen 7 9800X3D",
+      "fabricante": "amd",
+      "nota": 1,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-7-7800x3d",
+      "nome": "Ryzen 7 7800X3D",
+      "fabricante": "amd",
+      "nota": 1,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-9-9950x",
+      "nome": "Ryzen 9 9950X",
+      "fabricante": "amd",
+      "nota": 1,
+      "threads": 32
+    },
+    {
+      "id": "ryzen-9-7950x",
+      "nome": "Ryzen 9 7950X",
+      "fabricante": "amd",
+      "nota": 0.97,
+      "threads": 32
+    },
+    {
+      "id": "ryzen-7-9700x",
+      "nome": "Ryzen 7 9700X",
+      "fabricante": "amd",
+      "nota": 0.95,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-7-7700x",
+      "nome": "Ryzen 7 7700X",
+      "fabricante": "amd",
+      "nota": 0.9,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-5-9600x",
+      "nome": "Ryzen 5 9600X",
+      "fabricante": "amd",
+      "nota": 0.87,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-7600x",
+      "nome": "Ryzen 5 7600X",
+      "fabricante": "amd",
+      "nota": 0.85,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-7600",
+      "nome": "Ryzen 5 7600",
+      "fabricante": "amd",
+      "nota": 0.83,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-7-5800x3d",
+      "nome": "Ryzen 7 5800X3D",
+      "fabricante": "amd",
+      "nota": 0.85,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-7-5700x3d",
+      "nome": "Ryzen 7 5700X3D",
+      "fabricante": "amd",
+      "nota": 0.82,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-9-5900x",
+      "nome": "Ryzen 9 5900X",
+      "fabricante": "amd",
+      "nota": 0.82,
+      "threads": 24
+    },
+    {
+      "id": "ryzen-7-5800x",
+      "nome": "Ryzen 7 5800X",
+      "fabricante": "amd",
+      "nota": 0.78,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-7-5700x",
+      "nome": "Ryzen 7 5700X",
+      "fabricante": "amd",
+      "nota": 0.75,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-5-5600x",
+      "nome": "Ryzen 5 5600X",
+      "fabricante": "amd",
+      "nota": 0.7,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-5600",
+      "nome": "Ryzen 5 5600",
+      "fabricante": "amd",
+      "nota": 0.68,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-7-5700g",
+      "nome": "Ryzen 7 5700G",
+      "fabricante": "amd",
+      "nota": 0.65,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-5-5600g",
+      "nome": "Ryzen 5 5600G",
+      "fabricante": "amd",
+      "nota": 0.6,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-5500",
+      "nome": "Ryzen 5 5500",
+      "fabricante": "amd",
+      "nota": 0.6,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-5500g",
+      "nome": "Ryzen 5 5500G",
+      "fabricante": "amd",
+      "nota": 0.58,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-7-3700x",
+      "nome": "Ryzen 7 3700X",
+      "fabricante": "amd",
+      "nota": 0.6,
+      "threads": 16
+    },
+    {
+      "id": "ryzen-5-3600",
+      "nome": "Ryzen 5 3600",
+      "fabricante": "amd",
+      "nota": 0.55,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-2600",
+      "nome": "Ryzen 5 2600",
+      "fabricante": "amd",
+      "nota": 0.4,
+      "threads": 12
+    },
+    {
+      "id": "ryzen-5-1600",
+      "nome": "Ryzen 5 1600",
+      "fabricante": "amd",
+      "nota": 0.35,
+      "threads": 12
+    },
+    {
+      "id": "core-ultra-9-285k",
+      "nome": "Core Ultra 9 285K",
+      "fabricante": "intel",
+      "nota": 0.98,
+      "threads": 24
+    },
+    {
+      "id": "core-ultra-7-265k",
+      "nome": "Core Ultra 7 265K",
+      "fabricante": "intel",
+      "nota": 0.93,
+      "threads": 20
+    },
+    {
+      "id": "core-ultra-5-245k",
+      "nome": "Core Ultra 5 245K",
+      "fabricante": "intel",
+      "nota": 0.85,
+      "threads": 14
+    },
+    {
+      "id": "core-i9-14900k",
+      "nome": "Core i9-14900K",
+      "fabricante": "intel",
+      "nota": 1,
+      "threads": 32
+    },
+    {
+      "id": "core-i7-14700k",
+      "nome": "Core i7-14700K",
+      "fabricante": "intel",
+      "nota": 0.97,
+      "threads": 28
+    },
+    {
+      "id": "core-i5-14600k",
+      "nome": "Core i5-14600K",
+      "fabricante": "intel",
+      "nota": 0.9,
+      "threads": 20
+    },
+    {
+      "id": "core-i5-14400f",
+      "nome": "Core i5-14400F",
+      "fabricante": "intel",
+      "nota": 0.73,
+      "threads": 16
+    },
+    {
+      "id": "core-i7-13700k",
+      "nome": "Core i7-13700K",
+      "fabricante": "intel",
+      "nota": 0.92,
+      "threads": 24
+    },
+    {
+      "id": "core-i5-13600k",
+      "nome": "Core i5-13600K",
+      "fabricante": "intel",
+      "nota": 0.88,
+      "threads": 20
+    },
+    {
+      "id": "core-i5-13400f",
+      "nome": "Core i5-13400F",
+      "fabricante": "intel",
+      "nota": 0.72,
+      "threads": 16
+    },
+    {
+      "id": "core-i9-12900k",
+      "nome": "Core i9-12900K",
+      "fabricante": "intel",
+      "nota": 0.88,
+      "threads": 24
+    },
+    {
+      "id": "core-i7-12700k",
+      "nome": "Core i7-12700K",
+      "fabricante": "intel",
+      "nota": 0.82,
+      "threads": 20
+    },
+    {
+      "id": "core-i5-12600k",
+      "nome": "Core i5-12600K",
+      "fabricante": "intel",
+      "nota": 0.78,
+      "threads": 16
+    },
+    {
+      "id": "core-i5-12400f",
+      "nome": "Core i5-12400F",
+      "fabricante": "intel",
+      "nota": 0.7,
+      "threads": 12
+    },
+    {
+      "id": "core-i5-11400f",
+      "nome": "Core i5-11400F",
+      "fabricante": "intel",
+      "nota": 0.55,
+      "threads": 12
+    },
+    {
+      "id": "core-i5-10400f",
+      "nome": "Core i5-10400F",
+      "fabricante": "intel",
+      "nota": 0.5,
+      "threads": 12
+    },
+    {
+      "id": "core-i7-9700k",
+      "nome": "Core i7-9700K",
+      "fabricante": "intel",
+      "nota": 0.5,
+      "threads": 8
+    },
+    {
+      "id": "core-i7-8700",
+      "nome": "Core i7-8700",
+      "fabricante": "intel",
+      "nota": 0.45,
+      "threads": 12
+    },
+    {
+      "id": "core-i5-9400f",
+      "nome": "Core i5-9400F",
+      "fabricante": "intel",
+      "nota": 0.4,
+      "threads": 6
+    },
+    {
+      "id": "core-i5-7400",
+      "nome": "Core i5-7400",
+      "fabricante": "intel",
+      "nota": 0.25,
+      "threads": 4
+    }
+  ]
+}

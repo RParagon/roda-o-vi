@@ -1,0 +1,826 @@
+{
+  "versao": 1,
+  "atualizado": "2026-11-26",
+  "escala": "desempenho relativo em jogos, RTX 4090 = 100",
+  "gpus": [
+    {
+      "id": "rtx-5090",
+      "nome": "RTX 5090",
+      "fabricante": "nvidia",
+      "desempenho": 130,
+      "vram": 32,
+      "dx12u": true,
+      "busca": [
+        "rtx 5090"
+      ]
+    },
+    {
+      "id": "rtx-5080",
+      "nome": "RTX 5080",
+      "fabricante": "nvidia",
+      "desempenho": 82,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rtx 5080"
+      ]
+    },
+    {
+      "id": "rtx-5070-ti",
+      "nome": "RTX 5070 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 70,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rtx 5070 ti"
+      ]
+    },
+    {
+      "id": "rtx-5070",
+      "nome": "RTX 5070",
+      "fabricante": "nvidia",
+      "desempenho": 56,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rtx 5070"
+      ]
+    },
+    {
+      "id": "rtx-5060-ti",
+      "nome": "RTX 5060 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 38,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rtx 5060 ti"
+      ]
+    },
+    {
+      "id": "rtx-5060",
+      "nome": "RTX 5060",
+      "fabricante": "nvidia",
+      "desempenho": 34,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 5060"
+      ]
+    },
+    {
+      "id": "rtx-4090",
+      "nome": "RTX 4090",
+      "fabricante": "nvidia",
+      "desempenho": 100,
+      "vram": 24,
+      "dx12u": true,
+      "busca": [
+        "rtx 4090"
+      ]
+    },
+    {
+      "id": "rtx-4080-super",
+      "nome": "RTX 4080 Super",
+      "fabricante": "nvidia",
+      "desempenho": 78,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rtx 4080 super"
+      ]
+    },
+    {
+      "id": "rtx-4080",
+      "nome": "RTX 4080",
+      "fabricante": "nvidia",
+      "desempenho": 76,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rtx 4080"
+      ]
+    },
+    {
+      "id": "rtx-4070-ti-super",
+      "nome": "RTX 4070 Ti Super",
+      "fabricante": "nvidia",
+      "desempenho": 66,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rtx 4070 ti super"
+      ]
+    },
+    {
+      "id": "rtx-4070-ti",
+      "nome": "RTX 4070 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 60,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rtx 4070 ti"
+      ]
+    },
+    {
+      "id": "rtx-4070-super",
+      "nome": "RTX 4070 Super",
+      "fabricante": "nvidia",
+      "desempenho": 55,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rtx 4070 super"
+      ]
+    },
+    {
+      "id": "rtx-4070",
+      "nome": "RTX 4070",
+      "fabricante": "nvidia",
+      "desempenho": 48,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rtx 4070"
+      ]
+    },
+    {
+      "id": "rtx-4060-ti",
+      "nome": "RTX 4060 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 36,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 4060 ti"
+      ]
+    },
+    {
+      "id": "rtx-4060",
+      "nome": "RTX 4060",
+      "fabricante": "nvidia",
+      "desempenho": 28,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 4060"
+      ]
+    },
+    {
+      "id": "rtx-3090-ti",
+      "nome": "RTX 3090 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 62,
+      "vram": 24,
+      "dx12u": true,
+      "busca": [
+        "rtx 3090 ti"
+      ]
+    },
+    {
+      "id": "rtx-3090",
+      "nome": "RTX 3090",
+      "fabricante": "nvidia",
+      "desempenho": 56,
+      "vram": 24,
+      "dx12u": true,
+      "busca": [
+        "rtx 3090"
+      ]
+    },
+    {
+      "id": "rtx-3080-ti",
+      "nome": "RTX 3080 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 54,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rtx 3080 ti"
+      ]
+    },
+    {
+      "id": "rtx-3080",
+      "nome": "RTX 3080",
+      "fabricante": "nvidia",
+      "desempenho": 50,
+      "vram": 10,
+      "dx12u": true,
+      "busca": [
+        "rtx 3080"
+      ]
+    },
+    {
+      "id": "rtx-3070-ti",
+      "nome": "RTX 3070 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 42,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 3070 ti"
+      ]
+    },
+    {
+      "id": "rtx-3070",
+      "nome": "RTX 3070",
+      "fabricante": "nvidia",
+      "desempenho": 39,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 3070"
+      ]
+    },
+    {
+      "id": "rtx-3060-ti",
+      "nome": "RTX 3060 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 35,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 3060 ti"
+      ]
+    },
+    {
+      "id": "rtx-3060",
+      "nome": "RTX 3060",
+      "fabricante": "nvidia",
+      "desempenho": 28,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rtx 3060"
+      ]
+    },
+    {
+      "id": "rtx-3050",
+      "nome": "RTX 3050",
+      "fabricante": "nvidia",
+      "desempenho": 18,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 3050"
+      ]
+    },
+    {
+      "id": "rtx-2080-ti",
+      "nome": "RTX 2080 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 40,
+      "vram": 11,
+      "dx12u": true,
+      "busca": [
+        "rtx 2080 ti"
+      ]
+    },
+    {
+      "id": "rtx-2080-super",
+      "nome": "RTX 2080 Super",
+      "fabricante": "nvidia",
+      "desempenho": 34,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 2080 super"
+      ]
+    },
+    {
+      "id": "rtx-2080",
+      "nome": "RTX 2080",
+      "fabricante": "nvidia",
+      "desempenho": 32,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 2080"
+      ]
+    },
+    {
+      "id": "rtx-2070-super",
+      "nome": "RTX 2070 Super",
+      "fabricante": "nvidia",
+      "desempenho": 31,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 2070 super"
+      ]
+    },
+    {
+      "id": "rtx-2070",
+      "nome": "RTX 2070",
+      "fabricante": "nvidia",
+      "desempenho": 28,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 2070"
+      ]
+    },
+    {
+      "id": "rtx-2060-super",
+      "nome": "RTX 2060 Super",
+      "fabricante": "nvidia",
+      "desempenho": 25,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rtx 2060 super"
+      ]
+    },
+    {
+      "id": "rtx-2060",
+      "nome": "RTX 2060",
+      "fabricante": "nvidia",
+      "desempenho": 21,
+      "vram": 6,
+      "dx12u": true,
+      "busca": [
+        "rtx 2060"
+      ]
+    },
+    {
+      "id": "gtx-1660-super",
+      "nome": "GTX 1660 Super",
+      "fabricante": "nvidia",
+      "desempenho": 16,
+      "vram": 6,
+      "dx12u": false,
+      "busca": [
+        "gtx 1660 super"
+      ]
+    },
+    {
+      "id": "gtx-1660-ti",
+      "nome": "GTX 1660 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 16,
+      "vram": 6,
+      "dx12u": false,
+      "busca": [
+        "gtx 1660 ti"
+      ]
+    },
+    {
+      "id": "gtx-1660",
+      "nome": "GTX 1660",
+      "fabricante": "nvidia",
+      "desempenho": 14,
+      "vram": 6,
+      "dx12u": false,
+      "busca": [
+        "gtx 1660"
+      ]
+    },
+    {
+      "id": "gtx-1650-super",
+      "nome": "GTX 1650 Super",
+      "fabricante": "nvidia",
+      "desempenho": 11,
+      "vram": 4,
+      "dx12u": false,
+      "busca": [
+        "gtx 1650 super"
+      ]
+    },
+    {
+      "id": "gtx-1650",
+      "nome": "GTX 1650",
+      "fabricante": "nvidia",
+      "desempenho": 9,
+      "vram": 4,
+      "dx12u": false,
+      "busca": [
+        "gtx 1650"
+      ]
+    },
+    {
+      "id": "gtx-1080-ti",
+      "nome": "GTX 1080 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 28,
+      "vram": 11,
+      "dx12u": false,
+      "busca": [
+        "gtx 1080 ti"
+      ]
+    },
+    {
+      "id": "gtx-1080",
+      "nome": "GTX 1080",
+      "fabricante": "nvidia",
+      "desempenho": 22,
+      "vram": 8,
+      "dx12u": false,
+      "busca": [
+        "gtx 1080"
+      ]
+    },
+    {
+      "id": "gtx-1070-ti",
+      "nome": "GTX 1070 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 20,
+      "vram": 8,
+      "dx12u": false,
+      "busca": [
+        "gtx 1070 ti"
+      ]
+    },
+    {
+      "id": "gtx-1070",
+      "nome": "GTX 1070",
+      "fabricante": "nvidia",
+      "desempenho": 18,
+      "vram": 8,
+      "dx12u": false,
+      "busca": [
+        "gtx 1070"
+      ]
+    },
+    {
+      "id": "gtx-1060",
+      "nome": "GTX 1060",
+      "fabricante": "nvidia",
+      "desempenho": 12,
+      "vram": 6,
+      "dx12u": false,
+      "busca": [
+        "gtx 1060"
+      ]
+    },
+    {
+      "id": "gtx-1050-ti",
+      "nome": "GTX 1050 Ti",
+      "fabricante": "nvidia",
+      "desempenho": 7,
+      "vram": 4,
+      "dx12u": false,
+      "busca": [
+        "gtx 1050 ti"
+      ]
+    },
+    {
+      "id": "gtx-1050",
+      "nome": "GTX 1050",
+      "fabricante": "nvidia",
+      "desempenho": 5,
+      "vram": 2,
+      "dx12u": false,
+      "busca": [
+        "gtx 1050"
+      ]
+    },
+    {
+      "id": "rx-9070-xt",
+      "nome": "RX 9070 XT",
+      "fabricante": "amd",
+      "desempenho": 70,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 9070 xt"
+      ]
+    },
+    {
+      "id": "rx-9070",
+      "nome": "RX 9070",
+      "fabricante": "amd",
+      "desempenho": 63,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 9070"
+      ]
+    },
+    {
+      "id": "rx-9060-xt",
+      "nome": "RX 9060 XT",
+      "fabricante": "amd",
+      "desempenho": 36,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 9060 xt"
+      ]
+    },
+    {
+      "id": "rx-7900-xtx",
+      "nome": "RX 7900 XTX",
+      "fabricante": "amd",
+      "desempenho": 85,
+      "vram": 24,
+      "dx12u": true,
+      "busca": [
+        "rx 7900 xtx"
+      ]
+    },
+    {
+      "id": "rx-7900-xt",
+      "nome": "RX 7900 XT",
+      "fabricante": "amd",
+      "desempenho": 74,
+      "vram": 20,
+      "dx12u": true,
+      "busca": [
+        "rx 7900 xt"
+      ]
+    },
+    {
+      "id": "rx-7900-gre",
+      "nome": "RX 7900 GRE",
+      "fabricante": "amd",
+      "desempenho": 60,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 7900 gre"
+      ]
+    },
+    {
+      "id": "rx-7800-xt",
+      "nome": "RX 7800 XT",
+      "fabricante": "amd",
+      "desempenho": 55,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 7800 xt"
+      ]
+    },
+    {
+      "id": "rx-7700-xt",
+      "nome": "RX 7700 XT",
+      "fabricante": "amd",
+      "desempenho": 46,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rx 7700 xt"
+      ]
+    },
+    {
+      "id": "rx-7600-xt",
+      "nome": "RX 7600 XT",
+      "fabricante": "amd",
+      "desempenho": 28,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 7600 xt"
+      ]
+    },
+    {
+      "id": "rx-7600",
+      "nome": "RX 7600",
+      "fabricante": "amd",
+      "desempenho": 27,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rx 7600"
+      ]
+    },
+    {
+      "id": "rx-6950-xt",
+      "nome": "RX 6950 XT",
+      "fabricante": "amd",
+      "desempenho": 58,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 6950 xt"
+      ]
+    },
+    {
+      "id": "rx-6900-xt",
+      "nome": "RX 6900 XT",
+      "fabricante": "amd",
+      "desempenho": 55,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 6900 xt"
+      ]
+    },
+    {
+      "id": "rx-6800-xt",
+      "nome": "RX 6800 XT",
+      "fabricante": "amd",
+      "desempenho": 52,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 6800 xt"
+      ]
+    },
+    {
+      "id": "rx-6800",
+      "nome": "RX 6800",
+      "fabricante": "amd",
+      "desempenho": 45,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "rx 6800"
+      ]
+    },
+    {
+      "id": "rx-6750-xt",
+      "nome": "RX 6750 XT",
+      "fabricante": "amd",
+      "desempenho": 38,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rx 6750 xt"
+      ]
+    },
+    {
+      "id": "rx-6700-xt",
+      "nome": "RX 6700 XT",
+      "fabricante": "amd",
+      "desempenho": 36,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "rx 6700 xt"
+      ]
+    },
+    {
+      "id": "rx-6650-xt",
+      "nome": "RX 6650 XT",
+      "fabricante": "amd",
+      "desempenho": 28,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rx 6650 xt"
+      ]
+    },
+    {
+      "id": "rx-6600-xt",
+      "nome": "RX 6600 XT",
+      "fabricante": "amd",
+      "desempenho": 27,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rx 6600 xt"
+      ]
+    },
+    {
+      "id": "rx-6600",
+      "nome": "RX 6600",
+      "fabricante": "amd",
+      "desempenho": 24,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "rx 6600"
+      ]
+    },
+    {
+      "id": "rx-6500-xt",
+      "nome": "RX 6500 XT",
+      "fabricante": "amd",
+      "desempenho": 10,
+      "vram": 4,
+      "dx12u": true,
+      "busca": [
+        "rx 6500 xt"
+      ]
+    },
+    {
+      "id": "rx-5700-xt",
+      "nome": "RX 5700 XT",
+      "fabricante": "amd",
+      "desempenho": 24,
+      "vram": 8,
+      "dx12u": false,
+      "busca": [
+        "rx 5700 xt"
+      ]
+    },
+    {
+      "id": "rx-5700",
+      "nome": "RX 5700",
+      "fabricante": "amd",
+      "desempenho": 21,
+      "vram": 8,
+      "dx12u": false,
+      "busca": [
+        "rx 5700"
+      ]
+    },
+    {
+      "id": "rx-5600-xt",
+      "nome": "RX 5600 XT",
+      "fabricante": "amd",
+      "desempenho": 18,
+      "vram": 6,
+      "dx12u": false,
+      "busca": [
+        "rx 5600 xt"
+      ]
+    },
+    {
+      "id": "rx-580",
+      "nome": "RX 580",
+      "fabricante": "amd",
+      "desempenho": 10,
+      "vram": 8,
+      "dx12u": false,
+      "busca": [
+        "rx 580"
+      ]
+    },
+    {
+      "id": "rx-570",
+      "nome": "RX 570",
+      "fabricante": "amd",
+      "desempenho": 9,
+      "vram": 4,
+      "dx12u": false,
+      "busca": [
+        "rx 570"
+      ]
+    },
+    {
+      "id": "arc-b580",
+      "nome": "Arc B580",
+      "fabricante": "intel",
+      "desempenho": 30,
+      "vram": 12,
+      "dx12u": true,
+      "busca": [
+        "arc b580"
+      ]
+    },
+    {
+      "id": "arc-a770",
+      "nome": "Arc A770",
+      "fabricante": "intel",
+      "desempenho": 26,
+      "vram": 16,
+      "dx12u": true,
+      "busca": [
+        "arc a770"
+      ]
+    },
+    {
+      "id": "arc-a750",
+      "nome": "Arc A750",
+      "fabricante": "intel",
+      "desempenho": 23,
+      "vram": 8,
+      "dx12u": true,
+      "busca": [
+        "arc a750"
+      ]
+    },
+    {
+      "id": "radeon-780m-integrada",
+      "nome": "Radeon 780M (iGPU)",
+      "fabricante": "amd",
+      "desempenho": 10,
+      "vram": 2,
+      "dx12u": true,
+      "busca": [
+        "780m",
+        "760m"
+      ]
+    },
+    {
+      "id": "radeon-vega-integrada",
+      "nome": "Radeon Vega (iGPU)",
+      "fabricante": "amd",
+      "desempenho": 4,
+      "vram": 2,
+      "dx12u": false,
+      "busca": [
+        "radeon graphics",
+        "radeon vega",
+        "vega"
+      ]
+    },
+    {
+      "id": "intel-uhd-iris-integrada",
+      "nome": "Intel UHD / Iris (iGPU)",
+      "fabricante": "intel",
+      "desempenho": 2,
+      "vram": 1,
+      "dx12u": false,
+      "busca": [
+        "uhd graphics",
+        "iris",
+        "intel hd graphics"
+      ]
+    }
+  ]
+}

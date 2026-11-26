@@ -1,0 +1,97 @@
+{
+  "versao": 1,
+  "atualizado": "2026-11-26",
+  "fonte": "https://portwatch-vi.xyz/",
+  "rigs": [
+    {
+      "projeto": "Belobug",
+      "tipo": "Port · fork do VIctory",
+      "fabricante": "amd",
+      "hardware": "RX 9070 XT 16GB · Ryzen 7 9800X3D · 64GB",
+      "fps": "~22",
+      "ate_onde": "Jogável, missões da história",
+      "selo": "verificado"
+    },
+    {
+      "projeto": "CGBJ",
+      "tipo": "Port · build privado",
+      "fabricante": "",
+      "hardware": "16GB de VRAM · 8GB de RAM",
+      "fps": "~25",
+      "ate_onde": "Jogável",
+      "selo": "privado"
+    },
+    {
+      "projeto": "AvatarManz",
+      "tipo": "Port",
+      "fabricante": "amd",
+      "hardware": "RX 7900 XTX · i9-12900K · 64GB",
+      "fps": "~16",
+      "ate_onde": "Jogável",
+      "selo": null
+    },
+    {
+      "projeto": "darkworldhm",
+      "tipo": "Port · build privado",
+      "fabricante": "nvidia",
+      "hardware": "RTX série 50",
+      "fps": "5–24",
+      "ate_onde": "Jogável",
+      "selo": "privado"
+    },
+    {
+      "projeto": "hyphennn",
+      "tipo": "Port",
+      "fabricante": "nvidia",
+      "hardware": "RTX 4070",
+      "fps": "3–10",
+      "ate_onde": "Abre o jogo",
+      "selo": null
+    },
+    {
+      "projeto": "Kelvaroq",
+      "tipo": "Port",
+      "fabricante": "nvidia",
+      "hardware": "RTX 4090",
+      "fps": "7–8",
+      "ate_onde": "Prólogo",
+      "selo": null
+    },
+    {
+      "projeto": "Uilian",
+      "tipo": "Port",
+      "fabricante": "nvidia",
+      "hardware": "RTX 5060 Ti",
+      "fps": "até 4",
+      "ate_onde": "Menus a 30 fps",
+      "selo": null
+    },
+    {
+      "projeto": "DexNom",
+      "tipo": "Port",
+      "fabricante": "amd",
+      "hardware": "RX 7900 XTX",
+      "fps": "3–4",
+      "ate_onde": "Jogável",
+      "selo": null
+    },
+    {
+      "projeto": "ZETTROX",
+      "tipo": "Port",
+      "fabricante": "nvidia",
+      "hardware": "RTX 3050",
+      "fps": "1–3",
+      "ate_onde": "Abre o jogo",
+      "selo": "removido"
+    },
+    {
+      "projeto": "VIctory",
+      "tipo": "Port",
+      "fabricante": "amd",
+      "hardware": "RX 6700 XT",
+      "fps": "~1",
+      "ate_onde": "Menus a ~15 fps",
+      "selo": null
+    }
+  ]
+}

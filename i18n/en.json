@@ -1,0 +1,92 @@
+{
+  "idioma": "en",
+  "nome": "English",
+  "meta": {
+    "title": "Roda o VI? Check if your PC can handle the port",
+    "description": "See whether your PC can handle the community-made PC port of GTA VI. Nothing to download: the test runs in your browser."
+  },
+  "nav": { "pc": "Your PC", "res": "Result", "news": "News", "rank": "Ranking", "lang": "Language" },
+  "hero": {
+    "chip1": "Nothing to download",
+    "chip2": "Runs in your browser, in 10 seconds",
+    "h1": "Can your PC run GTA VI?",
+    "answer": "Let's see.",
+    "lead": "The test reads your graphics card through the browser and compares it with the PCs the community has used to run ports of the leaked build.",
+    "cta": "Test my PC"
+  },
+  "meter": {
+    "label": "Estimated fps on the port",
+    "title": "Gauge of estimated fps on the port",
+    "wait": "Waiting for test",
+    "click": "Click Test my PC",
+    "noGpu": "Card not set",
+    "range": "Estimated range, varies by build",
+    "noOpen": "Your card probably won't start the ports"
+  },
+  "strip": {
+    "t1": "Out Nov 19, console only",
+    "s1": "PS5 and Xbox Series. Rockstar hasn't said anything about PC yet.",
+    "t2": "Leaked port",
+    "s2": "Best result: ~25 fps",
+    "t3": "Official version",
+    "s3": "Expected in 2027, no date"
+  },
+  "pc": {
+    "h2": "Your PC",
+    "sub": "We filled in what we could detect. Browsers don't reveal your CPU model or how much RAM you have, so check and adjust.",
+    "gpu": "Graphics card",
+    "cpu": "Processor",
+    "ram": "RAM",
+    "detGpu": "Click Test my PC to detect it.",
+    "detCpu": "Pick your model from the list.",
+    "detRam": "Check Settings › System › About.",
+    "wait": "Waiting for test.",
+    "ram64": "64 GB or more",
+    "unknownGpu": "Not sure / other",
+    "unknownCpu": "Not sure / other",
+    "gpuFound": "Detected: {x}",
+    "gpuUnknown": "We don't recognize \"{x}\". Pick it from the list.",
+    "gpuNone": "Your browser didn't reveal the card. Pick it from the list.",
+    "cpuThreads": "Your processor has {t} threads. Pick the model for a more accurate result."
+  },
+  "res": {
+    "h2": "Result",
+    "sub": "Two readings: how your PC does on the community ports today, and an estimate for when the official PC version comes out.",
+    "portH": "Community port, today",
+    "portWait": "Not tested yet",
+    "portHint": "Click Test my PC above, or pick your parts from the list.",
+    "pct": "Compatibility with the best tested PC",
+    "offH": "Official PC version, when it ships",
+    "offHint": "We compare your card with the PS5's, the console the game runs on today.",
+    "offNote": "Rockstar hasn't announced a PC version or its requirements."
+  },
+  "news": {
+    "h2": "News",
+    "sub": "The ports change every day. News comes from PortWatch VI.",
+    "read": "Read on PortWatch",
+    "original": "",
+    "cat": { "Port": "Port", "Takedown": "Takedown", "Recompile": "Recompile", "Tools": "Tools", "Scale": "PortWatch" },
+    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "date": "{m} {d}"
+  },
+  "band": {
+    "t": "Vice City hasn't reached PC yet.",
+    "s": "But the community is close: the best port already tops 20 fps. See who's ahead."
+  },
+  "rank": {
+    "h2": "Port ranking",
+    "sub": "Most advanced first. Numbers are reported by the groups themselves and change with every build.",
+    "src": "Source: <a href=\"https://portwatch-vi.xyz/\" rel=\"noopener\">PortWatch VI</a>. Most numbers haven't been independently verified.",
+    "stages": { "playable": "Playable", "world": "In the world", "menu": "Menus", "boots": "Boots", "loads": "Loads" },
+    "approach": { "Compatibility layer": "Compatibility layer", "Port": "Port", "Recompile": "Recompile", "Emulator": "Emulator", "Emulation": "Emulation" },
+    "both": "AMD and NVIDIA",
+    "unknown": "Hardware not listed",
+    "selo": { "verificado": "Verified", "privado": "Private", "removido": "Taken down" }
+  },
+  "foot": {
+    "legal": "Fan-made, not affiliated with Rockstar Games, Take-Two or Microsoft. Estimates use relative GPU performance and community-reported tests. It's for curiosity, not a guarantee.",
+    "credit": "Inspired by <a href=\"https://portwatch-vi.xyz/\" rel=\"noopener\">PortWatch VI</a> by 4lwayz, which has tracked the ports from the start. News and ranking come from there.",
+    "code": "Open source on <a href=\"https://github.com/RafaeltCMSP/roda-o-vi\" rel=\"noopener\">GitHub</a>. <a href=\"/embed/\">Put the test on your site</a>."
+  },
+  "score": "Your PC's compatibility with the best tested PC"
+}

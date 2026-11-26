@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">Roda o VI? Teste se seu PC aguenta o port</title>
+<meta name="description" data-i18n-attr="content:meta.description" content="Veja se seu PC aguenta o port de PC do GTA VI que a comunidade está fazendo. Nada para baixar: o teste roda no navegador.">
+<meta name="theme-color" content="#0B0C12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C12;
+    --panel:#12141D;
+    --glass:rgba(22,24,36,.72);
+    --line:rgba(255,255,255,.09);
+    --line-2:rgba(255,255,255,.16);
+    --text:#ECEEF3;
+    --muted:#9A9EAC;
+    --faint:#6B6F7E;
+    --violet:#7A5CFF;
+    --pink:#FF2E7E;
+    --orange:#FF8A3D;
+    --gold:#FFC24D;
+    --green:#2FD08A;
+    --red:#FF5A5F;
+    --nvidia:#76B900;
+    --amd:#ED1C24;
+    --intel:#3B9CFF;
+    --grad:linear-gradient(90deg,#7A5CFF 0%,#FF2E7E 55%,#FF8A3D 100%);
+    --r:24px;
+    --r-sm:14px;
+    --display:"Inter Tight","Inter",system-ui,sans-serif;
+    --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--bg);color:var(--text);scroll-behavior:smooth;scroll-padding-top:84px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* Navegação */
+  nav{position:sticky;top:0;z-index:20;background:rgba(11,12,18,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font:800 19px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+  .logo .ring{width:26px;height:26px;flex:none}
+  .logo .ring circle{fill:none;stroke-width:4}
+  #ring{stroke-dasharray:100 100;transition:stroke-dasharray 1.5s cubic-bezier(.2,.9,.25,1)}
+  .logo .sc{font:700 12px/1 var(--body);color:var(--muted);padding:4px 8px;border-radius:999px;border:1px solid var(--line-2);font-variant-numeric:tabular-nums;opacity:0;transform:translateX(-4px);transition:opacity .4s,transform .4s}
+  .logo .sc.on{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){#ring{transition:none}}
+  .logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .links{display:flex;gap:22px;font-size:14px;font-weight:500;color:#C9CCD6}
+  .links a{text-decoration:none}
+  .links a:hover{color:#fff}
+  .upd{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(47,208,138,.15)}
+
+  .langs{margin-left:auto;display:flex;gap:2px;padding:3px;border:1px solid var(--line-2);border-radius:999px}
+  .langs button{font:700 12px/1 var(--body);color:var(--muted);background:none;border:0;border-radius:999px;padding:7px 10px;cursor:pointer}
+  .langs button:hover{color:#fff}
+  .langs button[aria-pressed="true"]{background:var(--grad);color:#fff}
+  footer .wrap{flex-direction:column;gap:18px}
+  .foot-main{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted)}
+  .foot-main a{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:3px}
+  .credit a{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none;font-weight:700}
+
+  /* Hero */
+  .hero{position:relative;margin:18px 0 0;border-radius:28px;overflow:hidden;border:1px solid var(--line);
+    background:
+      linear-gradient(90deg,rgba(11,12,18,.94) 0%,rgba(11,12,18,.78) 40%,rgba(11,12,18,.2) 75%,rgba(11,12,18,.35) 100%),
+      linear-gradient(0deg,rgba(11,12,18,.85) 0%,transparent 35%),
+      radial-gradient(90% 60% at 20% 110%,rgba(255,46,126,.28),transparent 60%),
+      url("https://images.unsplash.com/photo-1652112428671-fceb3e666710?w=2200&q=75&auto=format") 70% 40%/cover #12101E;
+    min-height:640px;display:flex;align-items:center}
+  .hero-in{width:100%}
+
+  /* Faixa de fotos */
+  .strip{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-top:12px}
+  .strip figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;background:#12101E}
+  .strip figure:first-child{aspect-ratio:auto}
+  .strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 20px 16px;font:800 18px/1.15 var(--display);letter-spacing:-.02em;background:linear-gradient(0deg,rgba(11,12,18,.9),transparent)}
+  .strip figcaption small{display:block;font:500 13px/1.4 var(--body);color:#C9CCD6;margin-top:4px}
+
+  /* Banda */
+  .band{position:relative;margin-top:72px;border-radius:28px;overflow:hidden;min-height:340px;display:flex;align-items:flex-end;padding:44px;
+    background:linear-gradient(0deg,rgba(11,12,18,.92) 0%,rgba(11,12,18,.35) 55%,rgba(11,12,18,.1) 100%),url("https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=2200&q=75&auto=format") center 60%/cover #2A1230}
+  .band p{margin:0;font:900 clamp(30px,4.4vw,56px)/1 var(--display);letter-spacing:-.04em;max-width:18ch}
+  .band small{display:block;margin-top:14px;font:500 16px/1.5 var(--body);color:#D3D6DF;letter-spacing:0;max-width:52ch}
+
+  /* Imagem das notícias */
+  .news .nw{padding:0;gap:0;overflow:hidden}
+  .nw-img{display:block;aspect-ratio:16/8;background:#12101E center/cover}
+  .nw.lead-n .nw-img{aspect-ratio:16/10}
+  .nw-b{display:flex;flex-direction:column;gap:10px;padding:18px 22px 22px;flex:1}
+  .hero-in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:64px 56px 72px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+  .pill{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;padding:8px 14px 8px 10px;border-radius:999px;background:rgba(11,12,18,.6);border:1px solid var(--line-2)}
+  .pill.grad{border:1.5px solid transparent;background:linear-gradient(#0B0C12,#0B0C12) padding-box,var(--grad) border-box}
+  h1{font:900 clamp(46px,6.4vw,84px)/.95 var(--display);letter-spacing:-.045em;margin:0}
+  .answer{display:block;margin-top:10px;font:900 clamp(46px,6.4vw,84px)/1 var(--display);letter-spacing:-.045em;background:linear-gradient(90deg,#FFC24D,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:6px}
+  .lead{max-width:48ch;color:#D3D6DF;font-size:17px;margin:22px 0 30px}
+  .cta{display:inline-flex;align-items:center;gap:10px;font:700 17px/1 var(--body);color:#fff;border:0;border-radius:999px;padding:17px 28px;cursor:pointer;background:var(--grad);box-shadow:0 10px 34px -8px rgba(255,46,126,.55)}
+  .cta:hover{filter:brightness(1.08)}
+  .cta:active{transform:translateY(1px)}
+
+  /* Velocímetro */
+  .meter{background:rgba(16,18,28,.66);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line-2);border-radius:var(--r);padding:22px 24px 24px}
+  .meter-h{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--muted)}
+  .meter-h span:first-child{display:flex;align-items:center;gap:8px;color:#fff}
+  .meter svg{width:100%;height:auto;display:block;margin-top:10px}
+  .needle{transform-origin:200px 200px;transform:rotate(-90deg);transition:transform 1.5s cubic-bezier(.2,.9,.25,1.12)}
+  @media (prefers-reduced-motion:reduce){.needle{transition:none}}
+  .read{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-top:16px}
+  .read .n{font:900 56px/1 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+  .read .u{font-size:15px;color:var(--muted);font-weight:500}
+  .meter-f{text-align:center;font-size:13.5px;color:var(--muted);margin-top:6px;min-height:1.6em}
+
+  /* Seções */
+  section{padding:72px 0 0}
+  .sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+  h2{font:800 clamp(30px,3.6vw,42px)/1.05 var(--display);letter-spacing:-.035em;margin:0}
+  .sub{color:var(--muted);margin:8px 0 0;max-width:62ch}
+
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+
+  /* Peças */
+  .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .part{padding:22px;display:flex;flex-direction:column;gap:14px}
+  .part-h{display:flex;justify-content:space-between;align-items:center}
+  .part-h label{font:800 20px/1 var(--display);letter-spacing:-.02em}
+  .vendor{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid currentColor;opacity:.95}
+  .vendor[data-v="nvidia"]{color:var(--nvidia)}
+  .vendor[data-v="amd"]{color:var(--amd)}
+  .vendor[data-v="intel"]{color:var(--intel)}
+  .vendor[data-v=""]{display:none}
+  .sel{position:relative}
+  .sel select{appearance:none;-webkit-appearance:none;width:100%;font:600 15px/1.2 var(--body);color:var(--text);background:#0B0C12;border:1px solid var(--line-2);border-radius:12px;padding:13px 40px 13px 14px;cursor:pointer}
+  .sel::after{content:"";position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+  .det{font-size:12.5px;color:var(--faint);line-height:1.45;min-height:2.9em}
+  .stat{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;padding-top:14px;border-top:1px solid var(--line);color:#C9CCD6;min-height:4.4em}
+  .stat i{flex:none;width:10px;height:10px;border-radius:50%;margin-top:5px;background:var(--faint)}
+  .part[data-s="ok"] .stat i{background:var(--green);box-shadow:0 0 0 4px rgba(47,208,138,.15)}
+  .part[data-s="meio"] .stat i{background:var(--gold);box-shadow:0 0 0 4px rgba(255,194,77,.15)}
+  .part[data-s="ruim"] .stat i{background:var(--red);box-shadow:0 0 0 4px rgba(255,90,95,.15)}
+  .stat b{color:#fff;font-weight:700}
+
+  /* Resultado */
+  .res{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+  .rc{padding:28px}
+  .rc h3{font-size:13.5px;font-weight:600;color:var(--muted);margin:0 0 10px}
+  .big{font:900 clamp(30px,3.4vw,40px)/1.05 var(--display);letter-spacing:-.035em;margin:0 0 10px}
+  .rc p{margin:0;color:#C9CCD6;font-size:15px;max-width:54ch}
+  .ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:26px}
+  .step{height:8px;border-radius:999px;background:rgba(255,255,255,.08);transition:background .5s}
+  .step.on{background:var(--grad);background-size:500% 100%}
+  .step:nth-child(1).on{background-position:0 0}.step:nth-child(2).on{background-position:25% 0}.step:nth-child(3).on{background-position:50% 0}.step:nth-child(4).on{background-position:75% 0}.step:nth-child(5).on{background-position:100% 0}
+  .ladder-l{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px;font-size:12px;color:var(--faint)}
+  .ladder-l span.cur{color:#fff;font-weight:600}
+  .pct{display:flex;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .pct b{font:800 22px/1 var(--display);color:#fff;letter-spacing:-.02em}
+  .rc.off{background:linear-gradient(160deg,rgba(122,92,255,.14),rgba(255,46,126,.06) 60%,transparent),var(--panel)}
+  .note{margin-top:18px;font-size:13px;color:var(--faint)}
+
+  /* PCs testados */
+  .rigs{display:grid;gap:10px}
+  .rig{display:grid;grid-template-columns:44px 1.1fr 2fr 110px 1.3fr;gap:18px;align-items:center;padding:16px 22px}
+  .rank{font:800 18px/1 var(--display);color:var(--faint);font-variant-numeric:tabular-nums}
+  .rig:nth-child(1) .rank{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .rig .nm{font:800 17px/1.2 var(--display);letter-spacing:-.01em}
+  .rig .nm small{display:block;font:500 12px/1.4 var(--body);color:var(--faint);margin-top:3px}
+  .rig .hw{font-size:14px;color:#C9CCD6;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .fps{font:800 22px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .fps small{font:500 12px var(--body);color:var(--faint);margin-left:3px}
+  .where{font-size:13.5px;color:var(--muted)}
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px}
+  .tag.ok{background:rgba(47,208,138,.12);color:var(--green)}
+  .tag.no{background:rgba(255,90,95,.12);color:var(--red)}
+  .tag.pv{background:rgba(255,255,255,.07);color:var(--muted)}
+  .src{margin-top:14px;font-size:13px;color:var(--faint)}
+  .src a{color:var(--muted)}
+
+  /* Novidades */
+  .news{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+  .nw{display:flex;flex-direction:column;gap:10px;padding:22px;text-decoration:none;transition:border-color .2s}
+  .nw:hover{border-color:var(--line-2)}
+  .nw-m{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--faint)}
+  .cat{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(122,92,255,.14);color:#B7A6FF}
+  .cat.takedown{background:rgba(255,90,95,.12);color:var(--red)}
+  .nw h3{font:800 19px/1.2 var(--display);letter-spacing:-.02em;margin:0}
+  .nw p{margin:0;font-size:14px;color:#B9BDC8;line-height:1.5}
+  .nw .more{margin-top:auto;padding-top:6px;font-size:13px;font-weight:600;color:var(--gold)}
+  .nw.lead-n{grid-row:span 2;background:linear-gradient(170deg,rgba(255,46,126,.12),transparent 55%),var(--panel)}
+  .nw.lead-n h3{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.03em}
+  .nw.lead-n p{font-size:15.5px}
+  .en{font-size:11px;font-weight:600;color:var(--faint);border:1px solid var(--line-2);border-radius:999px;padding:1px 7px}
+  .live{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+  @media (max-width:980px){.news{grid-template-columns:1fr}.nw.lead-n{grid-row:auto}}
+
+  /* Aviso */
+  .warn{display:flex;gap:18px;align-items:flex-start;margin-top:72px;padding:26px 28px;border-radius:var(--r);background:rgba(255,90,95,.06);border:1px solid rgba(255,90,95,.25)}
+  .warn h3{font:800 20px/1.2 var(--display);margin:0 0 6px;letter-spacing:-.02em}
+  .warn p{margin:0;color:#D3D6DF;font-size:15px;max-width:76ch}
+
+  footer{margin-top:56px;padding:28px 0 48px;border-top:1px solid var(--line);color:var(--faint);font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  footer p{margin:0;max-width:70ch}
+
+  @media (max-width:980px){
+    .hero-in{grid-template-columns:1fr;padding:44px 26px 56px}
+    .parts{grid-template-columns:1fr}
+    .hero{min-height:0;background-position:center,center,center,60% 40%}
+    .strip{grid-template-columns:1fr 1fr}
+    .strip figure:first-child{grid-column:1/3;aspect-ratio:16/9}
+    .band{padding:28px;min-height:280px}
+    .res{grid-template-columns:1fr}
+    .rig{grid-template-columns:34px 1fr 90px;row-gap:6px}
+    .rig .fps{grid-column:3;grid-row:1;text-align:right}
+    .rig .hw{grid-column:2/4}
+    .rig .where{grid-column:2/4}
+    .links{display:none}
+  }
+  @media (max-width:520px){
+    .upd span.t{display:none}
+    .det,.stat{min-height:0}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#topo"><svg class="ring" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs><circle cx="13" cy="13" r="10" stroke="rgba(255,255,255,.14)"/><circle id="ring" cx="13" cy="13" r="10" stroke="url(#rg)" stroke-linecap="round" pathLength="100" transform="rotate(-90 13 13)"/></svg>Roda o <b>VI</b><span class="sc" id="ring-sc"></span></a>
+    <div class="links"><a href="#pecas" data-i18n="nav.pc">Seu PC</a><a href="#resultado" data-i18n="nav.res">Resultado</a><a href="#novidades" data-i18n="nav.news">Novidades</a><a href="#testados" data-i18n="nav.rank">Ranking</a></div>
+    <div class="langs" role="group" aria-label="Idioma" data-i18n-attr="aria-label:nav.lang"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="es">ES</button></div>
+  </div>
+</nav>
+
+<main class="wrap" id="topo">
+
+<header class="hero">
+
+  <div class="hero-in">
+    <div>
+      <div class="chips">
+        <span class="pill grad"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2FD08A" stroke-width="2.4" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span data-i18n="hero.chip1">Nada pra baixar</span></span>
+        <span class="pill" data-i18n="hero.chip2">Roda no navegador, em 10 segundos</span>
+      </div>
+      <h1 data-i18n="hero.h1">Seu PC roda o GTA VI?</h1>
+      <span class="answer" id="answer" data-i18n="hero.answer">Vamos ver.</span>
+      <p class="lead" data-i18n="hero.lead">O teste lê sua placa de vídeo pelo navegador e compara com os PCs que a comunidade já usou pra rodar os ports da build vazada.</p>
+      <button class="cta" id="go" type="button" data-i18n="hero.cta">Testar meu PC</button>
+    </div>
+
+    <div class="meter" aria-live="polite">
+      <div class="meter-h"><span><span class="dot" aria-hidden="true"></span><span data-i18n="meter.label">FPS estimado no port</span></span><span id="mtag" data-i18n="meter.wait">Aguardando teste</span></div>
+      <svg viewBox="0 0 400 222" role="img" aria-labelledby="mt">
+        <title id="mt" data-i18n="meter.title">Velocímetro de fps estimado no port</title>
+        <defs><linearGradient id="arc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs>
+        <path d="M40 200 A160 160 0 0 1 360 200" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="18" stroke-linecap="round"/>
+        <path id="arcfill" d="M40 200 A160 160 0 0 1 360 200" fill="none" stroke="url(#arc)" stroke-width="18" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100" style="transition:stroke-dasharray 1.5s cubic-bezier(.2,.9,.25,1)"/>
+        <g stroke="rgba(255,255,255,.35)" stroke-width="2">
+          <line x1="200" y1="22" x2="200" y2="32"/><line x1="73" y1="73" x2="80" y2="80"/><line x1="327" y1="73" x2="320" y2="80"/>
+        </g>
+        <g fill="#6B6F7E" font-family="Inter" font-size="13" font-weight="600" text-anchor="middle">
+          <text x="40" y="220">0</text><text x="62" y="66">15</text><text x="200" y="14">30</text><text x="338" y="66">45</text><text x="360" y="220">60</text>
+        </g>
+        <g class="needle" id="needle">
+          <line x1="200" y1="200" x2="200" y2="70" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="200" cy="200" r="11" fill="#fff"/><circle cx="200" cy="200" r="4" fill="#0B0C12"/>
+        </g>
+      </svg>
+      <div class="read"><span class="n" id="num">--</span><span class="u">fps</span></div>
+      <div class="meter-f" id="mfoot" data-i18n="meter.click">Clique em Testar meu PC</div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <figure><img src="https://images.unsplash.com/photo-1779333466753-772495d49426?w=1400&q=70&auto=format" alt="Rua de Miami com prédios art déco e palmeiras iluminados à noite" loading="lazy"><figcaption><span data-i18n="strip.t1">Saiu em 19 de nov., só no console</span><small data-i18n="strip.s1">PS5 e Xbox Series. A Rockstar ainda não falou de PC.</small></figcaption></figure>
+  <figure><img src="https://images.unsplash.com/photo-1666032800277-607511d3869a?w=1200&q=70&auto=format" alt="Carro passando por uma rua com letreiros de neon" loading="lazy"><figcaption><span data-i18n="strip.t2">Port vazado</span><small data-i18n="strip.s2">Melhor resultado: ~25 fps</small></figcaption></figure>
+  <figure><img src="https://images.unsplash.com/photo-1779333429848-d6494e6b11ff?w=1200&q=70&auto=format" alt="Vida noturna com prédios em neon azul e palmeiras" loading="lazy"><figcaption><span data-i18n="strip.t3">Versão oficial</span><small data-i18n="strip.s3">Prevista pra 2027, sem data</small></figcaption></figure>
+</div>
+
+<section id="pecas">
+  <div class="sh">
+    <div><h2 data-i18n="pc.h2">Seu PC</h2><p class="sub" data-i18n="pc.sub">Preenchemos o que deu pra detectar. O navegador não mostra o modelo do processador nem quanta RAM você tem, então confira e ajuste.</p></div>
+  </div>
+  <div class="parts">
+    <div class="part box" id="p-gpu">
+      <div class="part-h"><label for="gpu" data-i18n="pc.gpu">Placa de vídeo</label><span class="vendor" id="v-gpu" data-v=""></span></div>
+      <div class="sel"><select id="gpu"></select></div>
+      <div class="det" id="d-gpu" data-i18n="pc.detGpu">Clique em Testar meu PC pra detectar.</div>
+      <div class="stat"><i></i><span id="s-gpu" data-i18n="pc.wait">Aguardando teste.</span></div>
+    </div>
+    <div class="part box" id="p-cpu">
+      <div class="part-h"><label for="cpu" data-i18n="pc.cpu">Processador</label><span class="vendor" id="v-cpu" data-v=""></span></div>
+      <div class="sel"><select id="cpu"></select></div>
+      <div class="det" id="d-cpu" data-i18n="pc.detCpu">Escolha o modelo na lista.</div>
+      <div class="stat"><i></i><span id="s-cpu" data-i18n="pc.wait">Aguardando teste.</span></div>
+    </div>
+    <div class="part box" id="p-ram">
+      <div class="part-h"><label for="ram" data-i18n="pc.ram">Memória RAM</label></div>
+      <div class="sel"><select id="ram">
+        <option value="8">8 GB</option><option value="16" selected>16 GB</option><option value="24">24 GB</option><option value="32">32 GB</option><option value="48">48 GB</option><option value="64" data-i18n="pc.ram64">64 GB ou mais</option>
+      </select></div>
+      <div class="det" id="d-ram" data-i18n="pc.detRam">Confira em Configurações › Sistema › Sobre.</div>
+      <div class="stat"><i></i><span id="s-ram" data-i18n="pc.wait">Aguardando teste.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="resultado">
+  <div class="sh">
+    <div><h2 data-i18n="res.h2">Resultado</h2><p class="sub" data-i18n="res.sub">Duas leituras: como seu PC se sai nos ports da comunidade hoje, e uma estimativa pra quando sair a versão oficial de PC.</p></div>
+  </div>
+  <div class="res">
+    <div class="rc box">
+      <h3 data-i18n="res.portH">Port da comunidade, hoje</h3>
+      <div class="big" id="v-port" data-i18n="res.portWait">Ainda não testado</div>
+      <p id="t-port" data-i18n="res.portHint">Clique em Testar meu PC lá em cima, ou escolha suas peças na lista.</p>
+      <div class="ladder" aria-hidden="true"><i class="step"></i><i class="step"></i><i class="step"></i><i class="step"></i><i class="step"></i></div>
+      <div class="ladder-l" id="ladder-l"><span>Não abre</span><span>Menus</span><span>Abre o jogo</span><span>Jogável</span><span>Como os testados</span></div>
+      <div class="pct"><span data-i18n="res.pct">Compatibilidade com o melhor PC testado</span><b id="pct">--</b></div>
+    </div>
+    <div class="rc box off">
+      <h3 data-i18n="res.offH">Versão oficial de PC, quando sair</h3>
+      <div class="big" id="v-off">--</div>
+      <p id="t-off" data-i18n="res.offHint">Comparamos sua placa com a do PS5, o console onde o jogo roda hoje.</p>
+      <p class="note" data-i18n="res.offNote">A Rockstar ainda não anunciou a versão de PC nem os requisitos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="novidades">
+  <div class="sh">
+    <div><h2 data-i18n="news.h2">Novidades</h2><p class="sub" data-i18n="news.sub">Os ports mudam todo dia. As notícias vêm do PortWatch VI.</p></div>
+  </div>
+  <div class="news" id="news"></div>
+</section>
+
+<div class="band">
+  <p><span data-i18n="band.t">Vice City ainda não chegou no PC.</span><small data-i18n="band.s">Mas a comunidade está perto: o melhor port já passa dos 20 fps. Veja quem está na frente.</small></p>
+</div>
+
+<section id="testados">
+  <div class="sh">
+    <div><h2 data-i18n="rank.h2">Ranking dos ports</h2><p class="sub" data-i18n="rank.sub">Os mais avançados primeiro. Os números são informados pelos próprios grupos e mudam a cada build.</p></div>
+  </div>
+  <div class="rigs" id="rigs"></div>
+  <p class="src" data-i18n-html="rank.src">Fonte: <a href="https://portwatch-vi.xyz/" rel="noopener">PortWatch VI</a>. A maior parte dos números não passou por verificação independente.</p>
+</section>
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-main">
+      <p class="credit" data-i18n-html="foot.credit">Inspirado no <a href="https://portwatch-vi.xyz/" rel="noopener">PortWatch VI</a>, de 4lwayz, que acompanha os ports desde o começo. As notícias e o ranking vêm de lá.</p>
+      <p data-i18n-html="foot.code">Código aberto no <a href="https://github.com/RafaeltCMSP/roda-o-vi" rel="noopener">GitHub</a>. <a href="/embed/">Coloque o teste no seu site</a>.</p>
+    </div>
+    <p data-i18n="foot.legal">Feito por fãs, sem ligação com a Rockstar Games, a Take-Two ou a Microsoft. As estimativas usam o desempenho relativo das placas e os testes informados pela comunidade. É só curiosidade, não garantia.</p>
+  </div>
+</footer>
+
+<script type="module">
+import { carregarDados, detectarGPU, limparNomeGPU, acharGPU, avaliar, formatarFps, TEXTOS, IDIOMAS } from "./lib/rodavi.js";
+
+const $ = id => document.getElementById(id);
+const gpuSel = $("gpu"), cpuSel = $("cpu"), ramSel = $("ram");
+const vendorName = {nvidia:"NVIDIA",amd:"AMD",intel:"Intel"};
+// Escapa texto vindo de fora antes de pôr na página
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const json = f => fetch(f).then(r=>r.ok?r.json():Promise.reject(r.status));
+const pegar = (obj, caminho) => caminho.split(".").reduce((o,k)=>o?.[k], obj);
+const preencher = (txt, vars) => String(txt).replace(/\{(\w+)\}/g, (_,k)=>vars[k] ?? "");
+
+/* Idioma */
+const salvo = localStorage.getItem("rodavi-idioma");
+const doNavegador = (navigator.language || "pt").slice(0,2).toLowerCase();
+let lang = IDIOMAS.includes(salvo) ? salvo : IDIOMAS.includes(doNavegador) ? doNavegador : "en";
+let T = {};
+const cache = {};
+async function carregarIdioma(l){ return cache[l] ||= await json(`./i18n/${l}.json`); }
+
+function aplicarTextos(){
+  document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ const v = pegar(T, el.dataset.i18n); if(v!=null) el.textContent = v; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{ const v = pegar(T, el.dataset.i18nHtml); if(v!=null) el.innerHTML = v; });
+  document.querySelectorAll("[data-i18n-attr]").forEach(el=>{ const [a,k] = el.dataset.i18nAttr.split(":"); const v = pegar(T,k); if(v!=null) el.setAttribute(a, v); });
+  document.querySelectorAll("#ladder-l span").forEach((s,i)=>s.textContent = TEXTOS[lang].etapas[i]);
+  document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.lang===lang)));
+  gpuSel.querySelector('option[value="-1"]').textContent = T.pc.unknownGpu;
+  cpuSel.querySelector('option[value="-1"]').textContent = T.pc.unknownCpu;
+}
+
+const dataLocal = s => { const [y,m,d] = String(s).split("-").map(Number); return d ? preencher(T.news.date, {d, m:T.news.months[m-1]}) : ""; };
+
+/* Dados */
+const { gpus: GPUS, cpus: CPUS } = await carregarDados("./data/");
+GPUS.forEach((g,i)=>gpuSel.add(new Option(`${g.nome} · ${g.vram}GB`, i)));
+gpuSel.add(new Option("", -1));
+CPUS.forEach((c,i)=>cpuSel.add(new Option(c.nome, i)));
+cpuSel.add(new Option("", -1));
+gpuSel.value = "-1"; cpuSel.value = "-1";
+
+T = await carregarIdioma(lang);
+aplicarTextos();
+
+/* Ranking */
+let RIGS = [], rigsAoVivo = null;
+const SELO = {verificado:"ok",privado:"pv",removido:"no"};
+function renderRigs(){
+  const list = rigsAoVivo ? rigsAoVivo.map(rigDoPortWatch) : RIGS;
+  $("rigs").innerHTML = list.map((r,i)=>`<div class="rig box">
+    <span class="rank">${String(i+1).padStart(2,"0")}</span>
+    <span class="nm">${esc(r.projeto)}<small>${esc(r.tipo)}</small></span>
+    <span class="hw">${vendorName[r.fabricante]?`<span class="vendor" data-v="${esc(r.fabricante)}">${vendorName[r.fabricante]}</span>`:""}${esc(r.hardware)}</span>
+    <span class="fps">${esc(r.fps)}<small>fps</small></span>
+    <span class="where">${esc(r.ate_onde)} ${r.selo?`<span class="tag ${SELO[r.selo]}">${esc(T.rank.selo[r.selo])}</span>`:""}</span>
+  </div>`).join("");
+}
+
+/* Notícias */
+let PT = {}, noticias = [];
+const NEWS_IMG = ["1530686577637-0ccce382b327","1533106497176-45ae19e68ba2","1589066724013-06f34f2cc17c","1574570120202-87f6842d5569","1652290761253-35c071df19eb"].map((id,i)=>`https://images.unsplash.com/photo-${id}?w=${i?700:1200}&q=70&auto=format`);
+function renderNews(){
+  $("news").innerHTML = noticias.slice(0,5).map((n,i)=>{
+    // Inglês usa o texto original do PortWatch. Português usa a tradução quando existe.
+    const t = lang === "pt" ? PT[n.id] : null;
+    const titulo = t ? t.titulo : (n.title || (PT[n.id]||{}).titulo);
+    const resumo = t ? t.resumo : (n.dek || (PT[n.id]||{}).resumo);
+    const original = !t && n.title && T.news.original;
+    const url = "https://portwatch-vi.xyz/news/" + encodeURIComponent(n.id) + ".html";
+    const cat = n.category || n.categoria || "Port";
+    return `<a class="nw box${i===0?" lead-n":""}" href="${url}" target="_blank" rel="noopener">
+      <span class="nw-img" style="background-image:url('${NEWS_IMG[i%NEWS_IMG.length]}')" aria-hidden="true"></span>
+      <span class="nw-b"><span class="nw-m"><span class="cat${cat==="Takedown"?" takedown":""}">${esc(T.news.cat[cat]||cat)}</span>${esc(dataLocal(n.date||n.data))}${original?` <span class="en">${esc(original)}</span>`:""}</span>
+      <h3>${esc(titulo)}</h3>
+      <p>${esc(resumo)}</p>
+      <span class="more">${esc(T.news.read)}</span></span>
+    </a>`;
+  }).join("");
+}
+
+// Ranking e notícias ao vivo a partir dos dados públicos do PortWatch
+const STAGES = ["playable","world","menu","boots","loads"];
+const stageOf = g => { for(let i=0;i<STAGES.length;i++) if(g && g[STAGES[i]]>=1) return i; return STAGES.length; };
+function rigDoPortWatch(e){
+  const k = RIGS.find(r=>r.projeto.toLowerCase()===String(e.name).toLowerCase());
+  const gv = (e.gpu||[]).map(x=>String(x).toLowerCase());
+  return {
+    projeto: e.name,
+    tipo: T.rank.approach[e.approach] || e.approach || "Port",
+    fabricante: k ? k.fabricante : (gv.length===1 ? gv[0] : ""),
+    hardware: k ? k.hardware : (gv.length>1 ? T.rank.both : T.rank.unknown),
+    fps: e.gta.fps ? `~${e.gta.fps}` : "–",
+    ate_onde: T.rank.stages[STAGES[stageOf(e.gta)]],
+    selo: e.stats && e.stats.missing ? "removido" : null
+  };
+}
+function carregarPortWatch(){
+  return json("https://portwatch-vi.xyz/data/tracker.json").then(d=>{
+    if(Array.isArray(d.news) && d.news.length){ noticias = d.news; renderNews(); }
+    const ef = (d.efforts||[]).filter(e=>e.tier==="tracked" && e.gta && stageOf(e.gta)<STAGES.length);
+    ef.sort((a,b)=> stageOf(a.gta)-stageOf(b.gta) || (b.gta.fps||0)-(a.gta.fps||0));
+    if(ef.length){ rigsAoVivo = ef.slice(0,10); renderRigs(); }
+  }).catch(()=>{});
+}
+
+Promise.all([json("./data/rigs.json"), json("./data/noticias-pt.json")]).then(([r, n])=>{
+  RIGS = r.rigs; renderRigs();
+  PT = Object.fromEntries(n.noticias.map(x=>[x.id,x]));
+  noticias = n.noticias; renderNews();
+  return carregarPortWatch();
+}).catch(()=>{});
+
+/* Avaliação */
+let testado = false, deteccao = null;
+function set(part, r){ $("p-"+part).dataset.s = r.status; $("s-"+part).innerHTML = `<b>${esc(r.titulo)}</b> ${esc(r.texto)}`; }
+function vendor(id, item){ const v = item ? item.fabricante : ""; const el=$(id); el.dataset.v=v||""; el.textContent=vendorName[v]||""; }
+
+function atualizar(){
+  testado = true;
+  const gpu = GPUS[+gpuSel.value] || null;
+  const cpu = CPUS[+cpuSel.value] || null;
+  const r = avaliar({ gpu, cpu, ramGB: +ramSel.value, threads: navigator.hardwareConcurrency, idioma: lang });
+  vendor("v-gpu", gpu); vendor("v-cpu", cpu);
+  set("gpu", r.pecas.gpu); set("cpu", r.pecas.cpu); set("ram", r.pecas.ram);
+
+  $("v-port").textContent = r.port.titulo; $("t-port").textContent = r.port.texto;
+  $("answer").textContent = r.resposta;
+  document.querySelectorAll(".step").forEach((s,i)=>s.classList.toggle("on", i<=r.etapa));
+  document.querySelectorAll("#ladder-l span").forEach((s,i)=>s.classList.toggle("cur", i===r.etapa));
+  $("pct").textContent = r.pct+"%";
+
+  // Anel da logo enche até o score do PC
+  const ring = $("ring");
+  if(!ring.dataset.done){
+    ring.style.transition="none"; ring.style.strokeDasharray="0 100";
+    ring.getBoundingClientRect(); ring.style.transition=""; ring.dataset.done=1;
+  }
+  requestAnimationFrame(()=>{ ring.style.strokeDasharray = `${Math.max(r.pct,3)} 100`; });
+  const sc = $("ring-sc"); sc.textContent = r.pct+"%"; sc.classList.add("on"); sc.title = T.score;
+
+  // Velocímetro: 0–60 fps em 180°
+  const frac = Math.min(r.fps.max,60)/60;
+  $("needle").style.transform = `rotate(${-90 + frac*180}deg)`;
+  $("arcfill").setAttribute("stroke-dasharray", `${frac*100} 100`);
+  $("num").textContent = r.abre ? `${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)}` : "0";
+  $("mtag").textContent = gpu ? gpu.nome : T.meter.noGpu;
+  $("mfoot").textContent = r.abre ? T.meter.range : T.meter.noOpen;
+
+  $("v-off").textContent = r.oficial.titulo; $("t-off").textContent = r.oficial.texto;
+}
+
+function escreverDeteccao(){
+  if(!deteccao) return;
+  const { bruto, achou, threads } = deteccao;
+  $("d-gpu").textContent = achou ? preencher(T.pc.gpuFound,{x:limparNomeGPU(bruto)}) : bruto ? preencher(T.pc.gpuUnknown,{x:bruto}) : T.pc.gpuNone;
+  $("d-cpu").textContent = threads ? preencher(T.pc.cpuThreads,{t:threads}) : T.pc.detCpu;
+}
+
+$("go").addEventListener("click", ()=>{
+  const bruto = detectarGPU();
+  const gpu = acharGPU(bruto, GPUS);
+  if(gpu) gpuSel.value = GPUS.indexOf(gpu);
+  deteccao = { bruto, achou: !!gpu, threads: navigator.hardwareConcurrency };
+  escreverDeteccao();
+  atualizar();
+  setTimeout(()=>$("pecas").scrollIntoView(), 1700);
+});
+[gpuSel,cpuSel,ramSel].forEach(el=>el.addEventListener("change", atualizar));
+
+document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click", async ()=>{
+  lang = b.dataset.lang; localStorage.setItem("rodavi-idioma", lang);
+  T = await carregarIdioma(lang);
+  aplicarTextos(); renderNews(); renderRigs();
+  if(testado){ atualizar(); escreverDeteccao(); }
+}));
+</script>
+</body>
+</html>

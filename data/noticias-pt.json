@@ -1,0 +1,63 @@
+{
+  "versao": 1,
+  "atualizado": "2026-11-26",
+  "fonte": "https://portwatch-vi.xyz/news/",
+  "noticias": [
+    {
+      "id": "2026-11-26-multiplayer-running",
+      "data": "2026-11-26",
+      "categoria": "Port",
+      "titulo": "Multiplayer do GTA VI rodando no PC",
+      "resumo": "O grupo do TeK tem jogadores, carros e chat de voz por proximidade funcionando a 25–30 fps estáveis, num fork privado do build do CGBJ. O PortWatch confirmou que o vídeo é real."
+    },
+    {
+      "id": "2026-11-25-belobug-way-ahead",
+      "data": "2026-11-25",
+      "categoria": "Port",
+      "titulo": "O build AMD do Belobug está bem à frente",
+      "resumo": "O mundo aberto parece muito com o do jogo final num PC todo AMD, e dá pra fazer missões. Nada mais no ranking chega perto."
+    },
+    {
+      "id": "2026-11-25-zettrox-no-crashes",
+      "data": "2026-11-25",
+      "categoria": "Port",
+      "titulo": "O build do ZETTROX ainda não travou nenhuma vez",
+      "resumo": "Foi do prólogo da Lucia até a primeira missão do Jason sem crash, e está indo devagar rumo ao mundo aberto."
+    },
+    {
+      "id": "2026-11-25-prologue-gone-fishing",
+      "data": "2026-11-25",
+      "categoria": "Port",
+      "titulo": "Builds passam do prólogo e chegam à primeira missão do Jason",
+      "resumo": "Builds privados já jogam a abertura e entram em \"Gone Fishing\", mas a maioria ainda renderiza mal e os veículos quase nunca funcionam."
+    },
+    {
+      "id": "2026-11-24-take-two-dmca-leonida-forks",
+      "data": "2026-11-24",
+      "categoria": "Takedown",
+      "titulo": "Take-Two derruba o Leonida e 3.007 forks",
+      "resumo": "Um pedido de remoção (DMCA) publicado pelo GitHub na terça mira o repositório Leonida, e o GitHub aplicou a todos os forks dele."
+    },
+    {
+      "id": "2026-11-24-new-progress-scale",
+      "data": "2026-11-24",
+      "categoria": "Port",
+      "titulo": "Nova escala do PortWatch: jogável é metade, zerar é 100%",
+      "resumo": "Entrar no jogo vale metade da barra. A outra metade mede até onde dá pra jogar, se a imagem está certa, o fps e a estabilidade."
+    },
+    {
+      "id": "2026-11-24-omonkey-shaders-prison",
+      "data": "2026-11-24",
+      "categoria": "Port",
+      "titulo": "omonkey: andando pela prisão do começo do jogo",
+      "resumo": "Dá pra andar devagar pela cena da prisão, a uns 5 fps. Tudo é transmitido ao vivo num canal do Rumble."
+    },
+    {
+      "id": "2026-11-24-cgbj-in-game",
+      "data": "2026-11-24",
+      "categoria": "Port",
+      "titulo": "Build do CGBJ já deixa andar e falar com NPCs",
+      "resumo": "O build, baseado em VIctory e XCL, deixa andar pelo mapa e conversar com NPCs. O código ficou público por pouco tempo e voltou a ser privado."
+    }
+  ]
+}

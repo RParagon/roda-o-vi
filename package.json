@@ -1,0 +1,13 @@
+{
+  "name": "roda-o-vi",
+  "version": "1.0.0",
+  "description": "Teste se um PC aguenta os ports de PC do GTA VI feitos pela comunidade. Motor, dados e widget abertos.",
+  "type": "module",
+  "main": "lib/rodavi.js",
+  "exports": { ".": "./lib/rodavi.js", "./widget": "./embed/rodavi-widget.js" },
+  "files": ["lib", "embed", "data", "i18n"],
+  "scripts": { "validar": "node scripts/validar-dados.mjs", "testar": "node scripts/testar-motor.mjs" },
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/RafaeltCMSP/roda-o-vi.git" },
+  "homepage": "https://roda-o-vi.netlify.app"
+}
