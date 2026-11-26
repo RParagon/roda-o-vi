@@ -16,7 +16,7 @@
  * Evento:
  *   "rodavi:resultado", com o resultado completo em event.detail.
  *
- * Licença MIT. https://github.com/RafaeltCMSP/roda-o-vi
+ * Licença MIT. https://github.com/RParagon/roda-o-vi
  */
 import { carregarDados, detectarGPU, acharGPU, avaliar, formatarFps, IDIOMAS } from "../lib/rodavi.js";
 

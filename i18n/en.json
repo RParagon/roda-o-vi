@@ -86,7 +86,7 @@
   "foot": {
     "legal": "Fan-made, not affiliated with Rockstar Games, Take-Two or Microsoft. Estimates use relative GPU performance and community-reported tests. It's for curiosity, not a guarantee.",
     "credit": "Inspired by <a href=\"https://portwatch-vi.xyz/\" rel=\"noopener\">PortWatch VI</a> by 4lwayz, which has tracked the ports from the start. News and ranking come from there.",
-    "code": "Open source on <a href=\"https://github.com/RafaeltCMSP/roda-o-vi\" rel=\"noopener\">GitHub</a>. <a href=\"/embed/\">Put the test on your site</a>."
+    "code": "Open source on <a href=\"https://github.com/RParagon/roda-o-vi\" rel=\"noopener\">GitHub</a>. <a href=\"/embed/\">Put the test on your site</a>."
   },
   "score": "Your PC's compatibility with the best tested PC"
 }
