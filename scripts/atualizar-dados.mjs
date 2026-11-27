@@ -21,7 +21,7 @@ try {
 }
 
 const esforcos = Array.isArray(pw.efforts) ? pw.efforts : [];
-const jogaveis = esforcos.filter((e) => e.tier === "tracked" && e.gta && e.gta.playable >= 1 && Number(e.gta.fps) > 0);
+const jogaveis = esforcos.filter((e) => e.tier === "tracked" && !e.nuked && e.gta && e.gta.playable >= 1 && Number(e.gta.fps) > 0);
 if (!jogaveis.length) {
   console.log("Nenhum projeto jogável com fps nos dados. Nada foi alterado.");
   process.exit(0);
@@ -74,7 +74,7 @@ for (const rig of rigs.rigs) {
   if (!e || !e.gta) continue;
   const etapa = Object.keys(ETAPAS).find((k) => e.gta[k] >= 1);
   const fps = e.gta.fps ? `~${e.gta.fps}` : rig.fps;
-  const removido = e.stats && e.stats.missing;
+  const removido = !!e.nuked || (e.stats && e.stats.missing);
   const novo = { fps, ate_onde: etapa ? ETAPAS[etapa] : rig.ate_onde, selo: removido ? "removido" : rig.selo === "removido" ? null : rig.selo };
   if (novo.fps !== rig.fps || novo.ate_onde !== rig.ate_onde || novo.selo !== rig.selo) { Object.assign(rig, novo); mudou++; }
 }

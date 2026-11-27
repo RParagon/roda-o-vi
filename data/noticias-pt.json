@@ -1,8 +1,22 @@
 {
   "versao": 1,
-  "atualizado": "2026-11-26",
+  "atualizado": "2026-11-27",
   "fonte": "https://portwatch-vi.xyz/news/",
   "noticias": [
+    {
+      "id": "2026-11-27-belobug-dmca",
+      "data": "2026-11-27",
+      "categoria": "Takedown",
+      "titulo": "GitHub remove o build do Belobug por violar os Termos de Uso",
+      "resumo": "O repositório e a conta do GitHub por trás do build mais bem avaliado do ranking sumiram. O PortWatch confirmou que o GitHub removeu os dois por violação dos Termos de Uso."
+    },
+    {
+      "id": "2026-11-24-xcl-30fps-in-game",
+      "data": "2026-11-24",
+      "categoria": "Port",
+      "titulo": "XCL diz rodar o GTA VI a 30 fps, mas não diz se já passou dos menus",
+      "resumo": "A equipe não quis dar detalhes com medo de ser derrubada, mas deu a entender que está funcionando muito bem. Testadores já relatam o jogo carregando o mundo."
+    },
     {
       "id": "2026-11-26-multiplayer-running",
       "data": "2026-11-26",

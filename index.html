@@ -695,12 +695,13 @@ function rigDoPortWatch(e){
 function carregarPortWatch(){
   return json("https://portwatch-vi.xyz/data/tracker.json").then(d=>{
     if(Array.isArray(d.news) && d.news.length){ noticias = d.news; renderNews(); }
-    const ef = (d.efforts||[]).filter(e=>e.tier==="tracked" && e.gta && stageOf(e.gta)<STAGES.length);
+    // Projetos removidos (nuked) saem do ranking, como no PortWatch
+    const ef = (d.efforts||[]).filter(e=>e.tier==="tracked" && !e.nuked && e.gta && stageOf(e.gta)<STAGES.length);
     ef.sort((a,b)=> stageOf(a.gta)-stageOf(b.gta) || (b.gta.fps||0)-(a.gta.fps||0));
     if(ef.length){ rigsAoVivo = ef.slice(0,10); renderRigs(); }
 
     // Calibração ao vivo: o melhor fps publicado agora vira a régua das estimativas
-    const jogaveis = (d.efforts||[]).filter(e=>e.tier==="tracked" && e.gta && e.gta.playable>=1 && Number(e.gta.fps)>0);
+    const jogaveis = (d.efforts||[]).filter(e=>e.tier==="tracked" && !e.nuked && e.gta && e.gta.playable>=1 && Number(e.gta.fps)>0);
     if(jogaveis.length){
       const melhor = Math.max(...jogaveis.map(e=>Number(e.gta.fps)));
       if(melhor > 0 && melhor <= 240) TETO = melhor;
