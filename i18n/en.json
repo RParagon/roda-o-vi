@@ -17,7 +17,7 @@
     "chip2": "Runs in your browser, in 10 seconds",
     "h1": "Can your PC run GTA VI?",
     "answer": "Let's see.",
-    "lead": "The test reads your graphics card through the browser and compares it with the PCs the community has used to run ports of the leaked build.",
+    "lead": "The test reads your graphics card through the browser and compares it with the PCs the community has used to run Cyberleek's leaked build.",
     "cta": "Test my PC",
     "again": "Test again",
     "adjust": "Adjust processor and RAM"
@@ -32,12 +32,12 @@
     "noOpen": "Your card probably won't start the ports"
   },
   "strip": {
-    "t1": "Out Nov 19, console only",
-    "s1": "PS5 and Xbox Series. Rockstar hasn't said anything about PC yet.",
-    "t2": "Leaked port",
-    "s2": "Best result: ~25 fps",
-    "t3": "Official version",
-    "s3": "Expected in 2027, no date"
+    "t1": "Leaked Xbox Series build",
+    "s1": "Executable released by Cyberleek on Nov 23",
+    "t2": "Best result",
+    "s2": "~25 fps on a test rig",
+    "t3": "Multiplayer running",
+    "s3": "25 to 30 fps on a private build"
   },
   "pc": {
     "h2": "Your PC",
@@ -61,14 +61,13 @@
   },
   "res": {
     "h2": "Result",
-    "sub": "Two readings: how your PC does on the community ports today, and an estimate for when the official PC version comes out.",
-    "portH": "Community port, today",
+    "sub": "How your PC does running Cyberleek's leaked build, based on the tests the community has published.",
+    "portH": "On Cyberleek's build",
     "portWait": "Not tested yet",
     "portHint": "Click Test my PC above, or pick your parts from the list.",
     "pct": "Compatibility with the best tested PC",
-    "offH": "Official PC version, when it ships",
-    "offHint": "We compare your card with the PS5's, the console the game runs on today.",
-    "offNote": "Rockstar hasn't announced a PC version or its requirements."
+    "nextH": "What it takes to run",
+    "nextWait": "Run the test to see what to upgrade."
   },
   "news": {
     "h2": "News",
@@ -169,8 +168,8 @@
     "text": "My PC scored {pct}% on Roda o VI. Test yours:",
     "compat": "compatible with the best tested PC",
     "fps": "fps on the port",
-    "oficial": "Official version",
-    "cta": "Test yours at"
+    "cta": "Test yours at",
+    "etapa": "Stage on the build"
   },
   "next": {
     "title": "What it takes to run",

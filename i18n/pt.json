@@ -17,7 +17,7 @@
     "chip2": "Roda no navegador, em 10 segundos",
     "h1": "Seu PC roda o GTA VI?",
     "answer": "Vamos ver.",
-    "lead": "O teste lê sua placa de vídeo pelo navegador e compara com os PCs que a comunidade já usou pra rodar os ports da build vazada.",
+    "lead": "O teste lê sua placa de vídeo pelo navegador e compara com os PCs que a comunidade já usou pra rodar o build vazado do Cyberleek.",
     "cta": "Testar meu PC",
     "again": "Testar de novo",
     "adjust": "Ajustar processador e RAM"
@@ -32,12 +32,12 @@
     "noOpen": "Sua placa não deve abrir os ports"
   },
   "strip": {
-    "t1": "Saiu em 19 de nov., só no console",
-    "s1": "PS5 e Xbox Series. A Rockstar ainda não falou de PC.",
-    "t2": "Port vazado",
-    "s2": "Melhor resultado: ~25 fps",
-    "t3": "Versão oficial",
-    "s3": "Prevista pra 2027, sem data"
+    "t1": "Build vazada do Xbox Series",
+    "s1": "Executável liberado pelo Cyberleek em 23 de nov.",
+    "t2": "Melhor resultado",
+    "s2": "~25 fps num PC de teste",
+    "t3": "Multiplayer rodando",
+    "s3": "25 a 30 fps num build privado"
   },
   "pc": {
     "h2": "Seu PC",
@@ -61,14 +61,13 @@
   },
   "res": {
     "h2": "Resultado",
-    "sub": "Duas leituras: como seu PC se sai nos ports da comunidade hoje, e uma estimativa pra quando sair a versão oficial de PC.",
-    "portH": "Port da comunidade, hoje",
+    "sub": "Como seu PC se sai rodando o build vazado do Cyberleek, com base nos testes que a comunidade publicou.",
+    "portH": "No build do Cyberleek",
     "portWait": "Ainda não testado",
     "portHint": "Clique em Testar meu PC lá em cima, ou escolha suas peças na lista.",
     "pct": "Compatibilidade com o melhor PC testado",
-    "offH": "Versão oficial de PC, quando sair",
-    "offHint": "Comparamos sua placa com a do PS5, o console onde o jogo roda hoje.",
-    "offNote": "A Rockstar ainda não anunciou a versão de PC nem os requisitos."
+    "nextH": "O que falta pra rodar",
+    "nextWait": "Faça o teste pra ver o que trocar no seu PC."
   },
   "news": {
     "h2": "Novidades",
@@ -169,8 +168,8 @@
     "text": "Meu PC tirou {pct}% no Roda o VI. Teste o seu:",
     "compat": "compatível com o melhor PC testado",
     "fps": "fps no port",
-    "oficial": "Versão oficial",
-    "cta": "Teste o seu em"
+    "cta": "Teste o seu em",
+    "etapa": "Etapa no build"
   },
   "next": {
     "title": "O que falta pra rodar",

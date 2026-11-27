@@ -340,6 +340,12 @@
   .res-next li{display:flex;gap:9px;align-items:baseline}
   .res-next li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--gold);transform:translateY(-2px)}
   .res-next p{margin:8px 0 0;color:var(--muted);font-size:13.5px}
+
+  /* O que falta (card da direita do resultado) */
+  .next-v ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+  .next-v li{display:flex;gap:12px;align-items:baseline;font:800 clamp(20px,2.2vw,26px)/1.2 var(--display);letter-spacing:-.02em}
+  .next-v li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--gold);transform:translateY(-3px)}
+  .next-v p{margin:14px 0 0;color:#C9CCD6;font-size:15px}
 </style>
 </head>
 <body>
@@ -405,7 +411,7 @@
       </div>
       <h1 data-i18n="hero.h1">Seu PC roda o GTA VI?</h1>
       <span class="answer" id="answer" data-i18n="hero.answer">Vamos ver.</span>
-      <p class="lead" data-i18n="hero.lead">O teste lê sua placa de vídeo pelo navegador e compara com os PCs que a comunidade já usou pra rodar os ports da build vazada.</p>
+      <p class="lead" data-i18n="hero.lead">O teste lê sua placa de vídeo pelo navegador e compara com os PCs que a comunidade já usou pra rodar o build vazado do Cyberleek.</p>
       <button class="cta" id="go" type="button" data-i18n="hero.cta">Testar meu PC</button>
       <div class="after" id="after" hidden>
         <button type="button" class="ghost" id="share"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span data-i18n="share.btn">Compartilhar resultado</span></button>
@@ -438,9 +444,9 @@
 </header>
 
 <div class="strip">
-  <figure><img src="https://images.unsplash.com/photo-1779333466753-772495d49426?w=1400&q=70&auto=format" alt="Rua de Miami com prédios art déco e palmeiras iluminados à noite" loading="lazy"><figcaption><span data-i18n="strip.t1">Saiu em 19 de nov., só no console</span><small data-i18n="strip.s1">PS5 e Xbox Series. A Rockstar ainda não falou de PC.</small></figcaption></figure>
-  <figure><img src="https://images.unsplash.com/photo-1666032800277-607511d3869a?w=1200&q=70&auto=format" alt="Carro passando por uma rua com letreiros de neon" loading="lazy"><figcaption><span data-i18n="strip.t2">Port vazado</span><small data-i18n="strip.s2">Melhor resultado: ~25 fps</small></figcaption></figure>
-  <figure><img src="https://images.unsplash.com/photo-1779333429848-d6494e6b11ff?w=1200&q=70&auto=format" alt="Vida noturna com prédios em neon azul e palmeiras" loading="lazy"><figcaption><span data-i18n="strip.t3">Versão oficial</span><small data-i18n="strip.s3">Prevista pra 2027, sem data</small></figcaption></figure>
+  <figure><img src="https://images.unsplash.com/photo-1779333466753-772495d49426?w=1400&q=70&auto=format" alt="Rua de Miami com prédios art déco e palmeiras iluminados à noite" loading="lazy"><figcaption><span data-i18n="strip.t1">Build vazada do Xbox Series</span><small data-i18n="strip.s1">Executável liberado pelo Cyberleek em 23 de nov.</small></figcaption></figure>
+  <figure><img src="https://images.unsplash.com/photo-1666032800277-607511d3869a?w=1200&q=70&auto=format" alt="Carro passando por uma rua com letreiros de neon" loading="lazy"><figcaption><span data-i18n="strip.t2">Melhor resultado</span><small data-i18n="strip.s2">~25 fps num PC de teste</small></figcaption></figure>
+  <figure><img src="https://images.unsplash.com/photo-1779333429848-d6494e6b11ff?w=1200&q=70&auto=format" alt="Vida noturna com prédios em neon azul e palmeiras" loading="lazy"><figcaption><span data-i18n="strip.t3">Multiplayer rodando</span><small data-i18n="strip.s3">25 a 30 fps num build privado</small></figcaption></figure>
 </div>
 
 <section id="pecas">
@@ -473,23 +479,23 @@
 
 <section id="resultado">
   <div class="sh">
-    <div><h2 data-i18n="res.h2">Resultado</h2><p class="sub" data-i18n="res.sub">Duas leituras: como seu PC se sai nos ports da comunidade hoje, e uma estimativa pra quando sair a versão oficial de PC.</p></div>
+    <div><h2 data-i18n="res.h2">Resultado</h2><p class="sub" data-i18n="res.sub">Como seu PC se sai rodando o build vazado do Cyberleek, com base nos testes que a comunidade publicou.</p></div>
   </div>
   <div class="res">
     <div class="rc box">
-      <h3 data-i18n="res.portH">Port da comunidade, hoje</h3>
+      <h3 data-i18n="res.portH">No build do Cyberleek</h3>
       <div class="big" id="v-port" data-i18n="res.portWait">Ainda não testado</div>
       <p id="t-port" data-i18n="res.portHint">Clique em Testar meu PC lá em cima, ou escolha suas peças na lista.</p>
       <div class="ladder" aria-hidden="true"><i class="step"></i><i class="step"></i><i class="step"></i><i class="step"></i><i class="step"></i></div>
       <div class="ladder-l" id="ladder-l"><span>Não abre</span><span>Menus</span><span>Abre o jogo</span><span>Jogável</span><span>Como os testados</span></div>
-      <div class="next" id="next" hidden><h4 data-i18n="next.title">O que falta pra rodar</h4><ul id="next-list"></ul><p id="next-res"></p></div>
       <div class="pct"><span data-i18n="res.pct">Compatibilidade com o melhor PC testado</span><b id="pct">--</b></div>
     </div>
     <div class="rc box off">
-      <h3 data-i18n="res.offH">Versão oficial de PC, quando sair</h3>
-      <div class="big" id="v-off">--</div>
-      <p id="t-off" data-i18n="res.offHint">Comparamos sua placa com a do PS5, o console onde o jogo roda hoje.</p>
-      <p class="note" data-i18n="res.offNote">A Rockstar ainda não anunciou a versão de PC nem os requisitos.</p>
+      <h3 data-i18n="res.nextH">O que falta pra rodar</h3>
+      <div class="next-v" id="next">
+        <ul id="next-list"></ul>
+        <p id="next-res" data-i18n="res.nextWait">Faça o teste pra ver o que trocar no seu PC.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -719,21 +725,19 @@ function atualizar(animar = false){
   };
   if(animar) contar(1500, escrever); else escrever(1);
 
-  $("v-off").textContent = r.oficial.titulo; $("t-off").textContent = r.oficial.texto;
 
   // O que falta pra rodar
   const box = $("next"), lista = $("next-list"), res = $("next-res");
   const up = sugerirUpgrade(pc, GPUS);
   if(r.etapa >= 4){
-    box.hidden = false; lista.innerHTML = ""; res.textContent = T.next.top;
+    lista.innerHTML = ""; res.textContent = T.next.top;
   } else if(up){
-    box.hidden = false;
     lista.innerHTML = [
       up.gpu ? `<li>${esc(preencher(T.next.gpu,{gpu:up.gpu.nome}))}</li>` : "",
       up.ramGB ? `<li>${esc(T.next.ram)}</li>` : ""
     ].join("");
     res.textContent = preencher(T.next.res,{etapa:TEXTOS[lang].etapas[up.para]});
-  } else box.hidden = true;
+  } else { lista.innerHTML = ""; res.textContent = T.next.top; }
 
   $("after").hidden = false;
   $("go").textContent = T.hero.again;
@@ -982,7 +986,7 @@ async function gerarCard(){
   ];
   // O teste mede a placa real; só mostra se a pessoa não trocou a placa na lista
   if(medidas.gpuFps && pc.gpu && pc.gpu.id === medidas.gpuId) linhas.push([T.scan.gpuBench, preencher(T.scan.gpuBenchVal, { n: nf(medidas.gpuFps) })]);
-  linhas.push([T.share.oficial, r.oficial.titulo]);
+  linhas.push([T.share.etapa, TEXTOS[lang].etapas[r.etapa]]);
   const rodape = 96, alt = 60, topoTab = 910;
   const altTab = linhas.length * alt + 20;
   retangulo(x, M, topoTab, W-2*M, altTab, 26);

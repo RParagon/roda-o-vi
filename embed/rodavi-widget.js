@@ -18,14 +18,14 @@
  *
  * Licença MIT. https://github.com/RParagon/roda-o-vi
  */
-import { carregarDados, detectarGPU, acharGPU, avaliar, formatarFps, IDIOMAS } from "../lib/rodavi.js";
+import { carregarDados, detectarGPU, acharGPU, avaliar, sugerirUpgrade, formatarFps, TEXTOS, IDIOMAS } from "../lib/rodavi.js";
 
 const SITE = "https://roda-o-vi.netlify.app/";
 
 const UI = {
-  pt: { titulo: "Roda o VI?", sub: "Seu PC aguenta o port do GTA VI?", botao: "Testar meu PC", gpu: "Placa de vídeo", cpu: "Processador", ram: "RAM", naoSei: "Não sei", ram64: "64 GB ou mais", port: "Port da comunidade", oficial: "Versão oficial", compat: "compatível com o melhor PC testado", fps: "fps estimado", rodape: "Ver o teste completo", sem: "Não deve abrir" },
-  en: { titulo: "Roda o VI?", sub: "Can your PC handle the GTA VI port?", botao: "Test my PC", gpu: "Graphics card", cpu: "Processor", ram: "RAM", naoSei: "Not sure", ram64: "64 GB or more", port: "Community port", oficial: "Official version", compat: "compatible with the best tested PC", fps: "estimated fps", rodape: "See the full test", sem: "Won't start" },
-  es: { titulo: "Roda o VI?", sub: "¿Tu PC aguanta el port de GTA VI?", botao: "Probar mi PC", gpu: "Tarjeta gráfica", cpu: "Procesador", ram: "RAM", naoSei: "No sé", ram64: "64 GB o más", port: "Port de la comunidad", oficial: "Versión oficial", compat: "compatible con el mejor PC probado", fps: "fps estimados", rodape: "Ver la prueba completa", sem: "No arranca" },
+  pt: { titulo: "Roda o VI?", sub: "Seu PC aguenta o port do GTA VI?", botao: "Testar meu PC", gpu: "Placa de vídeo", cpu: "Processador", ram: "RAM", naoSei: "Não sei", ram64: "64 GB ou mais", port: "No build do Cyberleek", falta: "O que falta", fGpu: "Placa {gpu} ou melhor", fRam: "32 GB de RAM", fRes: "Chega em “{etapa}”.", topo: "Já está no nível dos melhores PCs testados.", compat: "compatível com o melhor PC testado", fps: "fps estimado", rodape: "Ver o teste completo", sem: "Não deve abrir" },
+  en: { titulo: "Roda o VI?", sub: "Can your PC handle the GTA VI port?", botao: "Test my PC", gpu: "Graphics card", cpu: "Processor", ram: "RAM", naoSei: "Not sure", ram64: "64 GB or more", port: "On Cyberleek's build", falta: "What it takes", fGpu: "{gpu} or better", fRam: "32 GB of RAM", fRes: "Gets you to “{etapa}”.", topo: "Already on par with the best tested PCs.", compat: "compatible with the best tested PC", fps: "estimated fps", rodape: "See the full test", sem: "Won't start" },
+  es: { titulo: "Roda o VI?", sub: "¿Tu PC aguanta el port de GTA VI?", botao: "Probar mi PC", gpu: "Tarjeta gráfica", cpu: "Procesador", ram: "RAM", naoSei: "No sé", ram64: "64 GB o más", port: "En el build de Cyberleek", falta: "Lo que falta", fGpu: "{gpu} o mejor", fRam: "32 GB de RAM", fRes: "Llegas a “{etapa}”.", topo: "Ya está al nivel de los mejores PCs probados.", compat: "compatible con el mejor PC probado", fps: "fps estimados", rodape: "Ver la prueba completa", sem: "No arranca" },
 };
 
 const ESTILO = `
@@ -108,7 +108,7 @@ class RodaViTeste extends HTMLElement {
           <p class="txt" data-r="portTxt"></p>
           <div class="barra"><i></i></div>
           <div class="compat" data-r="compat"></div>
-          <div class="of"><span class="rot">${u.oficial}</span><div class="big" data-r="of"></div><p class="txt" data-r="ofTxt"></p></div>
+          <div class="of"><span class="rot">${u.falta}</span><div class="big" data-r="of"></div><p class="txt" data-r="ofTxt"></p></div>
         </div>
         <a href="${SITE}" target="_blank" rel="noopener">${u.rodape}</a>
       </div>`;
@@ -158,8 +158,11 @@ class RodaViTeste extends HTMLElement {
     $("portTxt").textContent = r.port.texto;
     $("fps").textContent = r.abre ? `${formatarFps(r.fps.min, r.idioma)}–${formatarFps(r.fps.max, r.idioma)}` : "0";
     $("compat").textContent = `${r.pct}% ${u.compat}`;
-    $("of").textContent = r.oficial.titulo;
-    $("ofTxt").textContent = r.oficial.texto;
+    const up = sugerirUpgrade({ gpu, cpu, ramGB, threads: navigator.hardwareConcurrency }, this.dados.gpus);
+    if (up) {
+      $("of").textContent = [up.gpu ? u.fGpu.replace("{gpu}", up.gpu.nome) : "", up.ramGB ? u.fRam : ""].filter(Boolean).join(" + ");
+      $("ofTxt").textContent = u.fRes.replace("{etapa}", TEXTOS[r.idioma].etapas[up.para]);
+    } else { $("of").textContent = "✓"; $("ofTxt").textContent = u.topo; }
     this.el.pct.textContent = r.pct + "%";
     this.el.res.classList.add("on");
     const a = this.el.anel;

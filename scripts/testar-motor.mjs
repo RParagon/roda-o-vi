@@ -26,7 +26,7 @@ assert.ok(fraca.pct < 15);
 const forte = avaliar({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d"), ramGB: 64 });
 assert.equal(forte.etapa, 4);
 assert.ok(forte.pct > 80);
-assert.equal(forte.oficial.titulo, "1440p no alto, 60 fps");
+assert.equal(forte.resposta, "Roda.");
 
 // Mais RAM nunca piora o resultado
 assert.ok(avaliar({ gpu: gpu("rtx-4070"), ramGB: 32 }).pct >= avaliar({ gpu: gpu("rtx-4070"), ramGB: 16 }).pct);
@@ -35,7 +35,7 @@ assert.ok(avaliar({ gpu: gpu("rtx-4070"), ramGB: 32 }).pct >= avaliar({ gpu: gpu
 for (const idioma of IDIOMAS) {
   const r = avaliar({ gpu: gpu("rtx-4090"), ramGB: 32, idioma });
   assert.equal(r.idioma, idioma);
-  assert.ok(r.port.titulo && r.oficial.titulo && r.pecas.gpu.titulo);
+  assert.ok(r.port.titulo && r.resposta && r.pecas.gpu.titulo);
 }
 assert.equal(formatarFps(4.1, "en"), "4.1");
 assert.equal(formatarFps(4.1, "pt"), "4,1");

@@ -1,6 +1,6 @@
 # Roda o VI?
 
-**Teste se seu PC aguenta os ports de PC do GTA VI feitos pela comunidade.** Tudo roda no navegador e não tem nada pra baixar.
+**Teste se seu PC aguenta o build vazado do GTA VI (o executável divulgado pelo Cyberleek), com base nos testes da comunidade.** Tudo roda no navegador e não tem nada pra baixar.
 
 🔗 **Site:** https://roda-o-vi.netlify.app
 🧩 **Widget pro seu site:** https://roda-o-vi.netlify.app/embed/
@@ -15,8 +15,9 @@
 
 O site lê sua placa de vídeo pelo navegador (WebGL), você escolhe o processador e a RAM, e ele mostra:
 
-- **Port da comunidade, hoje:** a faixa de fps estimada e até onde seu PC chega (não abre, menus, abre o jogo, jogável, como os PCs testados).
-- **Versão oficial de PC:** uma estimativa comparando sua placa com a do PS5.
+- **No build do Cyberleek:** a faixa de fps estimada e até onde seu PC chega (não abre, menus, abre o jogo, jogável, como os PCs testados).
+- **O que falta pra rodar:** a troca mais simples (placa e/ou RAM) que leva seu PC até "Jogável".
+- **Diagnóstico real:** teste de GPU, teste de CPU, tela e sistema, medidos no próprio navegador.
 - **Compatibilidade:** de 0 a 100%, comparando com o melhor PC que a comunidade já testou.
 
 Funciona em português, inglês e espanhol.
@@ -39,7 +40,7 @@ Funciona em português, inglês e espanhol.
 Pra fixar uma versão, use o jsDelivr direto do GitHub:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.2.2/embed/rodavi-widget.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.3.0/embed/rodavi-widget.js"></script>
 ```
 
 ### 2. Só o motor de cálculo
@@ -55,7 +56,6 @@ r.pct            // 0–100, compatibilidade com o melhor PC testado
 r.fps            // { min, max } estimado no port
 r.etapa          // 0 a 4: não abre, menus, abre o jogo, jogável, como os testados
 r.port           // { titulo, texto }
-r.oficial        // { titulo, texto } estimativa pra versão oficial
 r.pecas          // { gpu, cpu, ram } cada um com { status: "ok"|"meio"|"ruim", titulo, texto }
 
 // O que trocar pra chegar pelo menos em "Jogável"
@@ -84,8 +84,7 @@ Tudo está em [`lib/rodavi.js`](lib/rodavi.js), numa função só (`avaliar`):
 1. **Placa de vídeo** pesa mais. Sem DirectX 12 Ultimate o port não abre. A VRAM limita: 16 GB conta inteiro, 12 GB conta metade e 8 GB conta um quarto.
 2. **RAM:** o port mais avançado usa uns 30 GB, então 32 GB conta inteiro e 16 GB conta metade.
 3. **Processador** ajusta o resultado pra cima ou pra baixo.
-4. A faixa de fps é calibrada pelos resultados que os grupos publicaram (o melhor fica entre 22 e 25 fps).
-5. A **versão oficial** compara a placa com o PS5 (desempenho 30 na mesma escala).
+4. A faixa de fps é calibrada pelos resultados que os grupos publicaram rodando o build do Cyberleek (o melhor fica entre 22 e 25 fps).
 
 São estimativas pra matar a curiosidade, não garantia.
 
@@ -121,7 +120,7 @@ Código sob [MIT](LICENSE). Dados em `data/` sob [CC BY 4.0](https://creativecom
 
 ## English
 
-**Check whether your PC can handle the community-made PC ports of GTA VI.** Runs in the browser, nothing to download. Inspired by **[PortWatch VI](https://portwatch-vi.xyz/)** by 4lwayz.
+**Check whether your PC can handle Cyberleek's leaked GTA VI build, based on community tests.** Runs in the browser, nothing to download. Inspired by **[PortWatch VI](https://portwatch-vi.xyz/)** by 4lwayz.
 
 Drop it on your site:
 
@@ -134,7 +133,7 @@ Or use the engine (`lib/rodavi.js`, `avaliar({ gpu, cpu, ramGB, idioma: "en" })`
 
 ## Español
 
-**Prueba si tu PC aguanta los ports de PC de GTA VI hechos por la comunidad.** Corre en el navegador, nada que descargar. Inspirado en **[PortWatch VI](https://portwatch-vi.xyz/)**, de 4lwayz.
+**Prueba si tu PC aguanta el build filtrado de GTA VI de Cyberleek, según las pruebas de la comunidad.** Corre en el navegador, nada que descargar. Inspirado en **[PortWatch VI](https://portwatch-vi.xyz/)**, de 4lwayz.
 
 Ponlo en tu sitio:
 
