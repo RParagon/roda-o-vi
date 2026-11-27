@@ -317,13 +317,28 @@
   .next li{display:flex;gap:10px;align-items:baseline;font-size:15px;color:#E6E8EF}
   .next li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--gold);transform:translateY(-2px)}
   .next p{margin:10px 0 0;font-size:14px;color:var(--muted)}
+
+  /* Ajustes finos dos cards */
+  .part-h{min-height:30px}
+  .rig .hw{flex-wrap:nowrap}
+  .rig .hw .vendor{flex:none}
+  .news .nw.lead-n .nw-img{flex:1 1 auto;aspect-ratio:auto;min-height:260px}
+  .news .nw.lead-n .nw-b{flex:0 0 auto}
+  .res-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px;max-width:460px}
+  .res-acts .cta{grid-column:1/-1;justify-content:center}
+  .res-acts .ghost{justify-content:center}
+  .res-fps{max-width:46ch}
+  .res-next ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+  .res-next li{display:flex;gap:9px;align-items:baseline}
+  .res-next li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--gold);transform:translateY(-2px)}
+  .res-next p{margin:8px 0 0;color:var(--muted);font-size:13.5px}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <a class="logo" href="#topo"><svg class="ring" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs><circle cx="13" cy="13" r="10" stroke="rgba(255,255,255,.14)"/><circle id="ring" cx="13" cy="13" r="10" stroke="url(#rg)" stroke-linecap="round" pathLength="100" transform="rotate(-90 13 13)"/></svg>Roda o <b>VI</b><span class="sc" id="ring-sc"></span></a>
+    <a class="logo" href="#topo"><svg class="ring" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs><circle cx="13" cy="13" r="10" stroke="rgba(255,255,255,.14)"/><circle id="ring" cx="13" cy="13" r="10" stroke="url(#rg)" stroke-linecap="round" pathLength="100" transform="rotate(-90 13 13)"/></svg><span class="nome">Roda o <b>VI</b></span><span class="sc" id="ring-sc"></span></a>
     <div class="links"><a href="#pecas" data-i18n="nav.pc">Seu PC</a><a href="#resultado" data-i18n="nav.res">Resultado</a><a href="#novidades" data-i18n="nav.news">Novidades</a><a href="#testados" data-i18n="nav.rank">Ranking</a></div>
     <div class="langs" role="group" aria-label="Idioma" data-i18n-attr="aria-label:nav.lang"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="es">ES</button></div>
   </div>
@@ -616,7 +631,7 @@ Promise.all([json("./data/rigs.json"), json("./data/noticias-pt.json")]).then(([
 }).catch(()=>{});
 
 /* Avaliação */
-let testado = false, deteccao = null, ultimo = null, cardBlob = null, fecharScan = null;
+let testado = false, deteccao = null, ultimo = null, cardBlob = null, fecharScan = null, medidas = {};
 const semMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esperar = ms => new Promise(r=>setTimeout(r, semMovimento ? 0 : ms));
 function set(part, r){ $("p-"+part).dataset.s = r.status; $("s-"+part).innerHTML = `<b>${esc(r.titulo)}</b> ${esc(r.texto)}`; }
@@ -748,7 +763,7 @@ async function diagnosticar(){
     { lb: S.sys, run: async () => { const s = await lerSistema(); return [s.so, s.navegador].filter(Boolean).join(" · ") || null; } },
     { lb: S.gpu, run: async () => deteccao.bruto ? limparNomeGPU(deteccao.bruto).split(",").pop().trim() : null },
     { lb: S.gfx, run: async () => { const g = await lerRecursosGraficos(); return [g.webgl2 ? "WebGL 2" : g.webgl ? "WebGL" : null, g.webgpu ? "WebGPU" : null, g.textura ? `${nf(g.textura)} px` : null].filter(Boolean).join(" · ") || null; } },
-    { lb: S.gpuBench, barra: true, run: async p => { const q = await testarGPU(1100, p); return q ? preencher(S.gpuBenchVal, { n: nf(q) }) : null; } },
+    { lb: S.gpuBench, barra: true, run: async p => { const q = await testarGPU(1100, p); medidas.gpuFps = q; return q ? preencher(S.gpuBenchVal, { n: nf(q) }) : null; } },
     { lb: S.cpuBench, barra: true, run: async p => { const v = await testarCPU(800, p); return preencher(S.cpuBenchVal, { t: deteccao.threads || "?", n: nf(v) }); } },
     { lb: S.mem, run: async () => { const d = navigator.deviceMemory; return d ? preencher(d >= 8 ? S.memMax : S.memVal, { g: d }) : null; } },
     { lb: S.screen, barra: true, run: async p => { const t = await lerTela(600, p); return `${t.largura}×${t.altura} · ${t.hz} Hz`; } },
@@ -823,11 +838,11 @@ async function mostrarResultado(pc, r){
   requestAnimationFrame(() => res.classList.add("on"));
   $("res-ans").textContent = r.resposta;
   $("res-port").textContent = r.port.titulo;
-  $("res-fps").textContent = r.abre ? `${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)} ${T.share.fps} · ${r.pct}% ${T.share.compat}` : `${T.meter.noOpen} · ${r.pct}% ${T.share.compat}`;
+  $("res-fps").textContent = r.port.texto;
   const up = sugerirUpgrade(pc, GPUS), nx = $("res-next");
   if(up){
     nx.hidden = false;
-    nx.innerHTML = `<b>${esc(T.next.title)}</b>${[up.gpu ? preencher(T.next.gpu, { gpu: up.gpu.nome }) : "", up.ramGB ? T.next.ram : ""].filter(Boolean).map((t,i)=>esc(i ? t[0].toLowerCase()+t.slice(1) : t)).join(" + ")}. ${esc(preencher(T.next.res, { etapa: TEXTOS[lang].etapas[up.para] }))}`;
+    nx.innerHTML = `<b>${esc(T.next.title)}</b><ul>${[up.gpu ? preencher(T.next.gpu, { gpu: up.gpu.nome }) : "", up.ramGB ? T.next.ram : ""].filter(Boolean).map(t=>`<li>${esc(t)}</li>`).join("")}</ul><p>${esc(preencher(T.next.res, { etapa: TEXTOS[lang].etapas[up.para] }))}</p>`;
   } else nx.hidden = true;
   $("res-share").focus({ preventScroll: true });
 
@@ -846,6 +861,7 @@ $("go").addEventListener("click", async ()=>{
   const gpu = acharGPU(bruto, GPUS);
   if(gpu) gpuSel.value = GPUS.indexOf(gpu);
   deteccao = { bruto, achou: !!gpu, threads: navigator.hardwareConcurrency };
+  medidas = { gpuId: gpu ? gpu.id : null };
   escreverDeteccao();
   await diagnosticar();
   atualizar(true);
@@ -856,65 +872,125 @@ $("go").addEventListener("click", async ()=>{
 function carregarImagem(src){
   return new Promise(ok=>{ const i = new Image(); i.crossOrigin = "anonymous"; i.onload = ()=>ok(i); i.onerror = ()=>ok(null); i.src = src; });
 }
-function quebrar(ctx, texto, x, y, larg, alt){
-  const palavras = String(texto).split(" "); let linha = "";
-  for(const p of palavras){
-    const teste = linha ? linha+" "+p : p;
-    if(ctx.measureText(teste).width > larg && linha){ ctx.fillText(linha, x, y); linha = p; y += alt; } else linha = teste;
-  }
-  ctx.fillText(linha, x, y); return y + alt;
+// Corta o texto com reticências se passar da largura
+function caber(ctx, texto, larg){
+  let t = String(texto);
+  if(ctx.measureText(t).width <= larg) return t;
+  while(t.length > 1 && ctx.measureText(t + "…").width > larg) t = t.slice(0, -1);
+  return t.trimEnd() + "…";
 }
+function quebrar(ctx, texto, x, y, larg, alt, maxLinhas = 3){
+  const palavras = String(texto).split(" "); const linhas = []; let linha = "";
+  for(const p of palavras){
+    const teste = linha ? linha + " " + p : p;
+    if(ctx.measureText(teste).width > larg && linha){ linhas.push(linha); linha = p; } else linha = teste;
+  }
+  linhas.push(linha);
+  linhas.slice(0, maxLinhas).forEach((l, i) => ctx.fillText(i === maxLinhas - 1 && linhas.length > maxLinhas ? caber(ctx, l + "…", larg) : l, x, y + i * alt));
+  return y + Math.min(linhas.length, maxLinhas) * alt;
+}
+function retangulo(ctx, x, y, w, h, r){
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+
 async function gerarCard(){
   const { pc, r } = ultimo;
-  await Promise.all(['900 120px "Inter Tight"','800 60px "Inter Tight"','600 34px Inter','400 30px Inter'].map(f=>document.fonts.load(f)));
-  const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
+  await Promise.all(['900 150px "Inter Tight"','800 46px "Inter Tight"','700 30px Inter','500 28px Inter'].map(f=>document.fonts.load(f)));
+  const W = 1080, H = 1350, M = 72;
+  const c = document.createElement("canvas"); c.width = W; c.height = H;
   const x = c.getContext("2d");
-  const grad = (x0,y0,x1,y1) => { const g = x.createLinearGradient(x0,y0,x1,y1); g.addColorStop(0,"#7A5CFF"); g.addColorStop(.55,"#FF2E7E"); g.addColorStop(1,"#FF8A3D"); return g; };
+  const cores = ["#7A5CFF","#FF2E7E","#FF8A3D"];
+  const linear = (x0,y0,x1,y1) => { const g = x.createLinearGradient(x0,y0,x1,y1); g.addColorStop(0,cores[0]); g.addColorStop(.55,cores[1]); g.addColorStop(1,cores[2]); return g; };
 
-  // Fundo com foto da cidade
+  /* Fundo e cabeçalho com foto */
   x.fillStyle = "#0B0C12"; x.fillRect(0,0,W,H);
-  const foto = await carregarImagem("https://images.unsplash.com/photo-1652112428671-fceb3e666710?w=1200&q=70&auto=format");
-  if(foto){ const k = Math.max(W/foto.width, 760/foto.height); x.globalAlpha = .55; x.drawImage(foto, (W-foto.width*k)/2, 0, foto.width*k, foto.height*k); x.globalAlpha = 1; }
-  let g = x.createLinearGradient(0,0,0,H); g.addColorStop(0,"rgba(11,12,18,.35)"); g.addColorStop(.42,"rgba(11,12,18,.92)"); g.addColorStop(1,"#0B0C12");
-  x.fillStyle = g; x.fillRect(0,0,W,H);
-  g = x.createRadialGradient(W*.8,H,0,W*.8,H,900); g.addColorStop(0,"rgba(255,46,126,.28)"); g.addColorStop(1,"rgba(255,46,126,0)");
-  x.fillStyle = g; x.fillRect(0,0,W,H);
-
-  // Marca
-  x.lineWidth = 9; x.strokeStyle = "rgba(255,255,255,.18)"; x.beginPath(); x.arc(104,108,26,0,Math.PI*2); x.stroke();
-  x.strokeStyle = grad(78,82,130,134); x.lineCap = "round"; x.beginPath(); x.arc(104,108,26,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(r.pct,3)/100); x.stroke();
-  x.fillStyle = "#fff"; x.font = '800 44px "Inter Tight"'; x.textBaseline = "middle"; x.fillText("Roda o", 152, 110);
-  const w1 = x.measureText("Roda o ").width; x.fillStyle = grad(152+w1,0,152+w1+60,0); x.fillText("VI", 152+w1, 110);
-
-  // Anel grande com a porcentagem
-  const cx = W/2, cy = 470, raio = 220;
-  x.lineWidth = 34; x.strokeStyle = "rgba(255,255,255,.1)"; x.beginPath(); x.arc(cx,cy,raio,0,Math.PI*2); x.stroke();
-  x.strokeStyle = grad(cx-raio,cy-raio,cx+raio,cy+raio); x.beginPath(); x.arc(cx,cy,raio,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(r.pct,2)/100); x.stroke();
-  x.textAlign = "center"; x.fillStyle = "#fff"; x.font = '900 150px "Inter Tight"'; x.fillText(r.pct+"%", cx, cy-10);
-  x.fillStyle = "#B9BDC8"; x.font = '500 30px Inter'; quebrar(x, T.share.compat, cx, cy+92, 300, 38);
-
-  // Veredito
-  g = x.createLinearGradient(0,0,W,0); g.addColorStop(.3,"#FFC24D"); g.addColorStop(.7,"#FF8A3D");
-  x.fillStyle = g; x.font = '900 104px "Inter Tight"'; x.fillText(r.resposta, cx, 820);
-  x.fillStyle = "#fff"; x.font = '800 46px "Inter Tight"'; x.fillText(r.port.titulo, cx, 905);
-  if(r.abre){ x.fillStyle = "#B9BDC8"; x.font = '600 34px Inter'; x.fillText(`${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)} ${T.share.fps}`, cx, 960); }
-
-  // Peças
-  x.textAlign = "left"; x.textBaseline = "alphabetic";
-  const linhas = [[T.pc.gpu, pc.gpu ? pc.gpu.nome : T.meter.noGpu],[T.pc.cpu, pc.cpu ? pc.cpu.nome : T.pc.unknownCpu],[T.pc.ram, (pc.ramGB>=64?"64+":pc.ramGB)+" GB"],[T.share.oficial, r.oficial.titulo]];
-  let y = 1052;
-  x.strokeStyle = "rgba(255,255,255,.12)"; x.lineWidth = 2;
-  for(const [k,v] of linhas){
-    x.fillStyle = "#8A8FA0"; x.font = '500 28px Inter'; x.fillText(k, 90, y);
-    x.fillStyle = "#fff"; x.font = '700 30px Inter'; x.textAlign = "right"; x.fillText(v, W-90, y); x.textAlign = "left";
-    x.beginPath(); x.moveTo(90, y+22); x.lineTo(W-90, y+22); x.stroke();
-    y += 58;
+  const topo = 640;
+  const foto = await carregarImagem("https://images.unsplash.com/photo-1652112428671-fceb3e666710?w=1400&q=75&auto=format");
+  if(foto){
+    const k = Math.max(W/foto.width, topo/foto.height);
+    x.save(); x.beginPath(); x.rect(0, 0, W, topo); x.clip();
+    x.drawImage(foto, (W - foto.width*k)/2, (topo - foto.height*k)*0.35, foto.width*k, foto.height*k);
+    x.restore();
   }
+  let g = x.createLinearGradient(0,0,0,topo);
+  g.addColorStop(0,"rgba(11,12,18,.55)"); g.addColorStop(.55,"rgba(20,12,36,.72)"); g.addColorStop(1,"#0B0C12");
+  x.fillStyle = g; x.fillRect(0,0,W,topo);
+  g = x.createRadialGradient(W/2,420,0,W/2,420,520); g.addColorStop(0,"rgba(255,46,126,.20)"); g.addColorStop(1,"rgba(255,46,126,0)");
+  x.fillStyle = g; x.fillRect(0,0,W,H);
 
-  // Rodapé
-  x.fillStyle = grad(0,0,W,0); x.fillRect(0, H-96, W, 96);
-  x.fillStyle = "#fff"; x.textAlign = "center"; x.font = '700 32px Inter'; x.textBaseline = "middle";
-  x.fillText(`${T.share.cta} roda-o-vi.netlify.app`, cx, H-48);
+  /* Marca e data */
+  x.textBaseline = "middle"; x.textAlign = "left";
+  x.lineCap = "round"; x.lineWidth = 9;
+  x.strokeStyle = "rgba(255,255,255,.2)"; x.beginPath(); x.arc(M+26,86,24,0,Math.PI*2); x.stroke();
+  x.strokeStyle = linear(M,60,M+52,112); x.beginPath(); x.arc(M+26,86,24,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(r.pct,3)/100); x.stroke();
+  x.fillStyle = "#fff"; x.font = '800 42px "Inter Tight"'; x.fillText("Roda o", M+68, 88);
+  const wRoda = x.measureText("Roda o ").width;
+  x.fillStyle = linear(M+68+wRoda,0,M+68+wRoda+56,0); x.fillText("VI", M+68+wRoda, 88);
+  const data = new Intl.DateTimeFormat(lang === "pt" ? "pt-BR" : lang, { day:"numeric", month:"short", year:"numeric" }).format(new Date());
+  x.font = '600 24px Inter'; const wd = x.measureText(data).width + 40;
+  retangulo(x, W-M-wd, 64, wd, 46, 23); x.fillStyle = "rgba(11,12,18,.55)"; x.fill(); x.strokeStyle = "rgba(255,255,255,.18)"; x.lineWidth = 2; x.stroke();
+  x.fillStyle = "#D3D6DF"; x.textAlign = "center"; x.fillText(data, W-M-wd/2, 88);
+
+  /* Anel com a porcentagem */
+  const cx = W/2, cy = 400, raio = 190;
+  x.fillStyle = "rgba(11,12,18,.78)"; x.beginPath(); x.arc(cx,cy,raio+2,0,Math.PI*2); x.fill();
+  x.lineWidth = 30; x.strokeStyle = "rgba(255,255,255,.12)"; x.beginPath(); x.arc(cx,cy,raio,0,Math.PI*2); x.stroke();
+  const fim = -Math.PI/2 + Math.PI*2*Math.max(r.pct,2)/100;
+  let arco;
+  if(x.createConicGradient){
+    arco = x.createConicGradient(-Math.PI/2, cx, cy);
+    const f = Math.max(r.pct,2)/100;
+    arco.addColorStop(0,cores[0]); arco.addColorStop(f*.55,cores[1]); arco.addColorStop(f,cores[2]); arco.addColorStop(Math.min(f+.001,1),cores[2]);
+  } else arco = linear(cx-raio,cy-raio,cx+raio,cy+raio);
+  x.strokeStyle = arco; x.beginPath(); x.arc(cx,cy,raio,-Math.PI/2,fim); x.stroke();
+  // Número e "%" medidos separados, pra ficarem colados e centralizados
+  x.textBaseline = "alphabetic"; x.textAlign = "left";
+  // Mede pela tinta das letras, não pela caixa, pra "%" ficar colado no número
+  x.font = '900 150px "Inter Tight"'; const mn = x.measureText(String(r.pct));
+  const wn = mn.actualBoundingBoxRight + mn.actualBoundingBoxLeft;
+  x.font = '900 76px "Inter Tight"'; const mp = x.measureText("%");
+  const wp = mp.actualBoundingBoxRight + mp.actualBoundingBoxLeft, folga = 8;
+  const x0 = cx - (wn + folga + wp)/2, base = cy + 34;
+  x.fillStyle = "#fff"; x.font = '900 150px "Inter Tight"'; x.fillText(String(r.pct), x0 + mn.actualBoundingBoxLeft, base);
+  x.font = '900 76px "Inter Tight"'; x.fillText("%", x0 + wn + folga + mp.actualBoundingBoxLeft, base - 4);
+  x.textAlign = "center"; x.fillStyle = "#B9BDC8"; x.font = '500 26px Inter';
+  quebrar(x, T.share.compat, cx, cy + 82, 250, 32, 2);
+
+  /* Veredito */
+  x.textAlign = "center";
+  g = x.createLinearGradient(cx-300,0,cx+300,0); g.addColorStop(0,"#FFC24D"); g.addColorStop(1,"#FF8A3D");
+  x.fillStyle = g; x.font = '900 108px "Inter Tight"'; x.fillText(caber(x, r.resposta, W-2*M), cx, 735);
+  x.fillStyle = "#fff"; x.font = '800 46px "Inter Tight"'; x.fillText(caber(x, r.port.titulo, W-2*M), cx, 808);
+  x.fillStyle = "#B9BDC8"; x.font = '500 30px Inter';
+  x.fillText(caber(x, r.abre ? `${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)} ${T.share.fps}` : T.meter.noOpen, W-2*M), cx, 860);
+
+  /* Peças e medições */
+  const cpuTxt = pc.cpu ? pc.cpu.nome : (pc.threads ? preencher(T.scan.threads, { t: pc.threads }) : T.scan.na);
+  const linhas = [
+    [T.pc.gpu, pc.gpu ? pc.gpu.nome : T.meter.noGpu],
+    [T.pc.cpu, cpuTxt],
+    [T.pc.ram, (pc.ramGB >= 64 ? "64+" : pc.ramGB) + " GB"],
+  ];
+  // O teste mede a placa real; só mostra se a pessoa não trocou a placa na lista
+  if(medidas.gpuFps && pc.gpu && pc.gpu.id === medidas.gpuId) linhas.push([T.scan.gpuBench, preencher(T.scan.gpuBenchVal, { n: nf(medidas.gpuFps) })]);
+  linhas.push([T.share.oficial, r.oficial.titulo]);
+  const rodape = 96, alt = 60, topoTab = 910;
+  const altTab = linhas.length * alt + 20;
+  retangulo(x, M, topoTab, W-2*M, altTab, 26);
+  x.fillStyle = "rgba(255,255,255,.045)"; x.fill(); x.strokeStyle = "rgba(255,255,255,.09)"; x.lineWidth = 2; x.stroke();
+  x.textBaseline = "middle";
+  linhas.forEach(([k, v], i) => {
+    const y = topoTab + 10 + alt*i + alt/2;
+    if(i){ x.strokeStyle = "rgba(255,255,255,.07)"; x.beginPath(); x.moveTo(M+28, y - alt/2); x.lineTo(W-M-28, y - alt/2); x.stroke(); }
+    x.textAlign = "left"; x.fillStyle = "#8A8FA0"; x.font = '500 27px Inter'; x.fillText(caber(x, k, 330), M+32, y);
+    x.textAlign = "right"; x.fillStyle = "#fff"; x.font = '700 29px Inter'; x.fillText(caber(x, v, W-2*M-64-340), W-M-32, y);
+  });
+
+  /* Rodapé */
+  x.fillStyle = linear(0,0,W,0); x.fillRect(0, H-rodape, W, rodape);
+  x.fillStyle = "#fff"; x.textAlign = "center"; x.textBaseline = "middle"; x.font = '700 32px Inter';
+  x.fillText(`${T.share.cta} roda-o-vi.netlify.app`, cx, H-rodape/2);
   return new Promise(ok=>c.toBlob(ok, "image/png"));
 }
 
