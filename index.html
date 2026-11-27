@@ -230,27 +230,75 @@
   }
 
   /* Diagnóstico */
-  .scan{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;background:rgba(8,9,14,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;transition:opacity .35s ease}
+  .scan{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;overflow-y:auto;
+    background:radial-gradient(70% 60% at 50% 0%,rgba(122,92,255,.18),transparent 70%),rgba(8,9,14,.9);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);opacity:0;transition:opacity .35s ease}
   .scan.on{opacity:1}
   .scan[hidden]{display:none}
-  .scan-in{width:min(460px,100%);text-align:center}
-  .scan-ring{width:132px;height:132px;margin:0 auto 22px;display:block}
-  .scan-ring circle{fill:none;stroke-width:7}
-  .scan-ring .v{stroke-dasharray:28 100;transform-origin:50% 50%;animation:girar 1.1s linear infinite}
-  .scan.fim .scan-ring .v{animation:none;stroke-dasharray:100 100;transition:stroke-dasharray .5s ease}
+  .scan-x{position:absolute;top:18px;right:18px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:#fff;cursor:pointer}
+  .scan-x:hover{background:rgba(255,255,255,.1)}
+  .scan-run{width:min(560px,100%)}
+  .scan-run[hidden]{display:none}
+  .scan-top{display:flex;align-items:center;gap:20px;margin-bottom:22px}
+  .scan-gauge{position:relative;width:96px;height:96px;flex:none}
+  .scan-gauge svg{width:100%;height:100%}
+  .scan-gauge circle{fill:none;stroke-width:8}
+  .scan-gauge .spin{stroke-dasharray:14 100;transform-origin:50% 50%;animation:girar 1.4s linear infinite}
+  .scan-gauge .v{stroke-dasharray:0 100;transition:stroke-dasharray .45s ease}
+  .scan.fim .scan-gauge .spin{opacity:0;transition:opacity .3s}
+  #scan-pct{position:absolute;inset:0;display:grid;place-items:center;font:900 24px/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
   @keyframes girar{to{transform:rotate(360deg)}}
-  .scan h2{font:900 clamp(30px,5vw,40px)/1 var(--display);letter-spacing:-.04em;margin:0 0 22px}
-  .scan-list{list-style:none;margin:0;padding:0;text-align:left;display:grid;gap:10px}
-  .scan-list li{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease}
-  .scan-list li.on{opacity:1;transform:none}
+  .scan h2{font:900 clamp(26px,4.4vw,36px)/1.05 var(--display);letter-spacing:-.04em;margin:0 0 8px}
+  .scan-sub{display:flex;align-items:center;gap:7px;margin:0;font-size:13.5px;color:var(--muted)}
+  .scan-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  .scan-list li{display:grid;grid-template-columns:24px 1fr auto;column-gap:12px;align-items:center;padding:11px 14px 12px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);opacity:.38;transition:opacity .3s,background .3s,border-color .3s}
+  .scan-list li.on{opacity:1;background:rgba(255,255,255,.05);border-color:var(--line-2)}
+  .scan-list li.ok{opacity:1;background:rgba(255,255,255,.03);border-color:var(--line)}
   .scan-list .ic{width:22px;height:22px;border-radius:50%;border:2px solid var(--line-2);position:relative}
-  .scan-list li.ok .ic{border-color:var(--green);background:rgba(47,208,138,.15)}
+  .scan-list li.on:not(.ok) .ic{border-color:rgba(255,255,255,.15);border-top-color:#FF2E7E;animation:girar .8s linear infinite}
+  .scan-list li.ok .ic{border-color:var(--green);background:rgba(47,208,138,.14)}
   .scan-list li.ok .ic::after{content:"";position:absolute;left:6px;top:2.5px;width:5px;height:10px;border:solid var(--green);border-width:0 2px 2px 0;transform:rotate(45deg)}
-  .scan-list .lb{font-size:14.5px;color:#C9CCD6}
-  .scan-list .vl{font:700 14px/1.2 var(--body);color:#fff;text-align:right;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .scan-skip{margin-top:20px;background:none;border:0;color:var(--muted);font:600 14px var(--body);cursor:pointer;padding:8px 12px;border-radius:8px}
+  .scan-list li.falhou .ic{border-color:var(--faint);background:none;animation:none}
+  .scan-list li.falhou .ic::after{display:none}
+  .scan-list .lb{font-size:14px;color:#D3D6DF;min-width:0}
+  .scan-list .vl{font:700 13.5px/1.2 var(--body);color:#fff;text-align:right;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .scan-list .bar{grid-column:2/4;height:3px;margin-top:8px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+  .scan-list .bar i{display:block;height:100%;width:0;background:var(--grad);transition:width .12s linear}
+  .scan-list li.ok .bar{opacity:.35}
+  .scan-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;min-height:36px}
+  #scan-now{font-size:13px;color:var(--faint)}
+  .scan-skip{background:none;border:0;color:var(--muted);font:600 14px var(--body);cursor:pointer;padding:8px 12px;border-radius:8px}
   .scan-skip:hover{color:#fff}
-  @media (prefers-reduced-motion:reduce){.scan-ring .v{animation:none}.scan-list li{transition:none}}
+
+  /* Resultado dentro do diagnóstico */
+  .scan-res{width:min(980px,100%);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:44px;align-items:center;opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+  .scan-res.on{opacity:1;transform:none}
+  .scan-res[hidden]{display:none}
+  .card-wrap{position:relative;aspect-ratio:1080/1350;max-height:78vh;justify-self:center;width:100%;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(255,46,126,.45),0 0 0 1px rgba(255,255,255,.08);background:#12141D}
+  .card-wrap img{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+  .card-wrap img.on{opacity:1}
+  .card-load{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%) 0 0/200% 100%;animation:brilho 1.2s linear infinite}
+  .card-load[hidden]{display:none}
+  @keyframes brilho{to{background-position:-200% 0}}
+  .res-kicker{margin:0 0 10px;font-size:13.5px;font-weight:600;color:var(--green)}
+  .res-ans{margin:0;font:900 clamp(44px,6vw,72px)/.95 var(--display);letter-spacing:-.045em;background:linear-gradient(90deg,#FFC24D,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:6px}
+  .res-port{margin:8px 0 4px;font:800 24px/1.2 var(--display);letter-spacing:-.02em}
+  .res-fps{margin:0;color:var(--muted);font-size:15px}
+  .res-next{margin-top:20px;padding:14px 16px;border-radius:14px;border:1px solid rgba(255,194,77,.28);background:rgba(255,194,77,.07);font-size:14px;color:#E6E8EF}
+  .res-next[hidden]{display:none}
+  .res-next b{display:block;color:var(--gold);font:800 15px/1.2 var(--display);margin-bottom:6px}
+  .res-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  @media (max-width:820px){
+    .scan{place-items:start center;padding:72px 16px 24px}
+    .scan-top{gap:14px}
+    .scan-gauge{width:72px;height:72px}
+    #scan-pct{font-size:19px}
+    .scan-list .vl{max-width:150px}
+    .scan-res{grid-template-columns:1fr;gap:22px}
+    .card-wrap{max-height:52vh;width:auto;height:52vh}
+    .res-acts .cta,.res-acts .ghost{flex:1 1 auto;justify-content:center}
+  }
+  @media (prefers-reduced-motion:reduce){.scan-gauge .spin,.scan-list li.on:not(.ok) .ic,.card-load{animation:none}.scan-res{transition:none}}
 
   /* Depois do teste */
   .after{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
@@ -282,15 +330,42 @@
 </nav>
 
 <div class="scan" id="scan" role="dialog" aria-modal="true" aria-labelledby="scan-t" hidden>
-  <div class="scan-in">
-    <svg class="scan-ring" viewBox="0 0 132 132" aria-hidden="true">
-      <defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs>
-      <circle cx="66" cy="66" r="56" stroke="rgba(255,255,255,.08)"/>
-      <circle class="v" cx="66" cy="66" r="56" stroke="url(#sg)" stroke-linecap="round" pathLength="100"/>
-    </svg>
-    <h2 id="scan-t" data-i18n="scan.title">Lendo seu PC</h2>
+  <button type="button" class="scan-x" id="scan-x" aria-label="Fechar" data-i18n-attr="aria-label:scan.close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+
+  <div class="scan-run" id="scan-run">
+    <div class="scan-top">
+      <div class="scan-gauge">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs>
+          <circle cx="60" cy="60" r="50" stroke="rgba(255,255,255,.08)"/>
+          <circle class="spin" cx="60" cy="60" r="50" stroke="rgba(255,255,255,.22)" stroke-linecap="round" pathLength="100"/>
+          <circle class="v" id="scan-ring" cx="60" cy="60" r="50" stroke="url(#sg)" stroke-linecap="round" pathLength="100" transform="rotate(-90 60 60)"/>
+        </svg>
+        <span id="scan-pct">0%</span>
+      </div>
+      <div>
+        <h2 id="scan-t" data-i18n="scan.title">Diagnóstico do seu PC</h2>
+        <p class="scan-sub"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2FD08A" stroke-width="2.4" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span data-i18n="scan.sub">Tudo roda aqui no seu navegador. Nada é enviado.</span></p>
+      </div>
+    </div>
     <ol class="scan-list" id="scan-list" aria-live="polite"></ol>
-    <button type="button" class="scan-skip" id="scan-skip" data-i18n="scan.skip">Pular</button>
+    <div class="scan-foot"><span id="scan-now"></span><button type="button" class="scan-skip" id="scan-skip" data-i18n="scan.skip">Pular</button></div>
+  </div>
+
+  <div class="scan-res" id="scan-res" hidden>
+    <div class="card-wrap"><img id="scan-card" alt=""><div class="card-load" id="card-load"></div></div>
+    <div class="res-info">
+      <p class="res-kicker" data-i18n="scan.done">Diagnóstico concluído</p>
+      <p class="res-ans" id="res-ans"></p>
+      <p class="res-port" id="res-port"></p>
+      <p class="res-fps" id="res-fps"></p>
+      <div class="res-next" id="res-next" hidden></div>
+      <div class="res-acts">
+        <button type="button" class="cta" id="res-share"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span data-i18n="share.btn">Compartilhar resultado</span></button>
+        <button type="button" class="ghost" id="res-down"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg><span data-i18n="scan.download">Baixar imagem</span></button>
+        <button type="button" class="ghost" id="res-close" data-i18n="scan.view">Ver detalhes</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -430,6 +505,7 @@
 
 <script type="module">
 import { carregarDados, detectarGPU, limparNomeGPU, acharGPU, avaliar, sugerirUpgrade, formatarFps, TEXTOS, IDIOMAS } from "./lib/rodavi.js";
+import { lerSistema, lerRecursosGraficos, testarGPU, testarCPU, lerTela } from "./lib/medicoes.js";
 
 const $ = id => document.getElementById(id);
 const gpuSel = $("gpu"), cpuSel = $("cpu"), ramSel = $("ram");
@@ -540,7 +616,7 @@ Promise.all([json("./data/rigs.json"), json("./data/noticias-pt.json")]).then(([
 }).catch(()=>{});
 
 /* Avaliação */
-let testado = false, deteccao = null, ultimo = null;
+let testado = false, deteccao = null, ultimo = null, cardBlob = null, fecharScan = null;
 const semMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esperar = ms => new Promise(r=>setTimeout(r, semMovimento ? 0 : ms));
 function set(part, r){ $("p-"+part).dataset.s = r.status; $("s-"+part).innerHTML = `<b>${esc(r.titulo)}</b> ${esc(r.texto)}`; }
@@ -588,7 +664,7 @@ function atualizar(animar = false){
   testado = true;
   const pc = lerPC();
   const r = avaliar({ ...pc, idioma: lang });
-  ultimo = { pc, r };
+  ultimo = { pc, r }; cardBlob = null;
   vendor("v-gpu", pc.gpu); vendor("v-cpu", pc.cpu);
   set("gpu", r.pecas.gpu); set("cpu", r.pecas.cpu); set("ram", r.pecas.ram);
 
@@ -647,49 +723,122 @@ function escreverDeteccao(){
   $("d-cpu").textContent = threads ? preencher(T.pc.cpuThreads,{t:threads}) : T.pc.detCpu;
 }
 
-/* Diagnóstico: mostra o site lendo o PC, passo a passo */
+/* Diagnóstico: mede o PC de verdade, passo a passo, e termina mostrando o card */
+const nf = n => new Intl.NumberFormat(lang === "pt" ? "pt-BR" : lang).format(n);
+const agora = () => performance.now();
+
 async function diagnosticar(){
-  const scan = $("scan"), lista = $("scan-list");
-  let pular = false;
-  const sair = () => { pular = true; };
-  const tecla = e => { if(e.key==="Escape") sair(); };
-  $("scan-skip").onclick = sair;
+  const scan = $("scan"), lista = $("scan-list"), S = T.scan;
+  let pular = false, sairDireto = false;
+  const tecla = e => { if(e.key === "Escape") fechar(); };
+  const fechar = () => {
+    if(fecharScan){ fecharScan(); return; }
+    pular = true; sairDireto = true;
+  };
+  $("scan-skip").onclick = () => { pular = true; };
+  $("scan-x").onclick = fechar;
+  $("res-close").onclick = fechar;
   document.addEventListener("keydown", tecla);
 
   const pc = lerPC();
   const r = avaliar({ ...pc, idioma: lang });
-  const nomeGPU = deteccao.bruto ? limparNomeGPU(deteccao.bruto).split(",").pop().trim() : T.scan.none;
-  const passos = [
-    [T.scan.gpu, nomeGPU],
-    [T.scan.cpu, deteccao.threads ? preencher(T.scan.threads,{t:deteccao.threads}) : T.scan.none],
-    [T.scan.compare, preencher(T.scan.compareVal,{n:(rigsAoVivo||RIGS).length || 10})],
-    [T.scan.calc, r.pct+"%"]
-  ];
-  lista.innerHTML = passos.map(([l,v])=>`<li><span class="ic" aria-hidden="true"></span><span class="lb">${esc(l)}</span><span class="vl">${esc(v)}</span></li>`).join("");
-  scan.classList.remove("fim");
-  scan.hidden = false;
-  requestAnimationFrame(()=>scan.classList.add("on"));
-  $("scan-skip").focus();
+  ultimo = { pc, r }; cardBlob = null;
 
-  // Zera o velocímetro por trás pra ele varrer de novo no final
+  const passos = [
+    { lb: S.sys, run: async () => { const s = await lerSistema(); return [s.so, s.navegador].filter(Boolean).join(" · ") || null; } },
+    { lb: S.gpu, run: async () => deteccao.bruto ? limparNomeGPU(deteccao.bruto).split(",").pop().trim() : null },
+    { lb: S.gfx, run: async () => { const g = await lerRecursosGraficos(); return [g.webgl2 ? "WebGL 2" : g.webgl ? "WebGL" : null, g.webgpu ? "WebGPU" : null, g.textura ? `${nf(g.textura)} px` : null].filter(Boolean).join(" · ") || null; } },
+    { lb: S.gpuBench, barra: true, run: async p => { const q = await testarGPU(1100, p); return q ? preencher(S.gpuBenchVal, { n: nf(q) }) : null; } },
+    { lb: S.cpuBench, barra: true, run: async p => { const v = await testarCPU(800, p); return preencher(S.cpuBenchVal, { t: deteccao.threads || "?", n: nf(v) }); } },
+    { lb: S.mem, run: async () => { const d = navigator.deviceMemory; return d ? preencher(d >= 8 ? S.memMax : S.memVal, { g: d }) : null; } },
+    { lb: S.screen, barra: true, run: async p => { const t = await lerTela(600, p); return `${t.largura}×${t.altura} · ${t.hz} Hz`; } },
+    { lb: S.compare, run: async () => preencher(S.compareVal, { n: (rigsAoVivo || RIGS).length || 10 }) },
+    { lb: S.calc, run: async () => r.pct + "%" },
+  ];
+  lista.innerHTML = passos.map(p => `<li><span class="ic" aria-hidden="true"></span><span class="lb">${esc(p.lb)}</span><span class="vl"></span><span class="bar"><i></i></span></li>`).join("");
+
+  // Abre a tela
+  $("scan-run").hidden = false;
+  $("scan-res").hidden = true; $("scan-res").classList.remove("on");
+  scan.classList.remove("fim");
+  $("scan-ring").style.strokeDasharray = "0 100"; $("scan-pct").textContent = "0%";
+  scan.hidden = false;
+  requestAnimationFrame(() => scan.classList.add("on"));
+  $("scan-skip").focus({ preventScroll: true });
+
+  // Zera o velocímetro da página pra ele varrer de novo quando a tela fechar
   $("needle").style.transform = "rotate(-90deg)";
   $("arcfill").setAttribute("stroke-dasharray", "0 100");
 
   const itens = [...lista.children];
-  for(const li of itens){
-    if(pular) break;
-    li.classList.add("on"); await esperar(380);
-    li.classList.add("ok"); await esperar(220);
+  for(let i = 0; i < passos.length; i++){
+    const li = itens[i], bar = li.querySelector(".bar i"), vl = li.querySelector(".vl");
+    const avancar = k => {
+      const total = Math.round(((i + k) / passos.length) * 100);
+      $("scan-ring").style.strokeDasharray = `${total} 100`; $("scan-pct").textContent = total + "%";
+      bar.style.width = (k * 100) + "%";
+    };
+    let valor = null;
+    if(!pular){
+      li.classList.add("on");
+      $("scan-now").textContent = passos[i].lb + "…";
+      const t0 = agora();
+      try { valor = await passos[i].run(avancar); } catch { valor = null; }
+      if(!passos[i].barra){
+        // Passos instantâneos ganham uma barra curta pra dar pra ler
+        const resto = 380 - (agora() - t0);
+        if(resto > 0 && !semMovimento){ const t1 = agora(); while(agora() - t1 < resto && !pular){ avancar((agora() - t1) / resto); await esperar(16); } }
+      }
+    } else if(i >= passos.length - 2){
+      try { valor = await passos[i].run(() => {}); } catch { valor = null; }
+    }
+    avancar(1);
+    li.classList.add("on", valor ? "ok" : "falhou");
+    vl.textContent = valor || (pular && i < passos.length - 2 ? S.skipped : S.na);
   }
-  itens.forEach(li=>li.classList.add("on","ok"));
+
   scan.classList.add("fim");
-  await esperar(pular ? 0 : 450);
+  $("scan-now").textContent = S.ready;
+  document.removeEventListener("keydown", tecla);
+
+  if(!sairDireto){
+    await esperar(450);
+    await mostrarResultado(pc, r);
+    document.addEventListener("keydown", tecla);
+    await new Promise(ok => { fecharScan = ok; });
+    fecharScan = null;
+    document.removeEventListener("keydown", tecla);
+  }
+
   scan.classList.remove("on");
   await esperar(320);
   scan.hidden = true;
-  document.removeEventListener("keydown", tecla);
   window.scrollTo({ top: 0, behavior: semMovimento ? "auto" : "smooth" });
   $("go").focus({ preventScroll: true });
+}
+
+async function mostrarResultado(pc, r){
+  const run = $("scan-run"), res = $("scan-res");
+  run.hidden = true; res.hidden = false; $("scan").scrollTop = 0;
+  requestAnimationFrame(() => res.classList.add("on"));
+  $("res-ans").textContent = r.resposta;
+  $("res-port").textContent = r.port.titulo;
+  $("res-fps").textContent = r.abre ? `${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)} ${T.share.fps} · ${r.pct}% ${T.share.compat}` : `${T.meter.noOpen} · ${r.pct}% ${T.share.compat}`;
+  const up = sugerirUpgrade(pc, GPUS), nx = $("res-next");
+  if(up){
+    nx.hidden = false;
+    nx.innerHTML = `<b>${esc(T.next.title)}</b>${[up.gpu ? preencher(T.next.gpu, { gpu: up.gpu.nome }) : "", up.ramGB ? T.next.ram : ""].filter(Boolean).map((t,i)=>esc(i ? t[0].toLowerCase()+t.slice(1) : t)).join(" + ")}. ${esc(preencher(T.next.res, { etapa: TEXTOS[lang].etapas[up.para] }))}`;
+  } else nx.hidden = true;
+  $("res-share").focus({ preventScroll: true });
+
+  const img = $("scan-card"), load = $("card-load");
+  img.classList.remove("on"); load.hidden = false;
+  img.alt = `${r.resposta} ${r.pct}%`;
+  cardBlob = await gerarCard();
+  if(img.dataset.url) URL.revokeObjectURL(img.dataset.url);
+  img.dataset.url = URL.createObjectURL(cardBlob);
+  img.onload = () => { img.classList.add("on"); load.hidden = true; };
+  img.src = img.dataset.url;
 }
 
 $("go").addEventListener("click", async ()=>{
@@ -701,7 +850,7 @@ $("go").addEventListener("click", async ()=>{
   await diagnosticar();
   atualizar(true);
 });
-[gpuSel,cpuSel,ramSel].forEach(el=>el.addEventListener("change", ()=>atualizar(true)));
+[gpuSel,cpuSel,ramSel].forEach(el=>el.addEventListener("change", ()=>{ cardBlob = null; atualizar(true); }));
 
 /* Card pra compartilhar (1080 x 1350) */
 function carregarImagem(src){
@@ -769,20 +918,30 @@ async function gerarCard(){
   return new Promise(ok=>c.toBlob(ok, "image/png"));
 }
 
-$("share").addEventListener("click", async ()=>{
+async function obterCard(){
+  if(!cardBlob) cardBlob = await gerarCard();
+  return cardBlob;
+}
+function baixarCard(blob){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = `roda-o-vi-${ultimo.r.pct}.png`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  toast(T.share.saved);
+}
+async function compartilharCard(){
   if(!ultimo) return;
-  const blob = await gerarCard();
+  const blob = await obterCard();
   const arquivo = new File([blob], `roda-o-vi-${ultimo.r.pct}.png`, { type: "image/png" });
   const texto = preencher(T.share.text, { pct: ultimo.r.pct });
   if(navigator.canShare && navigator.canShare({ files: [arquivo] })){
     try { await navigator.share({ files: [arquivo], text: texto, url: "https://roda-o-vi.netlify.app/" }); return; }
     catch(e){ if(e.name === "AbortError") return; }
   }
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob); a.download = arquivo.name; a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-  toast(T.share.saved);
-});
+  baixarCard(blob);
+}
+$("share").addEventListener("click", compartilharCard);
+$("res-share").addEventListener("click", compartilharCard);
+$("res-down").addEventListener("click", async ()=>{ if(ultimo) baixarCard(await obterCard()); });
 
 document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click", async ()=>{
   lang = b.dataset.lang; localStorage.setItem("rodavi-idioma", lang);

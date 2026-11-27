@@ -39,7 +39,7 @@ Funciona em português, inglês e espanhol.
 Pra fixar uma versão, use o jsDelivr direto do GitHub:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.1.0/embed/rodavi-widget.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.2.0/embed/rodavi-widget.js"></script>
 ```
 
 ### 2. Só o motor de cálculo
