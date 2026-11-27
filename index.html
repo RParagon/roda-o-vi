@@ -271,11 +271,12 @@
   .scan-skip:hover{color:#fff}
 
   /* Resultado dentro do diagnóstico */
-  .scan-res{width:min(980px,100%);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:44px;align-items:center;opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+  .scan-res{width:min(1120px,100%);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:44px;align-items:center;opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
   .scan-res.on{opacity:1;transform:none}
   .scan-res[hidden]{display:none}
-  .card-wrap{position:relative;aspect-ratio:1080/1350;max-height:78vh;justify-self:center;width:100%;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(255,46,126,.45),0 0 0 1px rgba(255,255,255,.08);background:#12141D}
-  .card-wrap img{display:block;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+  /* O card nunca é cortado: a largura sai da altura livre da tela, mantendo a proporção 1080x1350 */
+  .card-wrap{position:relative;aspect-ratio:1080/1350;justify-self:center;width:min(100%, calc((100vh - 96px) * .8));border-radius:22px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(255,46,126,.45),0 0 0 1px rgba(255,255,255,.08);background:#12141D}
+  .card-wrap img{display:block;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .4s}
   .card-wrap img.on{opacity:1}
   .card-load{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%) 0 0/200% 100%;animation:brilho 1.2s linear infinite}
   .card-load[hidden]{display:none}
@@ -295,8 +296,15 @@
     #scan-pct{font-size:19px}
     .scan-list .vl{max-width:150px}
     .scan-res{grid-template-columns:1fr;gap:22px}
-    .card-wrap{max-height:52vh;width:auto;height:52vh}
+    .card-wrap{width:min(100%, calc(56vh * .8))}
     .res-acts .cta,.res-acts .ghost{flex:1 1 auto;justify-content:center}
+  }
+  @media (min-width:821px) and (max-height:760px){
+    .scan{padding:16px 24px}
+    .scan-res{gap:36px}
+    .res-ans{font-size:clamp(40px,5vw,60px)}
+    .res-next{margin-top:14px}
+    .res-acts{margin-top:18px}
   }
   @media (prefers-reduced-motion:reduce){.scan-gauge .spin,.scan-list li.on:not(.ok) .ic,.card-load{animation:none}.scan-res{transition:none}}
 
