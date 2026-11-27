@@ -1,5 +1,9 @@
 # Roda o VI?
 
+[![Netlify](https://api.netlify.com/api/v1/badges/ab233ea5-3ad9-4bd5-b365-85ce32eb2aa6/deploy-status)](https://roda-o-vi.netlify.app)
+[![Validar](https://github.com/RParagon/roda-o-vi/actions/workflows/validar.yml/badge.svg)](https://github.com/RParagon/roda-o-vi/actions/workflows/validar.yml)
+[![Atualizar dados](https://github.com/RParagon/roda-o-vi/actions/workflows/atualizar.yml/badge.svg)](https://github.com/RParagon/roda-o-vi/actions/workflows/atualizar.yml)
+
 **Teste se seu PC aguenta o build vazado do GTA VI (o executável divulgado pelo Cyberleek), com base nos testes da comunidade.** Tudo roda no navegador e não tem nada pra baixar.
 
 🔗 **Site:** https://roda-o-vi.netlify.app
