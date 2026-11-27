@@ -39,7 +39,7 @@ Funciona em português, inglês e espanhol.
 Pra fixar uma versão, use o jsDelivr direto do GitHub:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.0.1/embed/rodavi-widget.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.1.0/embed/rodavi-widget.js"></script>
 ```
 
 ### 2. Só o motor de cálculo
@@ -57,6 +57,10 @@ r.etapa          // 0 a 4: não abre, menus, abre o jogo, jogável, como os test
 r.port           // { titulo, texto }
 r.oficial        // { titulo, texto } estimativa pra versão oficial
 r.pecas          // { gpu, cpu, ram } cada um com { status: "ok"|"meio"|"ruim", titulo, texto }
+
+// O que trocar pra chegar pelo menos em "Jogável"
+sugerirUpgrade({ gpu, cpu, ramGB: 16 }, gpus)
+// { de: 0, para: 3, gpu: { nome: "RX 9060 XT", ... }, ramGB: 32 }
 ```
 
 Também funciona no Node 18+ (menos o `detectarGPU`, que precisa do navegador).

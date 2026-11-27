@@ -1,7 +1,7 @@
 // Testes rápidos do motor. Uso: node scripts/testar-motor.mjs
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
-import { avaliar, acharGPU, formatarFps, IDIOMAS } from "../lib/rodavi.js";
+import { avaliar, acharGPU, formatarFps, sugerirUpgrade, IDIOMAS } from "../lib/rodavi.js";
 
 const { gpus } = JSON.parse(readFileSync(new URL("../data/gpus.json", import.meta.url)));
 const { cpus } = JSON.parse(readFileSync(new URL("../data/cpus.json", import.meta.url)));
@@ -39,5 +39,12 @@ for (const idioma of IDIOMAS) {
 }
 assert.equal(formatarFps(4.1, "en"), "4.1");
 assert.equal(formatarFps(4.1, "pt"), "4,1");
+
+// Sugestão de upgrade
+const up = sugerirUpgrade({ gpu: gpu("gtx-1050-ti"), cpu: cpu("ryzen-5-5500g"), ramGB: 16 }, gpus);
+assert.ok(up && up.gpu && up.para >= 3, "1050 Ti deve receber uma placa que chegue em Jogável");
+const soRam = sugerirUpgrade({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d"), ramGB: 16 }, gpus);
+assert.equal(soRam.gpu, null); assert.equal(soRam.ramGB, 32);
+assert.equal(sugerirUpgrade({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d"), ramGB: 64 }, gpus), null);
 
 console.log("✓ Motor ok");

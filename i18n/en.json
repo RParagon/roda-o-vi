@@ -5,14 +5,22 @@
     "title": "Roda o VI? Check if your PC can handle the port",
     "description": "See whether your PC can handle the community-made PC port of GTA VI. Nothing to download: the test runs in your browser."
   },
-  "nav": { "pc": "Your PC", "res": "Result", "news": "News", "rank": "Ranking", "lang": "Language" },
+  "nav": {
+    "pc": "Your PC",
+    "res": "Result",
+    "news": "News",
+    "rank": "Ranking",
+    "lang": "Language"
+  },
   "hero": {
     "chip1": "Nothing to download",
     "chip2": "Runs in your browser, in 10 seconds",
     "h1": "Can your PC run GTA VI?",
     "answer": "Let's see.",
     "lead": "The test reads your graphics card through the browser and compares it with the PCs the community has used to run ports of the leaked build.",
-    "cta": "Test my PC"
+    "cta": "Test my PC",
+    "again": "Test again",
+    "adjust": "Adjust processor and RAM"
   },
   "meter": {
     "label": "Estimated fps on the port",
@@ -47,7 +55,9 @@
     "gpuFound": "Detected: {x}",
     "gpuUnknown": "We don't recognize \"{x}\". Pick it from the list.",
     "gpuNone": "Your browser didn't reveal the card. Pick it from the list.",
-    "cpuThreads": "Your processor has {t} threads. Pick the model for a more accurate result."
+    "cpuThreads": "Your processor has {t} threads. Pick the model for a more accurate result.",
+    "cpuSame": "With {t} threads, like yours",
+    "cpuOthers": "Other processors"
   },
   "res": {
     "h2": "Result",
@@ -65,8 +75,27 @@
     "sub": "The ports change every day. News comes from PortWatch VI.",
     "read": "Read on PortWatch",
     "original": "",
-    "cat": { "Port": "Port", "Takedown": "Takedown", "Recompile": "Recompile", "Tools": "Tools", "Scale": "PortWatch" },
-    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "cat": {
+      "Port": "Port",
+      "Takedown": "Takedown",
+      "Recompile": "Recompile",
+      "Tools": "Tools",
+      "Scale": "PortWatch"
+    },
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
     "date": "{m} {d}"
   },
   "band": {
@@ -77,16 +106,60 @@
     "h2": "Port ranking",
     "sub": "Most advanced first. Numbers are reported by the groups themselves and change with every build.",
     "src": "Source: <a href=\"https://portwatch-vi.xyz/\" rel=\"noopener\">PortWatch VI</a>. Most numbers haven't been independently verified.",
-    "stages": { "playable": "Playable", "world": "In the world", "menu": "Menus", "boots": "Boots", "loads": "Loads" },
-    "approach": { "Compatibility layer": "Compatibility layer", "Port": "Port", "Recompile": "Recompile", "Emulator": "Emulator", "Emulation": "Emulation" },
+    "stages": {
+      "playable": "Playable",
+      "world": "In the world",
+      "menu": "Menus",
+      "boots": "Boots",
+      "loads": "Loads"
+    },
+    "approach": {
+      "Compatibility layer": "Compatibility layer",
+      "Port": "Port",
+      "Recompile": "Recompile",
+      "Emulator": "Emulator",
+      "Emulation": "Emulation"
+    },
     "both": "AMD and NVIDIA",
     "unknown": "Hardware not listed",
-    "selo": { "verificado": "Verified", "privado": "Private", "removido": "Taken down" }
+    "selo": {
+      "verificado": "Verified",
+      "privado": "Private",
+      "removido": "Taken down"
+    }
   },
   "foot": {
     "legal": "Fan-made, not affiliated with Rockstar Games, Take-Two or Microsoft. Estimates use relative GPU performance and community-reported tests. It's for curiosity, not a guarantee.",
     "credit": "Inspired by <a href=\"https://portwatch-vi.xyz/\" rel=\"noopener\">PortWatch VI</a> by 4lwayz, which has tracked the ports from the start. News and ranking come from there.",
     "code": "Open source on <a href=\"https://github.com/RParagon/roda-o-vi\" rel=\"noopener\">GitHub</a>. <a href=\"/embed/\">Put the test on your site</a>."
   },
-  "score": "Your PC's compatibility with the best tested PC"
+  "score": "Your PC's compatibility with the best tested PC",
+  "scan": {
+    "title": "Reading your PC",
+    "gpu": "Graphics card",
+    "cpu": "Processor",
+    "threads": "{t} threads",
+    "none": "Not identified",
+    "compare": "Comparing with the community",
+    "compareVal": "{n} tested PCs",
+    "calc": "Working out the result",
+    "done": "Done",
+    "skip": "Skip"
+  },
+  "share": {
+    "btn": "Share result",
+    "saved": "Image saved. Go post it!",
+    "text": "My PC scored {pct}% on Roda o VI. Test yours:",
+    "compat": "compatible with the best tested PC",
+    "fps": "fps on the port",
+    "oficial": "Official version",
+    "cta": "Test yours at"
+  },
+  "next": {
+    "title": "What it takes to run",
+    "ram": "Upgrade RAM to 32 GB",
+    "gpu": "Swap the card for a {gpu} or better",
+    "res": "That gets you to “{etapa}”.",
+    "top": "Your PC is already on par with the best tested PCs."
+  }
 }
