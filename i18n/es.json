@@ -10,7 +10,8 @@
     "res": "Resultado",
     "news": "Novedades",
     "rank": "Ranking",
-    "lang": "Idioma"
+    "lang": "Idioma",
+    "mural": "Muro"
   },
   "hero": {
     "chip1": "Nada que descargar",
@@ -181,5 +182,24 @@
   "evo": {
     "title": "Progreso del líder en PortWatch",
     "sub": "De {a}% el {d} a {b}% ahora"
+  },
+  "mural": {
+    "h2": "Muro de la comunidad",
+    "sub": "Resultados de quienes hicieron la prueba y eligieron mostrarlos. Anónimo: solo las piezas y el resultado.",
+    "btn": "Mostrar en el muro",
+    "sending": "Enviando…",
+    "done": "En el muro ✓",
+    "note": "Va al muro: tarjeta, procesador, RAM, resultado y país. Nada que te identifique.",
+    "ok": "¡Tu PC está en el muro!",
+    "erroEnvio": "No se pudo enviar ahora. Inténtalo de nuevo en un rato.",
+    "limite": "Demasiados envíos seguidos. Espera un minuto.",
+    "semGpu": "Elige tu tarjeta gráfica antes de mostrarla en el muro.",
+    "total": "PCs probados",
+    "jog": "llegan a Jugable",
+    "top": "tarjeta más común",
+    "media": "compatibilidad media",
+    "vazio": "Nadie mostró su PC todavía. Haz la prueba y sé el primero.",
+    "erro": "El muro no cargó ahora. Inténtalo de nuevo en un rato.",
+    "voce": "Tú"
   }
 }

@@ -358,6 +358,42 @@
   .evo .lbl{font:700 12px Inter,sans-serif;fill:#fff}
   .evo .dt{font:500 11px Inter,sans-serif;fill:#8A8FA0}
   @media (max-width:980px){.band{grid-template-columns:1fr}.evo{width:100%;max-width:420px}}
+
+  /* Mural da comunidade */
+  .res-acts .mural-btn{grid-column:1/-1}
+  .mural-btn.feito{color:var(--green);border-color:rgba(47,208,138,.4);cursor:default}
+  .mural-btn[disabled]:not(.feito){opacity:.6;cursor:progress}
+  .mural-nota{margin:10px 0 0;font-size:12.5px;color:var(--faint);max-width:460px}
+  .mural-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .stat-box{padding:18px 20px}
+  .stat-box b{display:block;font:900 clamp(26px,3vw,36px)/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stat-box span{display:block;margin-top:8px;font-size:13px;color:var(--muted)}
+  .mural-dist{margin:14px 0 0}
+  .dist-bar{display:flex;height:10px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.06)}
+  .dist-bar i{display:block;height:100%}
+  .dist-leg{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .dist-leg span{display:inline-flex;align-items:center;gap:7px}
+  .dist-leg span::before{content:"";width:9px;height:9px;border-radius:3px;background:var(--c)}
+  .mural-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:18px}
+  .mc{display:grid;grid-template-columns:1fr auto;gap:4px 14px;padding:16px 18px;position:relative}
+  .mc.meu{border-color:rgba(255,46,126,.55);box-shadow:0 0 0 1px rgba(255,46,126,.25) inset}
+  .mc-top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--faint)}
+  .mc-top em{font-style:normal;font-weight:700;color:#fff;background:var(--grad);padding:2px 8px;border-radius:999px}
+  .mc-quando{display:inline-flex;align-items:center;gap:8px}
+  .pais{font:700 10.5px/1 var(--body);letter-spacing:.04em;color:#D3D6DF;border:1px solid var(--line-2);border-radius:5px;padding:3px 5px}
+  .mc-gpu{font:800 18px/1.2 var(--display);letter-spacing:-.01em;margin-top:6px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mc-spec{font-size:12.5px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mc-ring{grid-row:2/4;grid-column:2;align-self:center;position:relative;width:54px;height:54px}
+  .mc-ring svg{width:100%;height:100%}
+  .mc-ring circle{fill:none;stroke-width:6}
+  .mc-ring b{position:absolute;inset:0;display:grid;place-items:center;font:800 13px/1 var(--display);font-variant-numeric:tabular-nums}
+  .mc-etapa{grid-column:1/-1;justify-self:start;margin-top:8px;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px}
+  .e0{background:rgba(255,90,95,.12);color:var(--red)}
+  .e1,.e2{background:rgba(255,194,77,.12);color:var(--gold)}
+  .e3,.e4{background:rgba(47,208,138,.12);color:var(--green)}
+  .mural-vazio{grid-column:1/-1;padding:34px 24px;text-align:center;color:var(--muted)}
+  .mural-vazio p{margin:0 0 16px}
+  @media (max-width:980px){.mural-stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -365,7 +401,7 @@
 <nav>
   <div class="wrap">
     <a class="logo" href="#topo"><svg class="ring" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient></defs><circle cx="13" cy="13" r="10" stroke="rgba(255,255,255,.14)"/><circle id="ring" cx="13" cy="13" r="10" stroke="url(#rg)" stroke-linecap="round" pathLength="100" transform="rotate(-90 13 13)"/></svg><span class="nome">Roda o <b>VI</b></span><span class="sc" id="ring-sc"></span></a>
-    <div class="links"><a href="#pecas" data-i18n="nav.pc">Seu PC</a><a href="#resultado" data-i18n="nav.res">Resultado</a><a href="#novidades" data-i18n="nav.news">Novidades</a><a href="#testados" data-i18n="nav.rank">Ranking</a></div>
+    <div class="links"><a href="#pecas" data-i18n="nav.pc">Seu PC</a><a href="#resultado" data-i18n="nav.res">Resultado</a><a href="#mural" data-i18n="nav.mural">Mural</a><a href="#novidades" data-i18n="nav.news">Novidades</a><a href="#testados" data-i18n="nav.rank">Ranking</a></div>
     <div class="langs" role="group" aria-label="Idioma" data-i18n-attr="aria-label:nav.lang"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="es">ES</button></div>
   </div>
 </nav>
@@ -405,7 +441,9 @@
         <button type="button" class="cta" id="res-share"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span data-i18n="share.btn">Compartilhar resultado</span></button>
         <button type="button" class="ghost" id="res-down"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg><span data-i18n="scan.download">Baixar imagem</span></button>
         <button type="button" class="ghost" id="res-close" data-i18n="scan.view">Ver detalhes</button>
+        <button type="button" class="ghost mural-btn" data-mural><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M9 10v10"/></svg><span>Mostrar no mural</span></button>
       </div>
+      <p class="mural-nota" data-i18n="mural.note">Vai pro mural: placa, processador, RAM, resultado e país. Nada que identifique você.</p>
     </div>
   </div>
 </div>
@@ -427,6 +465,7 @@
       <button class="cta" id="go" type="button" data-i18n="hero.cta">Testar meu PC</button>
       <div class="after" id="after" hidden>
         <button type="button" class="ghost" id="share"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span data-i18n="share.btn">Compartilhar resultado</span></button>
+        <button type="button" class="ghost mural-btn" data-mural><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18M9 10v10"/></svg><span>Mostrar no mural</span></button>
         <a class="ghost" href="#pecas" data-i18n="hero.adjust">Ajustar processador e RAM</a>
       </div>
     </div>
@@ -510,6 +549,15 @@
       </div>
     </div>
   </div>
+</section>
+
+<section id="mural">
+  <div class="sh">
+    <div><h2 data-i18n="mural.h2">Mural da comunidade</h2><p class="sub" data-i18n="mural.sub">Resultados de quem fez o teste e escolheu mostrar. Anônimo: só as peças e o resultado.</p></div>
+  </div>
+  <div class="mural-stats" id="mural-stats"></div>
+  <div class="mural-dist" id="mural-dist" aria-hidden="true"></div>
+  <div class="mural-grid" id="mural-grid"></div>
 </section>
 
 <section id="novidades">
@@ -808,6 +856,7 @@ function atualizar(animar = false){
   } else { lista.innerHTML = ""; res.textContent = T.next.top; }
 
   $("after").hidden = false;
+  if(typeof atualizarBotoesMural === "function") atualizarBotoesMural();
   $("go").textContent = T.hero.again;
 }
 
@@ -1125,10 +1174,105 @@ $("share").addEventListener("click", compartilharCard);
 $("res-share").addEventListener("click", compartilharCard);
 $("res-down").addEventListener("click", async ()=>{ if(ultimo) baixarCard(await obterCard()); });
 
+
+/* Mural da comunidade */
+const CORES_ETAPA = ["#FF5A5F","#FFC24D","#FF8A3D","#2FD08A","#7A5CFF"];
+let MURAL = null;
+// O Windows não desenha bandeira em emoji, então o país vai como uma etiqueta com o código
+const bandeira = cc => cc && /^[A-Z]{2}$/.test(cc) ? `<span class="pais">${cc}</span>` : "";
+const meuMural = () => { try { return JSON.parse(localStorage.getItem("rodavi-mural") || "null"); } catch { return null; } };
+const assinatura = pc => [pc.gpu?.id, pc.cpu?.id || "-", pc.ramGB].join("|");
+function haQuanto(ms){
+  const rt = new Intl.RelativeTimeFormat(lang === "pt" ? "pt-BR" : lang, { numeric: "auto" });
+  const s = Math.round((ms - Date.now())/1000);
+  if(Math.abs(s) < 60) return rt.format(0, "minute");
+  if(Math.abs(s) < 3600) return rt.format(Math.round(s/60), "minute");
+  if(Math.abs(s) < 86400) return rt.format(Math.round(s/3600), "hour");
+  return rt.format(Math.round(s/86400), "day");
+}
+function anel(pct){
+  return `<svg viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="22" stroke="rgba(255,255,255,.1)"/><circle cx="27" cy="27" r="22" stroke="url(#rg)" stroke-linecap="round" pathLength="100" stroke-dasharray="${Math.max(pct,3)} 100" transform="rotate(-90 27 27)"/></svg>`;
+}
+function renderMural(){
+  const st = $("mural-stats"), dist = $("mural-dist"), grid = $("mural-grid");
+  if(!MURAL){ st.innerHTML = ""; dist.innerHTML = ""; grid.innerHTML = `<div class="mural-vazio box"><p>${esc(T.mural.erro)}</p></div>`; return; }
+  const m = MURAL, nf0 = n => new Intl.NumberFormat(lang === "pt" ? "pt-BR" : lang).format(n);
+  if(!m.total){
+    st.innerHTML = ""; dist.innerHTML = "";
+    grid.innerHTML = `<div class="mural-vazio box"><p>${esc(T.mural.vazio)}</p><button type="button" class="cta" id="mural-cta">${esc(T.hero.cta)}</button></div>`;
+    $("mural-cta").onclick = () => { window.scrollTo({ top: 0, behavior: semMovimento ? "auto" : "smooth" }); $("go").click(); };
+    return;
+  }
+  st.innerHTML = [
+    [nf0(m.total), T.mural.total],
+    [Math.round(m.jogaveis/m.total*100)+"%", T.mural.jog],
+    [m.gpuTop ? m.gpuTop.nome : "–", T.mural.top],
+    [m.mediaPct+"%", T.mural.media],
+  ].map(([v,l])=>`<div class="stat-box box"><b title="${esc(v)}">${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+  dist.innerHTML = `<div class="dist-bar">${m.porEtapa.map((n,i)=>n?`<i style="width:${n/m.total*100}%;background:${CORES_ETAPA[i]}"></i>`:"").join("")}</div>
+    <div class="dist-leg">${m.porEtapa.map((n,i)=>n?`<span style="--c:${CORES_ETAPA[i]}">${esc(TEXTOS[lang].etapas[i])} · ${nf0(n)}</span>`:"").join("")}</div>`;
+  const meu = meuMural();
+  grid.innerHTML = m.recentes.map(r=>{
+    const g = GPUS.find(x=>x.id===r.gpu), c = CPUS.find(x=>x.id===r.cpu);
+    const cpuTxt = c ? c.nome : (r.threads ? preencher(T.scan.threads,{t:r.threads}) : T.pc.unknownCpu);
+    const ehMeu = meu && meu.id === r.id;
+    return `<article class="mc box${ehMeu?" meu":""}">
+      <div class="mc-top"><span class="mc-quando">${bandeira(r.pais)}${esc(haQuanto(r.quando))}</span>${ehMeu?`<em>${esc(T.mural.voce)}</em>`:""}</div>
+      <div class="mc-gpu" title="${esc(g?g.nome:r.gpu)}">${esc(g?g.nome:r.gpu)}</div>
+      <div class="mc-ring">${anel(r.pct)}<b>${r.pct}%</b></div>
+      <div class="mc-spec" title="${esc(cpuTxt)} · ${r.ram} GB">${esc(cpuTxt)} · ${r.ram >= 64 ? "64+" : r.ram} GB</div>
+      <span class="mc-etapa e${r.etapa}">${esc(TEXTOS[lang].etapas[r.etapa])}</span>
+    </article>`;
+  }).join("");
+}
+function carregarMural(){
+  return fetch("/api/mural").then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(d=>{ MURAL = d; renderMural(); })
+    .catch(()=>{ MURAL = null; renderMural(); });
+}
+function atualizarBotoesMural(){
+  if(!ultimo) return;
+  const ja = meuMural(), igual = ja && ja.assin === assinatura(ultimo.pc);
+  document.querySelectorAll("[data-mural]").forEach(b=>{
+    b.disabled = !!igual; b.classList.toggle("feito", !!igual);
+    b.querySelector("span").textContent = igual ? T.mural.done : T.mural.btn;
+  });
+}
+async function enviarMural(){
+  if(!ultimo || !ultimo.pc.gpu){ toast(T.mural.semGpu); return; }
+  const pc = ultimo.pc;
+  const botoes = document.querySelectorAll("[data-mural]");
+  botoes.forEach(b=>{ b.disabled = true; b.querySelector("span").textContent = T.mural.sending; });
+  try {
+    const r = await fetch("/api/mural/enviar", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gpu: pc.gpu.id, cpu: pc.cpu ? pc.cpu.id : null, ram: pc.ramGB, threads: pc.threads || null,
+        fpsGpu: medidas.gpuFps && pc.gpu.id === medidas.gpuId ? medidas.gpuFps : null, idioma: lang }) });
+    if(r.status === 429) throw new Error("limite");
+    if(!r.ok) throw new Error("falhou");
+    const { registro } = await r.json();
+    localStorage.setItem("rodavi-mural", JSON.stringify({ id: registro.id, assin: assinatura(pc) }));
+    // Mostra na hora, sem esperar o cache do servidor
+    if(MURAL){
+      MURAL.total++; MURAL.recentes = [registro, ...MURAL.recentes.filter(x=>x.id!==registro.id)].slice(0,12);
+      MURAL.porEtapa[registro.etapa]++; if(registro.etapa >= 3) MURAL.jogaveis++;
+      MURAL.mediaPct = Math.round((MURAL.mediaPct*(MURAL.total-1) + registro.pct)/MURAL.total);
+      renderMural();
+    } else carregarMural();
+    toast(T.mural.ok);
+  } catch(e){
+    toast(e.message === "limite" ? T.mural.limite : T.mural.erroEnvio);
+  }
+  atualizarBotoesMural();
+  if(!meuMural() || meuMural().assin !== assinatura(pc)) botoes.forEach(b=>{ b.disabled = false; b.querySelector("span").textContent = T.mural.btn; });
+}
+document.querySelectorAll("[data-mural]").forEach(b=>b.addEventListener("click", enviarMural));
+carregarMural();
+setInterval(()=>{ if(document.visibilityState === "visible") carregarMural(); }, 60000);
+
 document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click", async ()=>{
   lang = b.dataset.lang; localStorage.setItem("rodavi-idioma", lang);
   T = await carregarIdioma(lang);
-  aplicarTextos(); montarCPUs(); renderNews(); renderRigs(); renderEvolucao();
+  aplicarTextos(); montarCPUs(); renderNews(); renderRigs(); renderEvolucao(); renderMural(); atualizarBotoesMural();
   if(testado){ atualizar(); escreverDeteccao(); }
 }));
 </script>

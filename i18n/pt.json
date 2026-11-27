@@ -10,7 +10,8 @@
     "res": "Resultado",
     "news": "Novidades",
     "rank": "Ranking",
-    "lang": "Idioma"
+    "lang": "Idioma",
+    "mural": "Mural"
   },
   "hero": {
     "chip1": "Nada pra baixar",
@@ -181,5 +182,24 @@
   "evo": {
     "title": "Progresso do líder no PortWatch",
     "sub": "De {a}% em {d} pra {b}% agora"
+  },
+  "mural": {
+    "h2": "Mural da comunidade",
+    "sub": "Resultados de quem fez o teste e escolheu mostrar. Anônimo: só as peças e o resultado.",
+    "btn": "Mostrar no mural",
+    "sending": "Enviando…",
+    "done": "No mural ✓",
+    "note": "Vai pro mural: placa, processador, RAM, resultado e país. Nada que identifique você.",
+    "ok": "Seu PC está no mural!",
+    "erroEnvio": "Não deu pra enviar agora. Tenta de novo daqui a pouco.",
+    "limite": "Muitos envios seguidos. Espera um minuto.",
+    "semGpu": "Escolha sua placa de vídeo antes de mostrar no mural.",
+    "total": "PCs testados",
+    "jog": "chegam em Jogável",
+    "top": "placa mais comum",
+    "media": "compatibilidade média",
+    "vazio": "Ninguém mostrou o PC ainda. Faça o teste e seja o primeiro.",
+    "erro": "O mural não carregou agora. Tenta de novo daqui a pouco.",
+    "voce": "Você"
   }
 }

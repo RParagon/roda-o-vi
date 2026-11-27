@@ -10,7 +10,8 @@
     "res": "Result",
     "news": "News",
     "rank": "Ranking",
-    "lang": "Language"
+    "lang": "Language",
+    "mural": "Wall"
   },
   "hero": {
     "chip1": "Nothing to download",
@@ -181,5 +182,24 @@
   "evo": {
     "title": "Leader's progress on PortWatch",
     "sub": "From {a}% on {d} to {b}% now"
+  },
+  "mural": {
+    "h2": "Community wall",
+    "sub": "Results from people who took the test and chose to share. Anonymous: just the parts and the result.",
+    "btn": "Show on the wall",
+    "sending": "Sending…",
+    "done": "On the wall ✓",
+    "note": "Goes on the wall: graphics card, processor, RAM, result and country. Nothing that identifies you.",
+    "ok": "Your PC is on the wall!",
+    "erroEnvio": "Couldn't send it right now. Try again in a bit.",
+    "limite": "Too many tries in a row. Wait a minute.",
+    "semGpu": "Pick your graphics card before sharing on the wall.",
+    "total": "PCs tested",
+    "jog": "reach Playable",
+    "top": "most common card",
+    "media": "average compatibility",
+    "vazio": "Nobody has shared a PC yet. Take the test and be the first.",
+    "erro": "The wall didn't load right now. Try again in a bit.",
+    "voce": "You"
   }
 }

@@ -1,7 +1,11 @@
-# Site estático, sem build.
+# Site estático + funções do mural.
 [build]
-  publish = "."
-  command = "node scripts/validar-dados.mjs"
+  # Confere os dados, roda os testes e monta só os arquivos do site em dist/
+  command = "node scripts/validar-dados.mjs && node scripts/testar-motor.mjs && node scripts/montar-site.mjs"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
 
 # Outros sites podem usar os dados, o motor e o widget.
 [[headers]]

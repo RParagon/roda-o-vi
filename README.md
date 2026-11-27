@@ -44,7 +44,7 @@ Funciona em português, inglês e espanhol.
 Pra fixar uma versão, use o jsDelivr direto do GitHub:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.4.0/embed/rodavi-widget.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.5.0/embed/rodavi-widget.js"></script>
 ```
 
 ### 2. Só o motor de cálculo
@@ -91,6 +91,22 @@ Tudo está em [`lib/rodavi.js`](lib/rodavi.js), numa função só (`avaliar`):
 2. **RAM:** o port mais avançado usa uns 30 GB, então 32 GB conta inteiro e 16 GB conta metade.
 3. **Processador** ajusta o resultado pra cima ou pra baixo.
 4. A faixa de fps é **calibrada pelo melhor fps que a comunidade publicou** rodando o build do Cyberleek (`teto`). Quando os grupos otimizam, a régua sobe e todas as estimativas acompanham.
+
+## Mural da comunidade
+
+Depois do teste, a pessoa pode clicar em **Mostrar no mural** e o resultado aparece no site pra todo mundo, junto com contadores (PCs testados, quantos chegam em Jogável, placa mais comum, compatibilidade média).
+
+- **Só com o clique da pessoa.** Nada vai pro mural sozinho.
+- **Anônimo.** Guarda placa, processador, RAM, resultado e país. Não guarda IP, nome nem texto livre.
+- **Sem nota falsa.** O servidor recalcula o resultado com o mesmo motor ([`lib/mural.js`](lib/mural.js)).
+- **Limite de 5 envios por minuto por pessoa.**
+
+Funciona com [Netlify Functions](netlify/functions/) e Netlify Blobs:
+
+| Rota | O que faz |
+|---|---|
+| `GET /api/mural` | Contadores e os 12 resultados mais recentes (cache de 30 s) |
+| `POST /api/mural/enviar` | Recebe `{ gpu, cpu, ram, threads, fpsGpu, idioma }` e devolve o registro salvo |
 
 ## Atualização automática
 
