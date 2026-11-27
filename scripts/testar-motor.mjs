@@ -47,4 +47,11 @@ const soRam = sugerirUpgrade({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d
 assert.equal(soRam.gpu, null); assert.equal(soRam.ramGB, 32);
 assert.equal(sugerirUpgrade({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d"), ramGB: 64 }, gpus), null);
 
+// Calibração: se a comunidade dobrar o fps, a estimativa dobra junto
+const base = avaliar({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d"), ramGB: 64 });
+const dobro = avaliar({ gpu: gpu("rx-9070-xt"), cpu: cpu("ryzen-7-9800x3d"), ramGB: 64, teto: 50 });
+assert.ok(Math.abs(dobro.fps.max - base.fps.max * 2) < 0.2, "fps acompanha o teto");
+assert.ok(avaliar({ gpu: gpu("rtx-4070"), ramGB: 32, teto: 100 }).etapa >= avaliar({ gpu: gpu("rtx-4070"), ramGB: 32 }).etapa);
+assert.ok(avaliar({ gpu: gpu("gtx-1050-ti"), teto: 40 }).port.texto.includes("40"));
+
 console.log("✓ Motor ok");

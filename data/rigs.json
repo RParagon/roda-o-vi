@@ -9,7 +9,7 @@
       "fabricante": "amd",
       "hardware": "RX 9070 XT 16GB · Ryzen 7 9800X3D · 64GB",
       "fps": "~22",
-      "ate_onde": "Jogável, missões da história",
+      "ate_onde": "Jogável",
       "selo": "verificado"
     },
     {
@@ -35,7 +35,7 @@
       "tipo": "Port · build privado",
       "fabricante": "nvidia",
       "hardware": "RTX série 50",
-      "fps": "5–24",
+      "fps": "~15",
       "ate_onde": "Jogável",
       "selo": "privado"
     },
@@ -44,8 +44,8 @@
       "tipo": "Port",
       "fabricante": "nvidia",
       "hardware": "RTX 4070",
-      "fps": "3–10",
-      "ate_onde": "Abre o jogo",
+      "fps": "~3",
+      "ate_onde": "Jogável",
       "selo": null
     },
     {
@@ -53,8 +53,8 @@
       "tipo": "Port",
       "fabricante": "nvidia",
       "hardware": "RTX 4090",
-      "fps": "7–8",
-      "ate_onde": "Prólogo",
+      "fps": "~10",
+      "ate_onde": "Jogável",
       "selo": null
     },
     {
@@ -62,8 +62,8 @@
       "tipo": "Port",
       "fabricante": "nvidia",
       "hardware": "RTX 5060 Ti",
-      "fps": "até 4",
-      "ate_onde": "Menus a 30 fps",
+      "fps": "~4",
+      "ate_onde": "Jogável",
       "selo": null
     },
     {
@@ -71,7 +71,7 @@
       "tipo": "Port",
       "fabricante": "amd",
       "hardware": "RX 7900 XTX",
-      "fps": "3–4",
+      "fps": "~3",
       "ate_onde": "Jogável",
       "selo": null
     },
@@ -80,8 +80,8 @@
       "tipo": "Port",
       "fabricante": "nvidia",
       "hardware": "RTX 3050",
-      "fps": "1–3",
-      "ate_onde": "Abre o jogo",
+      "fps": "~2",
+      "ate_onde": "Jogável",
       "selo": "removido"
     },
     {
@@ -90,7 +90,7 @@
       "fabricante": "amd",
       "hardware": "RX 6700 XT",
       "fps": "~1",
-      "ate_onde": "Menus a ~15 fps",
+      "ate_onde": "Jogável",
       "selo": null
     }
   ]

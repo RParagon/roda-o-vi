@@ -40,7 +40,7 @@ Funciona em português, inglês e espanhol.
 Pra fixar uma versão, use o jsDelivr direto do GitHub:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.3.0/embed/rodavi-widget.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/RParagon/roda-o-vi@v1.4.0/embed/rodavi-widget.js"></script>
 ```
 
 ### 2. Só o motor de cálculo
@@ -75,6 +75,8 @@ Com CORS liberado:
 | [`data/cpus.json`](data/cpus.json) | Processadores: nota de 0 a 1 pra jogos pesados e número de threads |
 | [`data/rigs.json`](data/rigs.json) | PCs que a comunidade usou nos testes dos ports |
 | [`data/noticias-pt.json`](data/noticias-pt.json) | Traduções das notícias do PortWatch |
+| [`data/calibracao.json`](data/calibracao.json) | Melhor fps que a comunidade conseguiu no build, atualizado pelo robô |
+| [`data/historico.json`](data/historico.json) | Evolução dia a dia: progresso do líder no PortWatch e melhor fps |
 | [`i18n/`](i18n/) | Textos do site em cada idioma |
 
 ## Como a estimativa funciona
@@ -84,7 +86,15 @@ Tudo está em [`lib/rodavi.js`](lib/rodavi.js), numa função só (`avaliar`):
 1. **Placa de vídeo** pesa mais. Sem DirectX 12 Ultimate o port não abre. A VRAM limita: 16 GB conta inteiro, 12 GB conta metade e 8 GB conta um quarto.
 2. **RAM:** o port mais avançado usa uns 30 GB, então 32 GB conta inteiro e 16 GB conta metade.
 3. **Processador** ajusta o resultado pra cima ou pra baixo.
-4. A faixa de fps é calibrada pelos resultados que os grupos publicaram rodando o build do Cyberleek (o melhor fica entre 22 e 25 fps).
+4. A faixa de fps é **calibrada pelo melhor fps que a comunidade publicou** rodando o build do Cyberleek (`teto`). Quando os grupos otimizam, a régua sobe e todas as estimativas acompanham.
+
+## Atualização automática
+
+Um robô no GitHub Actions ([`atualizar.yml`](.github/workflows/atualizar.yml)) roda 4 vezes por dia: puxa os dados públicos do PortWatch, atualiza `calibracao.json`, `historico.json` e o fps dos PCs testados, confere tudo e salva no repositório. O site ainda lê o PortWatch ao vivo, então pega mudanças antes mesmo do robô.
+
+```js
+avaliar({ gpu, cpu, ramGB: 32, teto: 25 })   // teto = melhor fps da comunidade (padrão: TETO_PADRAO)
+```
 
 São estimativas pra matar a curiosidade, não garantia.
 

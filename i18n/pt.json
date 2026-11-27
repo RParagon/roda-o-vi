@@ -35,7 +35,7 @@
     "t1": "Build vazada do Xbox Series",
     "s1": "Executável liberado pelo Cyberleek em 23 de nov.",
     "t2": "Melhor resultado",
-    "s2": "~25 fps num PC de teste",
+    "s2": "{fps} fps hoje · {n} builds jogáveis",
     "t3": "Multiplayer rodando",
     "s3": "25 a 30 fps num build privado"
   },
@@ -99,7 +99,7 @@
   },
   "band": {
     "t": "Vice City ainda não chegou no PC.",
-    "s": "Mas a comunidade está perto: o melhor port já passa dos 20 fps. Veja quem está na frente."
+    "s": "Mas a comunidade está perto: o melhor build já chega a {fps} fps. Veja quem está na frente."
   },
   "rank": {
     "h2": "Ranking dos ports",
@@ -177,5 +177,9 @@
     "gpu": "Trocar a placa por uma {gpu} ou melhor",
     "res": "Com isso você chega em “{etapa}”.",
     "top": "Seu PC já está no nível dos melhores PCs testados."
+  },
+  "evo": {
+    "title": "Progresso do líder no PortWatch",
+    "sub": "De {a}% em {d} pra {b}% agora"
   }
 }

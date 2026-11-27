@@ -1,0 +1,45 @@
+{
+  "versao": 1,
+  "fonte": "https://portwatch-vi.xyz/data/tracker.json",
+  "dias": [
+    {
+      "data": "2026-11-21",
+      "progressoLider": 6.3,
+      "liderId": "xbox-emulator",
+      "acompanhados": 17
+    },
+    {
+      "data": "2026-11-22",
+      "progressoLider": 8.8,
+      "liderId": "xcl",
+      "acompanhados": 20
+    },
+    {
+      "data": "2026-11-23",
+      "progressoLider": 30,
+      "liderId": "marvis",
+      "acompanhados": 27
+    },
+    {
+      "data": "2026-11-24",
+      "progressoLider": 61,
+      "liderId": "suri",
+      "acompanhados": 33
+    },
+    {
+      "data": "2026-11-25",
+      "progressoLider": 83.1,
+      "liderId": "avatarmanz",
+      "acompanhados": 43
+    },
+    {
+      "data": "2026-11-26",
+      "progressoLider": 91.3,
+      "liderId": "belobug",
+      "acompanhados": 44,
+      "melhorFps": 25,
+      "melhorProjeto": "CGBJ"
+    }
+  ],
+  "atualizado": "2026-11-26T22:07:44.715Z"
+}

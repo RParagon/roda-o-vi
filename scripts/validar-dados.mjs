@@ -46,6 +46,18 @@ if (c) {
 const r = ler("data/rigs.json");
 if (r) for (const x of r.rigs) if (!x.projeto || !x.hardware) erros.push(`rigs.json: item sem projeto ou hardware`);
 
+const cal = ler("data/calibracao.json");
+if (cal && !(cal.melhorFps > 0 && cal.melhorFps <= 240)) erros.push(`calibracao.json: melhorFps fora de 1–240 (${cal.melhorFps})`);
+
+const hist = ler("data/historico.json");
+if (hist) {
+  if (!Array.isArray(hist.dias)) erros.push("historico.json: falta a lista \"dias\"");
+  else for (const d of hist.dias) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.data || "")) erros.push(`historico.json: data inválida (${d.data})`);
+    if (d.progressoLider != null && !(d.progressoLider >= 0 && d.progressoLider <= 100)) erros.push(`historico.json › ${d.data}: progressoLider fora de 0–100`);
+  }
+}
+
 // Todo idioma precisa ter as mesmas chaves do português
 const chaves = (o, p = "") => Object.entries(o).flatMap(([k, v]) => (v && typeof v === "object" && !Array.isArray(v) ? chaves(v, `${p}${k}.`) : [`${p}${k}`]));
 const pt = ler("i18n/pt.json");

@@ -346,6 +346,18 @@
   .next-v li{display:flex;gap:12px;align-items:baseline;font:800 clamp(20px,2.2vw,26px)/1.2 var(--display);letter-spacing:-.02em}
   .next-v li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--gold);transform:translateY(-3px)}
   .next-v p{margin:14px 0 0;color:#C9CCD6;font-size:15px}
+
+  /* Evolução dos builds */
+  .band{display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px}
+  .evo{margin:0;width:360px;padding:18px 20px 14px;border-radius:20px;background:rgba(11,12,18,.6);border:1px solid var(--line-2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .evo[hidden]{display:none}
+  .evo figcaption{display:grid;gap:2px;margin-bottom:8px}
+  .evo figcaption b{font:800 16px/1.2 var(--display);letter-spacing:-.01em}
+  .evo figcaption span{font-size:13px;color:var(--muted)}
+  .evo svg{display:block;width:100%;height:auto;overflow:visible}
+  .evo .lbl{font:700 12px Inter,sans-serif;fill:#fff}
+  .evo .dt{font:500 11px Inter,sans-serif;fill:#8A8FA0}
+  @media (max-width:980px){.band{grid-template-columns:1fr}.evo{width:100%;max-width:420px}}
 </style>
 </head>
 <body>
@@ -445,7 +457,7 @@
 
 <div class="strip">
   <figure><img src="https://images.unsplash.com/photo-1779333466753-772495d49426?w=1400&q=70&auto=format" alt="Rua de Miami com prédios art déco e palmeiras iluminados à noite" loading="lazy"><figcaption><span data-i18n="strip.t1">Build vazada do Xbox Series</span><small data-i18n="strip.s1">Executável liberado pelo Cyberleek em 23 de nov.</small></figcaption></figure>
-  <figure><img src="https://images.unsplash.com/photo-1666032800277-607511d3869a?w=1200&q=70&auto=format" alt="Carro passando por uma rua com letreiros de neon" loading="lazy"><figcaption><span data-i18n="strip.t2">Melhor resultado</span><small data-i18n="strip.s2">~25 fps num PC de teste</small></figcaption></figure>
+  <figure><img src="https://images.unsplash.com/photo-1666032800277-607511d3869a?w=1200&q=70&auto=format" alt="Carro passando por uma rua com letreiros de neon" loading="lazy"><figcaption><span data-i18n="strip.t2">Melhor resultado</span><small id="strip-s2">25 fps hoje</small></figcaption></figure>
   <figure><img src="https://images.unsplash.com/photo-1779333429848-d6494e6b11ff?w=1200&q=70&auto=format" alt="Vida noturna com prédios em neon azul e palmeiras" loading="lazy"><figcaption><span data-i18n="strip.t3">Multiplayer rodando</span><small data-i18n="strip.s3">25 a 30 fps num build privado</small></figcaption></figure>
 </div>
 
@@ -508,7 +520,11 @@
 </section>
 
 <div class="band">
-  <p><span data-i18n="band.t">Vice City ainda não chegou no PC.</span><small data-i18n="band.s">Mas a comunidade está perto: o melhor port já passa dos 20 fps. Veja quem está na frente.</small></p>
+  <p><span data-i18n="band.t">Vice City ainda não chegou no PC.</span><small id="band-s">Mas a comunidade está perto. Veja quem está na frente.</small></p>
+  <figure class="evo" id="evo" hidden>
+    <figcaption><b data-i18n="evo.title">Progresso do líder no PortWatch</b><span id="evo-sub"></span></figcaption>
+    <div id="evo-chart"></div>
+  </figure>
 </div>
 
 <section id="testados">
@@ -533,7 +549,7 @@
 </footer>
 
 <script type="module">
-import { carregarDados, detectarGPU, limparNomeGPU, acharGPU, avaliar, sugerirUpgrade, formatarFps, TEXTOS, IDIOMAS } from "./lib/rodavi.js";
+import { carregarDados, detectarGPU, limparNomeGPU, acharGPU, avaliar, sugerirUpgrade, formatarFps, TEXTOS, IDIOMAS, TETO_PADRAO } from "./lib/rodavi.js";
 import { lerSistema, lerRecursosGraficos, testarGPU, testarCPU, lerTela } from "./lib/medicoes.js";
 
 const $ = id => document.getElementById(id);
@@ -634,10 +650,61 @@ function carregarPortWatch(){
     const ef = (d.efforts||[]).filter(e=>e.tier==="tracked" && e.gta && stageOf(e.gta)<STAGES.length);
     ef.sort((a,b)=> stageOf(a.gta)-stageOf(b.gta) || (b.gta.fps||0)-(a.gta.fps||0));
     if(ef.length){ rigsAoVivo = ef.slice(0,10); renderRigs(); }
+
+    // Calibração ao vivo: o melhor fps publicado agora vira a régua das estimativas
+    const jogaveis = (d.efforts||[]).filter(e=>e.tier==="tracked" && e.gta && e.gta.playable>=1 && Number(e.gta.fps)>0);
+    if(jogaveis.length){
+      const melhor = Math.max(...jogaveis.map(e=>Number(e.gta.fps)));
+      if(melhor > 0 && melhor <= 240) TETO = melhor;
+      JOGAVEIS = jogaveis.length;
+    }
+    if(Array.isArray(d.history) && d.history.length){
+      const porData = new Map(HIST.map(x=>[x.data, x]));
+      d.history.forEach(x=>{ const dia = porData.get(x.date) || { data:x.date }; dia.progressoLider = x.leader; porData.set(x.date, dia); });
+      HIST = [...porData.values()].sort((a,b)=>a.data.localeCompare(b.data));
+    }
+    renderEvolucao();
+    if(testado){ cardBlob = null; atualizar(); }
   }).catch(()=>{});
 }
 
-Promise.all([json("./data/rigs.json"), json("./data/noticias-pt.json")]).then(([r, n])=>{
+/* Evolução: melhor fps de hoje e progresso do líder dia a dia */
+let TETO = TETO_PADRAO, JOGAVEIS = null, HIST = [];
+function renderEvolucao(){
+  const fps = formatarFps(TETO, lang);
+  $("strip-s2").textContent = preencher(T.strip.s2, { fps, n: JOGAVEIS ?? "–" });
+  $("band-s").textContent = preencher(T.band.s, { fps });
+  const pts = HIST.filter(x=>x.progressoLider != null);
+  if(pts.length < 2){ $("evo").hidden = true; return; }
+  $("evo").hidden = false;
+  const a = pts[0], b = pts[pts.length-1];
+  $("evo-sub").textContent = preencher(T.evo.sub, { a: Math.round(a.progressoLider), d: dataLocal(a.data), b: Math.round(b.progressoLider) });
+  const W = 320, H = 120, px = 8, py = 14;
+  const X = i => px + i*(W-2*px)/(pts.length-1), Y = v => py + (1 - v/100)*(H-2*py);
+  const linha = pts.map((p,i)=>`${i?"L":"M"}${X(i).toFixed(1)} ${Y(p.progressoLider).toFixed(1)}`).join(" ");
+  const area = `${linha} L${X(pts.length-1).toFixed(1)} ${H-py} L${X(0).toFixed(1)} ${H-py} Z`;
+  const ultimoX = X(pts.length-1), ultimoY = Y(b.progressoLider);
+  $("evo-chart").innerHTML = `<svg viewBox="0 0 ${W} ${H+18}" role="img" aria-label="${esc($("evo-sub").textContent)}">
+    <defs>
+      <linearGradient id="evo-l" x1="0" x2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#FF2E7E"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient>
+      <linearGradient id="evo-a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF2E7E" stop-opacity=".35"/><stop offset="1" stop-color="#FF2E7E" stop-opacity="0"/></linearGradient>
+    </defs>
+    <line x1="${px}" x2="${W-px}" y1="${Y(50)}" y2="${Y(50)}" stroke="rgba(255,255,255,.08)" stroke-dasharray="3 4"/>
+    <line x1="${px}" x2="${W-px}" y1="${Y(100)}" y2="${Y(100)}" stroke="rgba(255,255,255,.08)" stroke-dasharray="3 4"/>
+    <path d="${area}" fill="url(#evo-a)"/>
+    <path d="${linha}" fill="none" stroke="url(#evo-l)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.map((p,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(p.progressoLider).toFixed(1)}" r="${i===pts.length-1?5:3}" fill="${i===pts.length-1?"#FF8A3D":"#fff"}" ${i===pts.length-1?'stroke="rgba(255,138,61,.35)" stroke-width="8"':""}/>`).join("")}
+    <text class="lbl" x="${ultimoX}" y="${ultimoY-12}" text-anchor="end">${Math.round(b.progressoLider)}%</text>
+    <text class="dt" x="${px}" y="${H+14}">${esc(dataLocal(a.data))}</text>
+    <text class="dt" x="${W-px}" y="${H+14}" text-anchor="end">${esc(dataLocal(b.data))}</text>
+  </svg>`;
+}
+
+Promise.all([json("./data/rigs.json"), json("./data/noticias-pt.json"), json("./data/calibracao.json").catch(()=>null), json("./data/historico.json").catch(()=>null)]).then(([r, n, cal, hist])=>{
+  // Dados salvos pelo robô do GitHub; o PortWatch ao vivo sobrescreve logo depois
+  if(cal && cal.melhorFps > 0){ TETO = cal.melhorFps; JOGAVEIS = cal.projetosJogaveis ?? null; }
+  if(hist && Array.isArray(hist.dias)) HIST = hist.dias;
+  renderEvolucao();
   RIGS = r.rigs; renderRigs();
   PT = Object.fromEntries(n.noticias.map(x=>[x.id,x]));
   noticias = n.noticias; renderNews();
@@ -685,7 +752,8 @@ function lerPC(){
     gpu: GPUS[+gpuSel.value] || null,
     cpu: CPUS[+cpuSel.value] || null,
     ramGB: +ramSel.value,
-    threads: navigator.hardwareConcurrency
+    threads: navigator.hardwareConcurrency,
+    teto: TETO
   };
 }
 
@@ -944,38 +1012,61 @@ async function gerarCard(){
   retangulo(x, W-M-wd, 64, wd, 46, 23); x.fillStyle = "rgba(11,12,18,.55)"; x.fill(); x.strokeStyle = "rgba(255,255,255,.18)"; x.lineWidth = 2; x.stroke();
   x.fillStyle = "#D3D6DF"; x.textAlign = "center"; x.fillText(data, W-M-wd/2, 88);
 
-  /* Anel com a porcentagem */
-  const cx = W/2, cy = 400, raio = 190;
-  x.fillStyle = "rgba(11,12,18,.78)"; x.beginPath(); x.arc(cx,cy,raio+2,0,Math.PI*2); x.fill();
-  x.lineWidth = 30; x.strokeStyle = "rgba(255,255,255,.12)"; x.beginPath(); x.arc(cx,cy,raio,0,Math.PI*2); x.stroke();
-  const fim = -Math.PI/2 + Math.PI*2*Math.max(r.pct,2)/100;
-  let arco;
-  if(x.createConicGradient){
-    arco = x.createConicGradient(-Math.PI/2, cx, cy);
-    const f = Math.max(r.pct,2)/100;
-    arco.addColorStop(0,cores[0]); arco.addColorStop(f*.55,cores[1]); arco.addColorStop(f,cores[2]); arco.addColorStop(Math.min(f+.001,1),cores[2]);
-  } else arco = linear(cx-raio,cy-raio,cx+raio,cy+raio);
-  x.strokeStyle = arco; x.beginPath(); x.arc(cx,cy,raio,-Math.PI/2,fim); x.stroke();
-  // Número e "%" medidos separados, pra ficarem colados e centralizados
+  /* Velocímetro de fps, igual ao do site (0 a 60 fps em meia-volta) */
+  const cx = W/2, cy = 520, raio = 300, esp = 34;
+  const frac = r.abre ? Math.min(r.fps.max, 60)/60 : 0;
+  const ang = v => Math.PI + Math.PI*v;               // 0 = esquerda, 1 = direita
+  // fundo escuro atrás do mostrador, pra ler bem em cima da foto
+  g = x.createRadialGradient(cx,cy,0,cx,cy,raio+70);
+  g.addColorStop(0,"rgba(11,12,18,.92)"); g.addColorStop(.8,"rgba(11,12,18,.72)"); g.addColorStop(1,"rgba(11,12,18,0)");
+  x.fillStyle = g; x.beginPath(); x.arc(cx,cy,raio+70,Math.PI,0); x.closePath(); x.fill();
+  x.lineCap = "round"; x.lineWidth = esp;
+  x.strokeStyle = "rgba(255,255,255,.12)"; x.beginPath(); x.arc(cx,cy,raio,Math.PI,0); x.stroke();
+  if(frac > 0){
+    x.strokeStyle = linear(cx-raio,0,cx+raio,0);
+    x.beginPath(); x.arc(cx,cy,raio,Math.PI,ang(Math.max(frac,.012))); x.stroke();
+  }
+  // marcas e números da escala
+  x.textAlign = "center"; x.textBaseline = "middle";
+  [0,15,30,45,60].forEach(v=>{
+    const a = ang(v/60), c1 = raio-esp/2-14, c2 = raio-esp/2-30, c3 = raio+esp/2+30;
+    x.strokeStyle = "rgba(255,255,255,.4)"; x.lineWidth = 4; x.lineCap = "round";
+    x.beginPath(); x.moveTo(cx+Math.cos(a)*c1, cy+Math.sin(a)*c1); x.lineTo(cx+Math.cos(a)*c2, cy+Math.sin(a)*c2); x.stroke();
+    x.fillStyle = "#8A8FA0"; x.font = '700 26px Inter';
+    x.fillText(String(v), cx+Math.cos(a)*c3, cy+Math.sin(a)*c3 + (v===0||v===60 ? 6 : 0));
+  });
+  // ponteiro
+  const ap = ang(frac);
+  x.strokeStyle = "#fff"; x.lineWidth = 9; x.lineCap = "round";
+  x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx+Math.cos(ap)*(raio-70), cy+Math.sin(ap)*(raio-70)); x.stroke();
+  x.fillStyle = "#fff"; x.beginPath(); x.arc(cx,cy,22,0,Math.PI*2); x.fill();
+  x.fillStyle = "#0B0C12"; x.beginPath(); x.arc(cx,cy,8,0,Math.PI*2); x.fill();
+
+  // leitura de fps embaixo do ponteiro
+  const leitura = r.abre ? `${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)}` : "0";
   x.textBaseline = "alphabetic"; x.textAlign = "left";
-  // Mede pela tinta das letras, não pela caixa, pra "%" ficar colado no número
-  x.font = '900 150px "Inter Tight"'; const mn = x.measureText(String(r.pct));
-  const wn = mn.actualBoundingBoxRight + mn.actualBoundingBoxLeft;
-  x.font = '900 76px "Inter Tight"'; const mp = x.measureText("%");
-  const wp = mp.actualBoundingBoxRight + mp.actualBoundingBoxLeft, folga = 8;
-  const x0 = cx - (wn + folga + wp)/2, base = cy + 34;
-  x.fillStyle = "#fff"; x.font = '900 150px "Inter Tight"'; x.fillText(String(r.pct), x0 + mn.actualBoundingBoxLeft, base);
-  x.font = '900 76px "Inter Tight"'; x.fillText("%", x0 + wn + folga + mp.actualBoundingBoxLeft, base - 4);
-  x.textAlign = "center"; x.fillStyle = "#B9BDC8"; x.font = '500 26px Inter';
-  quebrar(x, T.share.compat, cx, cy + 82, 250, 32, 2);
+  x.font = '900 112px "Inter Tight"'; const ml = x.measureText(leitura);
+  x.font = '700 38px Inter'; const mu = x.measureText("fps");
+  const wl = ml.actualBoundingBoxRight + ml.actualBoundingBoxLeft, wu = mu.width, gap = 14;
+  const lx = cx - (wl + gap + wu)/2, ly = cy + 128;
+  x.fillStyle = "#fff"; x.font = '900 112px "Inter Tight"'; x.fillText(leitura, lx + ml.actualBoundingBoxLeft, ly);
+  x.fillStyle = "#8A8FA0"; x.font = '700 38px Inter'; x.fillText("fps", lx + wl + gap, ly);
+
+  // selo da compatibilidade
+  x.font = '700 28px Inter';
+  const selo = `${r.pct}% ${T.share.compat}`;
+  const ws = Math.min(x.measureText(selo).width + 96, W - 2*M);
+  const sx = cx - ws/2, sy = ly + 34;
+  retangulo(x, sx, sy, ws, 58, 29); x.fillStyle = "rgba(255,255,255,.06)"; x.fill(); x.strokeStyle = "rgba(255,255,255,.14)"; x.lineWidth = 2; x.stroke();
+  x.lineWidth = 6; x.strokeStyle = "rgba(255,255,255,.18)"; x.beginPath(); x.arc(sx+34, sy+29, 13, 0, Math.PI*2); x.stroke();
+  x.strokeStyle = linear(sx+20,0,sx+48,0); x.beginPath(); x.arc(sx+34, sy+29, 13, -Math.PI/2, -Math.PI/2+Math.PI*2*Math.max(r.pct,3)/100); x.stroke();
+  x.fillStyle = "#fff"; x.textBaseline = "middle"; x.fillText(caber(x, selo, ws-80), sx+60, sy+30);
 
   /* Veredito */
-  x.textAlign = "center";
+  x.textAlign = "center"; x.textBaseline = "alphabetic";
   g = x.createLinearGradient(cx-300,0,cx+300,0); g.addColorStop(0,"#FFC24D"); g.addColorStop(1,"#FF8A3D");
-  x.fillStyle = g; x.font = '900 108px "Inter Tight"'; x.fillText(caber(x, r.resposta, W-2*M), cx, 735);
-  x.fillStyle = "#fff"; x.font = '800 46px "Inter Tight"'; x.fillText(caber(x, r.port.titulo, W-2*M), cx, 808);
-  x.fillStyle = "#B9BDC8"; x.font = '500 30px Inter';
-  x.fillText(caber(x, r.abre ? `${formatarFps(r.fps.min, lang)}–${formatarFps(r.fps.max, lang)} ${T.share.fps}` : T.meter.noOpen, W-2*M), cx, 860);
+  x.fillStyle = g; x.font = '900 96px "Inter Tight"'; x.fillText(caber(x, r.resposta, W-2*M), cx, 832);
+  x.fillStyle = "#fff"; x.font = '800 42px "Inter Tight"'; x.fillText(caber(x, r.port.titulo, W-2*M), cx, 890);
 
   /* Peças e medições */
   const cpuTxt = pc.cpu ? pc.cpu.nome : (pc.threads ? preencher(T.scan.threads, { t: pc.threads }) : T.scan.na);
@@ -987,13 +1078,16 @@ async function gerarCard(){
   // O teste mede a placa real; só mostra se a pessoa não trocou a placa na lista
   if(medidas.gpuFps && pc.gpu && pc.gpu.id === medidas.gpuId) linhas.push([T.scan.gpuBench, preencher(T.scan.gpuBenchVal, { n: nf(medidas.gpuFps) })]);
   linhas.push([T.share.etapa, TEXTOS[lang].etapas[r.etapa]]);
-  const rodape = 96, alt = 60, topoTab = 910;
-  const altTab = linhas.length * alt + 20;
+  const rodape = 96, alt = 54;
+  const altTab = linhas.length * alt + 16;
+  // Centraliza a tabela no espaço entre o veredito e o rodapé
+  const livreDe = 918, livreAte = H - rodape - 28;
+  const topoTab = Math.round(livreDe + Math.max(0, (livreAte - livreDe - altTab) / 2));
   retangulo(x, M, topoTab, W-2*M, altTab, 26);
   x.fillStyle = "rgba(255,255,255,.045)"; x.fill(); x.strokeStyle = "rgba(255,255,255,.09)"; x.lineWidth = 2; x.stroke();
   x.textBaseline = "middle";
   linhas.forEach(([k, v], i) => {
-    const y = topoTab + 10 + alt*i + alt/2;
+    const y = topoTab + 8 + alt*i + alt/2;
     if(i){ x.strokeStyle = "rgba(255,255,255,.07)"; x.beginPath(); x.moveTo(M+28, y - alt/2); x.lineTo(W-M-28, y - alt/2); x.stroke(); }
     x.textAlign = "left"; x.fillStyle = "#8A8FA0"; x.font = '500 27px Inter'; x.fillText(caber(x, k, 330), M+32, y);
     x.textAlign = "right"; x.fillStyle = "#fff"; x.font = '700 29px Inter'; x.fillText(caber(x, v, W-2*M-64-340), W-M-32, y);
@@ -1034,7 +1128,7 @@ $("res-down").addEventListener("click", async ()=>{ if(ultimo) baixarCard(await 
 document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click", async ()=>{
   lang = b.dataset.lang; localStorage.setItem("rodavi-idioma", lang);
   T = await carregarIdioma(lang);
-  aplicarTextos(); montarCPUs(); renderNews(); renderRigs();
+  aplicarTextos(); montarCPUs(); renderNews(); renderRigs(); renderEvolucao();
   if(testado){ atualizar(); escreverDeteccao(); }
 }));
 </script>
